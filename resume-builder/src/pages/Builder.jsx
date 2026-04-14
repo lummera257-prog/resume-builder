@@ -8,11 +8,12 @@ export default function Builder() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-slate-100">
+      {/* Hidden H1 for SEO */}
+      <h1 className="sr-only">ResumeForge — Free ATS Resume Builder & CV Maker Online</h1>
+
       <Header previewVisible={previewVisible} setPreviewVisible={setPreviewVisible} />
 
-      {/* Two-panel layout */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Form Panel — always visible on desktop, toggled on mobile */}
         <div className={`
           w-full lg:w-[420px] xl:w-[460px] flex-shrink-0
           bg-slate-50 border-r border-slate-200
@@ -22,7 +23,6 @@ export default function Builder() {
           <FormPanel />
         </div>
 
-        {/* Preview Panel — always visible on desktop, toggled on mobile */}
         <div className={`
           flex-1 overflow-hidden
           ${previewVisible ? 'flex flex-col' : 'hidden lg:flex lg:flex-col'}
@@ -31,7 +31,6 @@ export default function Builder() {
         </div>
       </div>
 
-      {/* Footer bar */}
       <div className="h-7 bg-white border-t border-slate-200 flex items-center justify-between px-4 flex-shrink-0">
         <span className="text-[11px] text-slate-400">
           💾 Auto-saved to browser · No account needed · 100% Free

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Header from '../components/Header'
 import FormPanel from '../components/FormPanel'
 import PreviewPanel from '../components/PreviewPanel'
-import Footer from '../components/Footer' // 👈 ADD THIS
 
 export default function Builder() {
   const [previewVisible, setPreviewVisible] = useState(false)
@@ -37,7 +36,7 @@ export default function Builder() {
 
       </div>
 
-      {/* Existing bottom bar */}
+      {/* Bottom bar */}
       <div className="h-7 bg-white border-t border-slate-200 flex items-center justify-between px-4 flex-shrink-0">
         <span className="text-[11px] text-slate-400">
           💾 Auto-saved to browser · No account needed · 100% Free
@@ -46,9 +45,6 @@ export default function Builder() {
           Built with ❤️ — ResumeForge
         </span>
       </div>
-
-      {/* 👇 NEW FOOTER ADD */}
-      <Footer />
 
     </div>
   )

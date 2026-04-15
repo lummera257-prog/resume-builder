@@ -8,7 +8,7 @@ export default function Builder() {
   const [previewVisible, setPreviewVisible] = useState(false)
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-100">
+    <div className="flex flex-col bg-slate-100" style={{ height: '100vh' }}>
 
       <h1 className="sr-only">
         ResumeForge — Free ATS Resume Builder & CV Maker Online
@@ -17,12 +17,12 @@ export default function Builder() {
       <Header previewVisible={previewVisible} setPreviewVisible={setPreviewVisible} />
 
       {/* MAIN LAYOUT */}
-      <div className="flex flex-1 flex-col md:flex-row overflow-hidden" style={{ height: 'calc(100vh - 56px - 28px)' }}>
+      <div className="flex flex-row flex-1 overflow-hidden" style={{ minHeight: 0 }}>
 
         {/* LEFT — FORM 55% */}
         <div className={`
           w-full md:w-[55%]
-          h-full overflow-y-auto
+          overflow-y-auto
           bg-white border-r border-slate-200
           ${previewVisible ? 'hidden md:block' : 'block'}
         `}>
@@ -32,7 +32,7 @@ export default function Builder() {
         {/* RIGHT — PREVIEW 45% */}
         <div className={`
           w-full md:w-[45%]
-          h-full overflow-y-auto
+          overflow-y-auto
           bg-slate-100
           ${previewVisible ? 'block' : 'hidden md:block'}
         `}>

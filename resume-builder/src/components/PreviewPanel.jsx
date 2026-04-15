@@ -6,16 +6,16 @@ import { useState } from 'react'
 
 export default function PreviewPanel() {
   const { resume } = useResume()
-  const [scale, setScale] = useState(0.82)
+  const [scale, setScale] = useState(0.62)
 
   const Template = resume.settings.template === 'prism' ? ModernTemplate : ClassicTemplate
 
   const zoomIn  = () => setScale(s => Math.min(s + 0.05, 1.3))
-  const zoomOut = () => setScale(s => Math.max(s - 0.05, 0.4))
-  const reset   = () => setScale(0.82)
+  const zoomOut = () => setScale(s => Math.max(s - 0.05, 0.3))
+  const reset   = () => setScale(0.62)
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col" style={{ height: '100%' }}>
 
       {/* Toolbar */}
       <div className="flex items-center justify-between px-4 py-2 bg-white border-b border-slate-200 flex-shrink-0 sticky top-0 z-10">
@@ -41,19 +41,36 @@ export default function PreviewPanel() {
         </div>
       </div>
 
-      {/* Resume Sheet */}
-      <div className="flex-1 overflow-y-auto flex justify-center py-6 px-3 bg-slate-100">
-        <div
-          style={{
-            transform: `scale(${scale})`,
-            transformOrigin: 'top center',
-            width: '210mm',
-            flexShrink: 0,
-            marginBottom: `calc((${scale} - 1) * 900px)`
-          }}
-        >
-          <div className="bg-white shadow-2xl ring-1 ring-slate-900/10 rounded-sm overflow-hidden">
-            <Template resume={resume} />
+      {/* Resume Sheet — scrollable canvas */}
+      <div
+        className="bg-slate-100"
+        style={{
+          flex: 1,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          padding: '24px 12px',
+        }}
+      >
+        {/* Outer centering wrapper */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {/* Scale wrapper */}
+          <div
+            style={{
+              transform: `scale(${scale})`,
+              transformOrigin: 'top center',
+              width: '210mm',
+              flexShrink: 0,
+              marginBottom: `calc((${scale} - 1) * 1122px)`,
+            }}
+          >
+            <div style={{
+              background: 'white',
+              boxShadow: '0 4px 32px rgba(0,0,0,0.15)',
+              borderRadius: '2px',
+              overflow: 'hidden',
+            }}>
+              <Template resume={resume} />
+            </div>
           </div>
         </div>
       </div>

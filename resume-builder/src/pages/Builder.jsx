@@ -8,7 +8,7 @@ export default function Builder() {
   const [previewVisible, setPreviewVisible] = useState(false)
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-100">
+    <div className="flex flex-col h-screen bg-slate-100">
 
       {/* Hidden H1 for SEO */}
       <h1 className="sr-only">
@@ -17,24 +17,34 @@ export default function Builder() {
 
       <Header previewVisible={previewVisible} setPreviewVisible={setPreviewVisible} />
 
+      {/* MAIN LAYOUT */}
       <div className="flex flex-1 overflow-hidden">
 
-        {/* Form Panel — Left Side (narrower) */}
+        {/* LEFT — FORM (60%) */}
         <div className={`
-          w-full lg:w-[340px] xl:w-[380px] flex-shrink-0
+          w-full md:w-3/5
+          h-full overflow-y-auto
           bg-white border-r border-slate-300
-          overflow-y-auto transition-all duration-300
-          ${previewVisible ? 'hidden lg:flex lg:flex-col' : 'flex flex-col'}
+          transition-all duration-300
+          ${previewVisible ? 'hidden md:flex md:flex-col' : 'flex flex-col'}
         `}>
-          <FormPanel />
+          <div className="max-w-xl mx-auto w-full p-4">
+            <FormPanel />
+          </div>
         </div>
 
-        {/* Preview Panel — Right Side (takes all remaining space) */}
+        {/* RIGHT — PREVIEW (40%) */}
         <div className={`
-          flex-1 min-w-0 overflow-auto bg-slate-100
-          ${previewVisible ? 'flex flex-col' : 'hidden lg:flex lg:flex-col'}
+          w-full md:w-2/5
+          h-full overflow-y-auto bg-slate-100
+          flex justify-center
+          ${previewVisible ? 'flex flex-col' : 'hidden md:flex md:flex-col'}
         `}>
-          <PreviewPanel />
+          <div className="w-full max-w-2xl p-4 md:p-6">
+            <div className="bg-white shadow-lg rounded-xl">
+              <PreviewPanel />
+            </div>
+          </div>
         </div>
 
       </div>

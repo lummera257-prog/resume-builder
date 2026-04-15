@@ -20,7 +20,6 @@ function resumeReducer(state, action) {
     case 'UPDATE_SETTINGS':
       return { ...state, settings: { ...state.settings, ...action.payload } }
 
-    // ── Generic section list mutations ───────────────────────────────────────
     case 'ADD_ITEM': {
       const { section, item } = action.payload
       return { ...state, [section]: [...state[section], { id: genId(), ...item }] }
@@ -44,7 +43,6 @@ function resumeReducer(state, action) {
       return { ...state, [section]: arr }
     }
 
-    // ── Section order / visibility ────────────────────────────────────────────
     case 'TOGGLE_SECTION': {
       const key = action.payload
       const active = state.settings.activeSections
@@ -57,7 +55,6 @@ function resumeReducer(state, action) {
       return { ...state, settings: { ...state.settings, sectionOrder: action.payload } }
     }
 
-    // ── Custom sections ───────────────────────────────────────────────────────
     case 'ADD_CUSTOM_SECTION': {
       const newSection = { id: genId(), title: 'Custom Section', entries: [] }
       return { ...state, customSections: [...state.customSections, newSection] }
@@ -90,9 +87,9 @@ export function ResumeProvider({ children }) {
   const [state, dispatch] = useReducer(resumeReducer, defaultResumeData, (init) => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
-      return saved ? { ...init, ...JSON.parse(saved) } : init
+      return saved ? { ...init, ...JSON.parse(saved) } : { ...sampleResumeData }
     } catch {
-      return init
+      return { ...sampleResumeData }
     }
   })
 

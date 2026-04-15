@@ -14,14 +14,14 @@ import CustomSection from './sections/CustomSection'
 import { ChevronDown, Settings2, Plus } from 'lucide-react'
 import { useState } from 'react'
 
-// ─── ATS Score ────────────────────────────────────────────────────────────────
+// ATS Score
 function ATSScore() {
   const { resume } = useResume()
   const ats = calculateATSScore(resume)
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <div className="mx-4 mb-3 rounded-xl border overflow-hidden" style={{ borderColor: ats.color + '40' }}>
+    <div className="mb-3 rounded-xl border overflow-hidden" style={{ borderColor: ats.color + '40' }}>
       <div
         className="px-3 py-2.5 flex items-center gap-3 cursor-pointer"
         style={{ backgroundColor: ats.color + '10' }}
@@ -56,12 +56,12 @@ function ATSScore() {
   )
 }
 
-// ─── Accordion Wrapper ────────────────────────────────────────────────────────
+// Accordion Wrapper
 function Section({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen)
 
   return (
-    <div className="mx-4 mb-3 bg-white border rounded-xl overflow-hidden">
+    <div className="mb-3 bg-white border rounded-xl overflow-hidden">
       <div
         className="px-4 py-3 flex justify-between items-center cursor-pointer bg-slate-50"
         onClick={() => setOpen(!open)}
@@ -75,7 +75,7 @@ function Section({ title, children, defaultOpen = false }) {
   )
 }
 
-// ─── Settings ────────────────────────────────────────────────────────────────
+// Settings
 function SettingsPanel() {
   const { resume, updateSettings } = useResume()
   const { settings } = resume
@@ -83,7 +83,6 @@ function SettingsPanel() {
   return (
     <Section title="Resume Settings">
       <div className="space-y-4">
-
         <div>
           <label className="text-xs">Template</label>
           <div className="grid grid-cols-2 gap-2 mt-1">
@@ -111,13 +110,12 @@ function SettingsPanel() {
             ))}
           </div>
         </div>
-
       </div>
     </Section>
   )
 }
 
-// ─── Section Manager ─────────────────────────────────────────────────────────
+// Section Manager
 function SectionOrderPanel() {
   const { resume, toggleSection } = useResume()
   const { settings } = resume
@@ -149,18 +147,16 @@ function SectionOrderPanel() {
   )
 }
 
-// ─── Main ────────────────────────────────────────────────────────────────────
+// Main Export
 export default function FormPanel() {
   const { resume } = useResume()
   const { settings } = resume
 
   return (
-    <div className="pb-8 pt-4">
+    <div className="px-4 pb-8 pt-4">
 
       <ATSScore />
-
       <SettingsPanel />
-
       <SectionOrderPanel />
 
       <Section title="Personal Info" defaultOpen={true}>
@@ -169,14 +165,14 @@ export default function FormPanel() {
 
       {settings.sectionOrder.map(key => {
         switch (key) {
-          case 'summary': return <Section key={key} title="Summary"><Summary /></Section>
-          case 'experience': return <Section key={key} title="Experience"><Experience /></Section>
-          case 'education': return <Section key={key} title="Education"><Education /></Section>
-          case 'skills': return <Section key={key} title="Skills"><Skills /></Section>
-          case 'projects': return <Section key={key} title="Projects"><Projects /></Section>
+          case 'summary':        return <Section key={key} title="Summary"><Summary /></Section>
+          case 'experience':     return <Section key={key} title="Experience"><Experience /></Section>
+          case 'education':      return <Section key={key} title="Education"><Education /></Section>
+          case 'skills':         return <Section key={key} title="Skills"><Skills /></Section>
+          case 'projects':       return <Section key={key} title="Projects"><Projects /></Section>
           case 'certifications': return <Section key={key} title="Certifications"><Certifications /></Section>
-          case 'languages': return <Section key={key} title="Languages"><Languages /></Section>
-          case 'achievements': return <Section key={key} title="Achievements"><Achievements /></Section>
+          case 'languages':      return <Section key={key} title="Languages"><Languages /></Section>
+          case 'achievements':   return <Section key={key} title="Achievements"><Achievements /></Section>
           default: return null
         }
       })}

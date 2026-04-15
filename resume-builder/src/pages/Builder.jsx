@@ -20,7 +20,7 @@ export default function Builder() {
       />
 
       {/* MAIN LAYOUT */}
-      <div className="flex flex-1 min-h-0 flex-row overflow-hidden">
+      <div className="flex flex-1 min-h-0 flex-row overflow-hidden pb-16">
 
         {/* LEFT — FORM 55% */}
         <div
@@ -58,7 +58,10 @@ export default function Builder() {
         </span>
       </div>
 
-      <Footer />
+      {/* FIXED FOOTER */}
+      <div className="fixed bottom-0 left-0 w-full z-50">
+        <Footer />
+      </div>
 
     </div>
   )

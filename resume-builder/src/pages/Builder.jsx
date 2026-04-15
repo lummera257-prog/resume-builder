@@ -19,12 +19,13 @@ export default function Builder() {
       />
 
       {/* MAIN LAYOUT */}
-      <div className="flex flex-1 min-h-0 flex-row overflow-hidden" style={{ minHeight: 0 }}>
+      <div className="flex flex-1 flex-row h-[calc(100vh-112px)] overflow-hidden">
+        
         {/* LEFT — FORM 55% */}
         <div
           className={`
             w-full md:w-[55%]
-            min-h-0 overflow-y-auto
+            overflow-y-auto
             bg-white border-r border-slate-200
             ${previewVisible ? 'hidden md:block' : 'block'}
           `}
@@ -36,13 +37,14 @@ export default function Builder() {
         <div
           className={`
             w-full md:w-[45%]
-            min-h-0 overflow-y-auto
+            overflow-y-auto
             bg-slate-100
             ${previewVisible ? 'block' : 'hidden md:block'}
           `}
         >
           <PreviewPanel />
         </div>
+
       </div>
 
       {/* Bottom Status Bar */}

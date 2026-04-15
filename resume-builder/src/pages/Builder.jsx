@@ -19,9 +19,9 @@ export default function Builder() {
 
       <div className="flex flex-1 overflow-hidden">
 
-        {/* Form Panel — Left Side */}
+        {/* Form Panel — Left Side (narrower) */}
         <div className={`
-          w-full lg:w-[380px] xl:w-[420px] flex-shrink-0
+          w-full lg:w-[340px] xl:w-[380px] flex-shrink-0
           bg-white border-r border-slate-300
           overflow-y-auto transition-all duration-300
           ${previewVisible ? 'hidden lg:flex lg:flex-col' : 'flex flex-col'}
@@ -29,9 +29,9 @@ export default function Builder() {
           <FormPanel />
         </div>
 
-        {/* Preview Panel — Right Side (larger) */}
+        {/* Preview Panel — Right Side (takes all remaining space) */}
         <div className={`
-          flex-1 overflow-auto bg-slate-100
+          flex-1 min-w-0 overflow-auto bg-slate-100
           ${previewVisible ? 'flex flex-col' : 'hidden lg:flex lg:flex-col'}
         `}>
           <PreviewPanel />

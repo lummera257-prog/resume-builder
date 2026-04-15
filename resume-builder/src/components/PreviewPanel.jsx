@@ -6,13 +6,13 @@ import { useState } from 'react'
 
 export default function PreviewPanel() {
   const { resume } = useResume()
-  const [scale, setScale] = useState(0.62)
+  const [scale, setScale] = useState(0.78)
 
   const Template = resume.settings.template === 'prism' ? ModernTemplate : ClassicTemplate
 
-  const zoomIn  = () => setScale(s => Math.min(s + 0.07, 1.0))
+  const zoomIn  = () => setScale(s => Math.min(s + 0.07, 1.2))
   const zoomOut = () => setScale(s => Math.max(s - 0.07, 0.35))
-  const reset   = () => setScale(0.62)
+  const reset   = () => setScale(0.78)
 
   return (
     <div className="h-full flex flex-col bg-slate-100">
@@ -38,9 +38,16 @@ export default function PreviewPanel() {
       </div>
 
       {/* Scrollable preview area */}
-      <div className="flex-1 overflow-auto p-6 flex justify-center">
-        <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center',
-          width: '210mm', flexShrink: 0, marginBottom: `calc((${scale} - 1) * 297mm)` }}>
+      <div className="flex-1 overflow-auto py-6 px-4 flex justify-center">
+        <div
+          style={{
+            transform: `scale(${scale})`,
+            transformOrigin: 'top center',
+            width: '210mm',
+            flexShrink: 0,
+            marginBottom: `calc((${scale} - 1) * 297mm)`,
+          }}
+        >
           <div className="shadow-2xl ring-1 ring-slate-900/10">
             <Template resume={resume} />
           </div>

@@ -7,8 +7,7 @@ import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
 
-import Footer from './components/Footer'
-
+// ✅ Footer HATA DIYA — ab sirf PageLayout mein rahega
 export default function App() {
   return (
     <ResumeProvider>
@@ -20,8 +19,6 @@ export default function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>
-
-        <Footer />
       </Router>
     </ResumeProvider>
   )

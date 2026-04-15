@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageLayout from "../components/PageLayout";
 
 export default function Contact() {
@@ -140,37 +140,39 @@ export default function Contact() {
             </div>
 
             <form onSubmit={handleSubmit} noValidate>
-              {/* Name + Email row */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
                 <div>
                   <label style={labelStyle} htmlFor="name">Your Name</label>
-                  <input id="name" type="text" placeholder="John Doe" value={form.name} onChange={(e) => handleChange("name", e.target.value)} style={inputStyle("name")}
+                  <input id="name" type="text" placeholder="John Doe" value={form.name}
+                    onChange={(e) => handleChange("name", e.target.value)} style={inputStyle("name")}
                     onFocus={(e) => { if (!errors.name) e.target.style.borderColor = "#2563eb"; }}
                     onBlur={(e) => { if (!errors.name) e.target.style.borderColor = "#e5e7eb"; }} />
                   {errors.name && <p style={errorStyle}>⚠ {errors.name}</p>}
                 </div>
                 <div>
                   <label style={labelStyle} htmlFor="email">Email Address</label>
-                  <input id="email" type="email" placeholder="you@example.com" value={form.email} onChange={(e) => handleChange("email", e.target.value)} style={inputStyle("email")}
+                  <input id="email" type="email" placeholder="you@example.com" value={form.email}
+                    onChange={(e) => handleChange("email", e.target.value)} style={inputStyle("email")}
                     onFocus={(e) => { if (!errors.email) e.target.style.borderColor = "#2563eb"; }}
                     onBlur={(e) => { if (!errors.email) e.target.style.borderColor = "#e5e7eb"; }} />
                   {errors.email && <p style={errorStyle}>⚠ {errors.email}</p>}
                 </div>
               </div>
 
-              {/* Subject */}
               <div style={{ marginBottom: "20px" }}>
                 <label style={labelStyle} htmlFor="subject">Subject</label>
-                <input id="subject" type="text" placeholder="How can we help?" value={form.subject} onChange={(e) => handleChange("subject", e.target.value)} style={inputStyle("subject")}
+                <input id="subject" type="text" placeholder="How can we help?" value={form.subject}
+                  onChange={(e) => handleChange("subject", e.target.value)} style={inputStyle("subject")}
                   onFocus={(e) => { if (!errors.subject) e.target.style.borderColor = "#2563eb"; }}
                   onBlur={(e) => { if (!errors.subject) e.target.style.borderColor = "#e5e7eb"; }} />
                 {errors.subject && <p style={errorStyle}>⚠ {errors.subject}</p>}
               </div>
 
-              {/* Message */}
               <div style={{ marginBottom: "28px" }}>
                 <label style={labelStyle} htmlFor="message">Message</label>
-                <textarea id="message" rows={5} placeholder="Write your message here..." value={form.message} onChange={(e) => handleChange("message", e.target.value)} style={{ ...inputStyle("message"), resize: "none", lineHeight: 1.6 }}
+                <textarea id="message" rows={5} placeholder="Write your message here..." value={form.message}
+                  onChange={(e) => handleChange("message", e.target.value)}
+                  style={{ ...inputStyle("message"), resize: "none", lineHeight: 1.6 }}
                   onFocus={(e) => { if (!errors.message) e.target.style.borderColor = "#2563eb"; }}
                   onBlur={(e) => { if (!errors.message) e.target.style.borderColor = "#e5e7eb"; }} />
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -181,29 +183,18 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={loading}
+              <button type="submit" disabled={loading}
                 style={{
                   width: "100%",
                   background: loading ? "#93c5fd" : "linear-gradient(135deg, #1e3a5f, #2563eb)",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "12px",
-                  padding: "14px",
-                  fontSize: "0.95rem",
-                  fontWeight: 700,
-                  cursor: loading ? "not-allowed" : "pointer",
-                  transition: "opacity 0.2s",
-                  letterSpacing: "0.3px",
-                }}
-              >
+                  color: "#fff", border: "none", borderRadius: "12px", padding: "14px",
+                  fontSize: "0.95rem", fontWeight: 700, cursor: loading ? "not-allowed" : "pointer",
+                  transition: "opacity 0.2s", letterSpacing: "0.3px",
+                }}>
                 {loading ? "Opening email client..." : "Send Message →"}
               </button>
             </form>
 
-            {/* Direct email */}
             <p style={{ textAlign: "center", marginTop: "24px", fontSize: "0.85rem", color: "#9ca3af" }}>
               Or email us directly at{" "}
               <a href="mailto:resumeforgehelp@gmail.com" style={{ color: "#2563eb", fontWeight: 600, textDecoration: "none" }}>

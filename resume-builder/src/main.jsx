@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 
 import { inject } from '@vercel/analytics'
-import { SpeedInsights } from '@vercel/speed-insights/react'
+import { SpeedInsights } from '@vercel/speed-insights'
 
 inject()
 

@@ -16,7 +16,7 @@ export default function Header({ previewVisible, setPreviewVisible }) {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white border-b border-slate-300 shadow-sm">
       <div className="flex items-center gap-3 px-4 h-14 max-w-screen-2xl mx-auto">
 
         {/* Logo */}
@@ -25,35 +25,33 @@ export default function Header({ previewVisible, setPreviewVisible }) {
             <FileText size={16} className="text-white" />
           </div>
           <div className="hidden sm:block">
-            <span className="font-bold text-slate-800 text-base tracking-tight">
+            <span className="font-bold text-slate-900 text-base tracking-tight">
               ResumeForge
             </span>
-            <span className="ml-1.5 text-xs text-slate-400 font-medium hidden md:inline">
+            <span className="ml-1.5 text-xs text-slate-500 font-medium hidden md:inline">
               Free Resume Builder
             </span>
           </div>
         </div>
 
-        {/* ✅ NEW — About + Contact nav links */}
+        {/* Nav links */}
         <div className="hidden md:flex items-center gap-1">
           <Link
             to="/about"
-            className="text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-3 py-1.5 rounded-lg transition-colors font-medium"
           >
             About
           </Link>
           <Link
             to="/contact"
-            className="text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-3 py-1.5 rounded-lg transition-colors font-medium"
           >
             Contact
           </Link>
         </div>
 
-        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Actions — unchanged */}
         <div className="flex items-center gap-2">
 
           {/* Load Sample */}
@@ -68,16 +66,16 @@ export default function Header({ previewVisible, setPreviewVisible }) {
           {/* Reset */}
           {showConfirm ? (
             <div className="flex items-center gap-1">
-              <span className="text-xs text-slate-500">Clear all?</span>
+              <span className="text-xs text-slate-600 font-medium">Clear all?</span>
               <button
                 onClick={() => { resetResume(); setShowConfirm(false) }}
-                className="text-xs px-2 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors"
+                className="text-xs px-2 py-1 bg-red-100 text-red-700 font-semibold rounded hover:bg-red-200 transition-colors"
               >
                 Yes
               </button>
               <button
                 onClick={() => setShowConfirm(false)}
-                className="text-xs px-2 py-1 bg-slate-100 text-slate-600 rounded hover:bg-slate-200 transition-colors"
+                className="text-xs px-2 py-1 bg-slate-200 text-slate-700 font-semibold rounded hover:bg-slate-300 transition-colors"
               >
                 No
               </button>
@@ -85,7 +83,7 @@ export default function Header({ previewVisible, setPreviewVisible }) {
           ) : (
             <button
               onClick={() => setShowConfirm(true)}
-              className="btn-ghost hidden sm:inline-flex text-xs py-1.5 px-3 text-slate-500"
+              className="btn-ghost hidden sm:inline-flex text-xs py-1.5 px-3"
             >
               <RotateCcw size={13} />
               <span className="hidden md:inline">Reset</span>

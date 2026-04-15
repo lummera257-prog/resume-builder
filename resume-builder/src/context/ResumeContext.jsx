@@ -1,11 +1,9 @@
 import { createContext, useContext, useReducer, useEffect, useCallback } from 'react'
 import { defaultResumeData, sampleResumeData, genId } from '../utils/defaultData'
 
-// ─── Context ──────────────────────────────────────────────────────────────────
 const ResumeContext = createContext(null)
 export const useResume = () => useContext(ResumeContext)
 
-// ─── Reducer ──────────────────────────────────────────────────────────────────
 function resumeReducer(state, action) {
   switch (action.type) {
     case 'SET_ALL':
@@ -80,20 +78,33 @@ function resumeReducer(state, action) {
   }
 }
 
-// ─── Provider ─────────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'resumeforge_v1'
+
+// Check karta hai user ka real data hai ya nahi
+function hasRealUserData(parsed) {
+  if (!parsed || !parsed.personalInfo) return false
+  const name = parsed.personalInfo.name || ''
+  const emptyNames = ['', 'John Doe', 'Your Name', 'your name']
+  if (emptyNames.includes(name.trim())) return false
+  const hasExperience = Array.isArray(parsed.experience) && parsed.experience.length > 0
+  const hasEducation = Array.isArray(parsed.education) && parsed.education.length > 0
+  return hasExperience || hasEducation
+}
 
 export function ResumeProvider({ children }) {
   const [state, dispatch] = useReducer(resumeReducer, defaultResumeData, (init) => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
-      return saved ? { ...init, ...JSON.parse(saved) } : { ...sampleResumeData }
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        return hasRealUserData(parsed) ? { ...init, ...parsed } : { ...sampleResumeData }
+      }
+      return { ...sampleResumeData }
     } catch {
       return { ...sampleResumeData }
     }
   })
 
-  // Auto-save on every state change
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
@@ -102,25 +113,24 @@ export function ResumeProvider({ children }) {
     }
   }, [state])
 
-  // ── Action helpers ──────────────────────────────────────────────────────────
   const updatePersonal  = useCallback((data) => dispatch({ type: 'UPDATE_PERSONAL', payload: data }), [])
   const updateSummary   = useCallback((val)  => dispatch({ type: 'UPDATE_SUMMARY', payload: val }), [])
   const updateSettings  = useCallback((data) => dispatch({ type: 'UPDATE_SETTINGS', payload: data }), [])
 
-  const addItem      = useCallback((section, item = {})       => dispatch({ type: 'ADD_ITEM',    payload: { section, item } }), [])
-  const updateItem   = useCallback((section, id, data)        => dispatch({ type: 'UPDATE_ITEM', payload: { section, id, data } }), [])
-  const removeItem   = useCallback((section, id)              => dispatch({ type: 'REMOVE_ITEM', payload: { section, id } }), [])
-  const reorderItem  = useCallback((section, from, to)        => dispatch({ type: 'REORDER_ITEM', payload: { section, fromIndex: from, toIndex: to } }), [])
+  const addItem      = useCallback((section, item = {})  => dispatch({ type: 'ADD_ITEM',    payload: { section, item } }), [])
+  const updateItem   = useCallback((section, id, data)   => dispatch({ type: 'UPDATE_ITEM', payload: { section, id, data } }), [])
+  const removeItem   = useCallback((section, id)         => dispatch({ type: 'REMOVE_ITEM', payload: { section, id } }), [])
+  const reorderItem  = useCallback((section, from, to)   => dispatch({ type: 'REORDER_ITEM', payload: { section, fromIndex: from, toIndex: to } }), [])
 
   const toggleSection   = useCallback((key)   => dispatch({ type: 'TOGGLE_SECTION', payload: key }), [])
   const reorderSections = useCallback((order) => dispatch({ type: 'REORDER_SECTIONS', payload: order }), [])
 
-  const addCustomSection    = useCallback(()       => dispatch({ type: 'ADD_CUSTOM_SECTION' }), [])
-  const updateCustomSection = useCallback((id, d)  => dispatch({ type: 'UPDATE_CUSTOM_SECTION', payload: { id, data: d } }), [])
-  const removeCustomSection = useCallback((id)     => dispatch({ type: 'REMOVE_CUSTOM_SECTION', payload: id }), [])
+  const addCustomSection    = useCallback(()      => dispatch({ type: 'ADD_CUSTOM_SECTION' }), [])
+  const updateCustomSection = useCallback((id, d) => dispatch({ type: 'UPDATE_CUSTOM_SECTION', payload: { id, data: d } }), [])
+  const removeCustomSection = useCallback((id)    => dispatch({ type: 'REMOVE_CUSTOM_SECTION', payload: id }), [])
 
-  const resetResume  = useCallback(() => dispatch({ type: 'RESET' }), [])
-  const loadSample   = useCallback(() => dispatch({ type: 'LOAD_SAMPLE' }), [])
+  const resetResume = useCallback(() => dispatch({ type: 'RESET' }), [])
+  const loadSample  = useCallback(() => dispatch({ type: 'LOAD_SAMPLE' }), [])
 
   const value = {
     resume: state,

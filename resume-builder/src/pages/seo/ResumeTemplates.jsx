@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
+import { TEMPLATES } from '../../utils/templateConfig'
 
 export default function ResumeTemplates() {
+  const navigate = useNavigate()
+
   useEffect(() => {
     document.title = 'Free Resume Templates 2026 | ATS-Friendly Designs | ResumeForge'
     let m = document.querySelector('meta[name="description"]')
@@ -15,15 +18,14 @@ export default function ResumeTemplates() {
 
   const faqs = [
     { q: 'Are these resume templates free?', a: 'Yes, all ResumeForge templates are completely free to use and download.' },
-    { q: 'Which template is best for ATS?', a: 'The Classic (Clarity) template is the most ATS-friendly. It uses a clean single-column layout that all ATS systems can parse correctly.' },
+    { q: 'Which template is best for ATS?', a: 'The Classic and Minimal templates are the most ATS-friendly. They use clean single-column layouts that all ATS systems can parse correctly.' },
     { q: 'Can I customize the template colors?', a: 'Yes. ResumeForge lets you choose from 6 color schemes for each template.' },
-    { q: 'Which template is best for freshers?', a: 'Both templates work well for freshers. The Classic template is recommended for traditional industries, while Modern suits creative and tech roles.' },
+    { q: 'Which template is best for freshers?', a: 'Classic and Minimal work well for freshers in traditional industries. Modern and Creative suit tech and design roles.' },
   ]
 
-  const templates = [
-    { name: 'Classic (Clarity)', icon: '📄', desc: 'Single-column, clean ATS-friendly design. Best for corporate, finance, and traditional roles.', tags: ['ATS-Safe', 'Single Column', 'Professional'] },
-    { name: 'Modern (Prism)', icon: '✨', desc: 'Two-column design with sidebar. Best for tech, creative, and design-forward roles.', tags: ['Modern', 'Two Column', 'Visual'] },
-  ]
+  const handleUseTemplate = (t) => {
+    navigate('/', { state: { templateKey: t.key, colorScheme: t.colorScheme } })
+  }
 
   return (
     <PageLayout>
@@ -40,11 +42,14 @@ export default function ResumeTemplates() {
           </Link>
         </div>
 
-        <div style={{ maxWidth: '860px', margin: '0 auto', padding: '48px 24px' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', padding: '48px 24px' }}>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#1e3a5f', marginBottom: '20px' }}>Available Resume Templates</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-            {templates.map((t, i) => (
-              <div key={i} style={{ background: '#fff', border: '2px solid #e5e7eb', borderRadius: '16px', padding: '28px', textAlign: 'center' }}>
+            {TEMPLATES.map((t, i) => (
+              <div key={i} style={{ background: '#fff', border: '2px solid #e5e7eb', borderRadius: '16px', padding: '28px', textAlign: 'center', transition: 'box-shadow 0.2s', cursor: 'pointer' }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow = '0 4px 24px rgba(37,99,235,0.12)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+              >
                 <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>{t.icon}</div>
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#1e3a5f', margin: '0 0 8px' }}>{t.name}</h3>
                 <p style={{ fontSize: '0.875rem', color: '#555', lineHeight: 1.6, margin: '0 0 16px' }}>{t.desc}</p>
@@ -53,7 +58,12 @@ export default function ResumeTemplates() {
                     <span key={j} style={{ background: '#f0f4ff', color: '#2563eb', padding: '3px 10px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 600 }}>{tag}</span>
                   ))}
                 </div>
-                <Link to="/" style={{ background: '#2563eb', color: '#fff', padding: '10px 20px', borderRadius: '8px', fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none', display: 'inline-block' }}>Use This Template</Link>
+                <button
+                  onClick={() => handleUseTemplate(t)}
+                  style={{ background: '#2563eb', color: '#fff', padding: '10px 20px', borderRadius: '8px', fontWeight: 600, fontSize: '0.875rem', border: 'none', cursor: 'pointer', width: '100%' }}
+                >
+                  Use This Template
+                </button>
               </div>
             ))}
           </div>

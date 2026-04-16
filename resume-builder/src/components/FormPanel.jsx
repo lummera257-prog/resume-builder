@@ -86,13 +86,22 @@ function SettingsPanel() {
         <div>
           <label className="text-xs">Template</label>
           <div className="grid grid-cols-2 gap-2 mt-1">
-            {['clarity', 'prism'].map(t => (
-              <button key={t}
-                onClick={() => updateSettings({ template: t })}
+            {[
+              { key: 'clarity', label: 'Classic' },
+              { key: 'prism',   label: 'Modern' },
+              { key: 'clarity', label: 'Minimal' },
+              { key: 'clarity', label: 'Elegant' },
+              { key: 'prism',   label: 'Executive' },
+              { key: 'prism',   label: 'Creative' },
+            ].map(t => (
+              <button key={t.label}
+                onClick={() => updateSettings({ template: t.key })}
                 className={`p-2 border rounded text-xs ${
-                  settings.template === t ? 'bg-blue-50 border-blue-500' : ''
+                  settings.template === t.key && settings.selectedLabel === t.label
+                    ? 'bg-blue-50 border-blue-500'
+                    : ''
                 }`}>
-                {t}
+                {t.label}
               </button>
             ))}
           </div>

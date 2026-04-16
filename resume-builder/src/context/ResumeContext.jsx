@@ -83,6 +83,10 @@ function resumeReducer(state, action) {
     case 'LOAD_SAMPLE':
       return { ...sampleResumeData }
 
+    // ── NEW: load a specific example ──
+    case 'LOAD_EXAMPLE':
+      return { ...action.payload }
+
     default:
       return state
   }
@@ -92,10 +96,8 @@ const STORAGE_KEY = 'resumeforge_v1'
 
 function hasRealUserData(parsed) {
   if (!parsed || !parsed.personalInfo) return false
-
   const name = parsed.personalInfo.name || ''
   if (['', 'John Doe', 'Your Name'].includes(name.trim())) return false
-
   return (
     (Array.isArray(parsed.experience) && parsed.experience.length > 0) ||
     (Array.isArray(parsed.education) && parsed.education.length > 0)
@@ -107,14 +109,12 @@ export function ResumeProvider({ children }) {
   const [state, dispatch] = useReducer(resumeReducer, defaultResumeData, (init) => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
-
       if (saved) {
         const parsed = JSON.parse(saved)
         return hasRealUserData(parsed)
           ? { ...init, ...parsed }
           : { ...sampleResumeData }
       }
-
       return { ...sampleResumeData }
     } catch {
       return { ...sampleResumeData }
@@ -122,9 +122,7 @@ export function ResumeProvider({ children }) {
   })
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)) } catch {}
   }, [state])
 
   const updatePersonal  = useCallback((data) => dispatch({ type: 'UPDATE_PERSONAL', payload: data }), [])
@@ -143,8 +141,11 @@ export function ResumeProvider({ children }) {
   const updateCustomSection = useCallback((id, d) => dispatch({ type: 'UPDATE_CUSTOM_SECTION', payload: { id, data: d } }), [])
   const removeCustomSection = useCallback((id)    => dispatch({ type: 'REMOVE_CUSTOM_SECTION', payload: id }), [])
 
-  const resetResume = useCallback(() => dispatch({ type: 'RESET' }), [])
-  const loadSample  = useCallback(() => dispatch({ type: 'LOAD_SAMPLE' }), [])
+  const resetResume  = useCallback(() => dispatch({ type: 'RESET' }), [])
+  const loadSample   = useCallback(() => dispatch({ type: 'LOAD_SAMPLE' }), [])
+
+  // ── NEW: load example by passing full data object ──
+  const loadExample  = useCallback((data) => dispatch({ type: 'LOAD_EXAMPLE', payload: data }), [])
 
   const value = {
     resume: state,
@@ -162,6 +163,7 @@ export function ResumeProvider({ children }) {
     removeCustomSection,
     resetResume,
     loadSample,
+    loadExample,   // ← exported
   }
 
   return (

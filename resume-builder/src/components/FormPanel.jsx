@@ -11,7 +11,7 @@ import Certifications from './sections/Certifications'
 import Languages from './sections/Languages'
 import Achievements from './sections/Achievements'
 import CustomSection from './sections/CustomSection'
-import { ChevronDown, Settings2, Plus } from 'lucide-react'
+import { ChevronDown, Plus } from 'lucide-react'
 import { useState } from 'react'
 
 // ATS Score
@@ -83,30 +83,34 @@ function SettingsPanel() {
   return (
     <Section title="Resume Settings">
       <div className="space-y-4">
+
+        {/* Template */}
         <div>
-          <label className="text-xs">Template</label>
-          <div className="grid grid-cols-2 gap-2 mt-1">
+          <label className="form-label">Template</label>
+          <div className="grid grid-cols-2 gap-2">
             {[
-              { key: 'clarity', label: 'Classic' },
-              { key: 'prism',   label: 'Modern' },
-              { key: 'clarity', label: 'Minimal' },
-              { key: 'clarity', label: 'Elegant' },
-              { key: 'prism',   label: 'Executive' },
-              { key: 'prism',   label: 'Creative' },
+              { id: 'clarity',   label: '📄 Classic',   desc: 'ATS-friendly, single column' },
+              { id: 'prism',     label: '✨ Modern',    desc: 'Two columns, sidebar layout' },
+              { id: 'minimal',   label: '🪄 Minimal',   desc: 'Ultra-clean typography' },
+              { id: 'elegant',   label: '💎 Elegant',   desc: 'Centered, timeline layout' },
+              { id: 'executive', label: '🏆 Executive', desc: 'Bold sidebar, dark accent' },
+              { id: 'creative',  label: '🎨 Creative',  desc: 'Vibrant two-column design' },
             ].map(t => (
-              <button key={t.label}
-                onClick={() => updateSettings({ template: t.key })}
-                className={`p-2 border rounded text-xs ${
-                  settings.template === t.key && settings.selectedLabel === t.label
-                    ? 'bg-blue-50 border-blue-500'
-                    : ''
+              <button key={t.id} type="button"
+                onClick={() => updateSettings({ template: t.id })}
+                className={`p-2.5 rounded-lg border text-left transition-all ${
+                  settings.template === t.id
+                    ? 'border-blue-500 bg-blue-50 text-blue-700'
+                    : 'border-slate-200 hover:border-slate-300 text-slate-600'
                 }`}>
-                {t.label}
+                <p className="text-xs font-semibold">{t.label}</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">{t.desc}</p>
               </button>
             ))}
           </div>
         </div>
 
+        {/* Color */}
         <div>
           <label className="text-xs">Color</label>
           <div className="flex gap-2 mt-1">
@@ -119,6 +123,7 @@ function SettingsPanel() {
             ))}
           </div>
         </div>
+
       </div>
     </Section>
   )

@@ -39,7 +39,7 @@ export default function Builder() {
       {/* Builder Area */}
       <div style={{
         display: 'flex',
-        height: 'calc(100vh - 56px - 26px)',
+        height: 'calc(100vh - 54px - 22px)',
         overflow: 'hidden',
         flexShrink: 0,
       }}>

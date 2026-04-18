@@ -36,34 +36,22 @@
         {
           "@type": "Question",
           "name": "Is ResumeForge completely free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, ResumeForge is 100% free. No hidden fees, no premium plans."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, ResumeForge is 100% free. No hidden fees, no premium plans." }
         },
         {
           "@type": "Question",
           "name": "Do I need to create an account?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No login or signup required. Start building your resume instantly."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "No login or signup required. Start building your resume instantly." }
         },
         {
           "@type": "Question",
           "name": "Is my resume ATS-friendly?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, all ResumeForge templates are optimized to pass Applicant Tracking Systems used by top companies."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, all ResumeForge templates are optimized to pass Applicant Tracking Systems used by top companies." }
         },
         {
           "@type": "Question",
           "name": "Can I download my resume as PDF?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, you can download your completed resume as a PDF instantly for free."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can download your completed resume as a PDF instantly for free." }
         }
       ]
     }
@@ -89,7 +77,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    <!-- ── Google Translate ── -->
+    <!-- Google Translate Init -->
     <script type="text/javascript">
       function googleTranslateElementInit() {
         new google.translate.TranslateElement(
@@ -103,29 +91,29 @@
         );
       }
     </script>
-    <script
-      type="text/javascript"
-      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
+    <script type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
 
-    <!-- Hide Google Translate top banner -->
+    <!-- ✅ Hide Google bar + prevent layout shift -->
     <style>
-      body { top: 0 !important; }
-      .goog-te-banner-frame { display: none !important; }
-      .goog-te-gadget { font-size: 0 !important; }
-      .goog-te-gadget .goog-te-combo {
-        font-size: 13px !important;
-        padding: 4px 8px !important;
-        border-radius: 6px !important;
-        border: 1px solid #cbd5e1 !important;
-        background: white !important;
-        color: #334155 !important;
-        cursor: pointer !important;
-        outline: none !important;
-      }
-      #google_translate_element {
-        display: inline-block;
-      }
+      /* Prevent body from shifting down */
+      body                          { top: 0 !important; position: static !important; }
+      body.translated-ltr           { margin-top: 0 !important; top: 0 !important; }
+      body.translated-rtl           { margin-top: 0 !important; top: 0 !important; }
+
+      /* Hide the Google top bar iframe completely */
+      .goog-te-banner-frame         { display: none !important; }
+      .goog-te-banner-frame.skiptranslate { display: none !important; }
+      iframe.goog-te-banner-frame   { display: none !important; }
+
+      /* Hide the default Google widget (we use our own UI) */
+      .goog-te-gadget               { display: none !important; }
+      #google_translate_element     { display: none !important; }
+
+      /* Prevent yellow highlight on translated text */
+      font[color="green"]           { color: inherit !important; }
+      .goog-text-highlight          { background: none !important; box-shadow: none !important; }
     </style>
   </head>
   <body>

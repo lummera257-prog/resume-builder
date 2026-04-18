@@ -29,6 +29,7 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold text-sm mb-3">Resources</h3>
             <nav className="flex flex-col gap-2 text-xs">
+              <Link to="/blog" className="hover:text-white">Blog</Link>
               <Link to="/resume-examples" className="hover:text-white">Resume Examples</Link>
               <Link to="/resume-for-freshers" className="hover:text-white">Resume for Freshers</Link>
               <Link to="/software-engineer-resume" className="hover:text-white">Software Engineer Resume</Link>
@@ -44,6 +45,7 @@ export default function Footer() {
             © {new Date().getFullYear()} ResumeForge
           </div>
           <nav className="flex gap-3 text-[11px] text-gray-500">
+            <Link to="/blog" className="hover:text-white">Blog</Link>
             <Link to="/about" className="hover:text-white">About</Link>
             <Link to="/contact" className="hover:text-white">Contact</Link>
             <Link to="/privacy" className="hover:text-white">Privacy</Link>

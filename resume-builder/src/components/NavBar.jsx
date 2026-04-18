@@ -5,6 +5,7 @@ export default function NavBar() {
   const location = useLocation()
 
   const navLinks = [
+    { to: '/blog', label: 'Blog' },
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
   ]
@@ -25,8 +26,6 @@ export default function NavBar() {
 
         {/* Nav Links + CTA */}
         <div className="flex items-center gap-1 sm:gap-4">
-
-          {/* About + Contact links */}
           {navLinks.map((link) => (
             <Link
               key={link.to}
@@ -40,8 +39,6 @@ export default function NavBar() {
               {link.label}
             </Link>
           ))}
-
-          {/* CTA Button */}
           <Link
             to="/"
             className="text-sm bg-blue-600 text-white px-4 py-1.5 rounded-lg hover:bg-blue-700 transition-colors font-semibold"

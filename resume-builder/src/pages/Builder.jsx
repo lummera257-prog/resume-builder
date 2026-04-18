@@ -22,7 +22,8 @@ export default function Builder() {
   }, [])
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-100">
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden', background: '#f1f5f9' }}>
+
       <h1 className="sr-only">
         ResumeForge — Free ATS Resume Builder & CV Maker Online
       </h1>
@@ -32,41 +33,58 @@ export default function Builder() {
         setPreviewVisible={setPreviewVisible}
       />
 
-      {/* ✅ Mobile: natural scroll | Desktop: fixed viewport height */}
-      <div className="flex flex-row md:h-[calc(100vh-56px)] flex-1">
+      {/* Main Split Area */}
+      <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+
         {/* Form Panel */}
-        <div className={`
-          w-full md:w-[55%]
-          md:overflow-y-auto
-          bg-white border-r border-slate-200
-          ${previewVisible ? 'hidden md:block' : 'block'}
-        `}>
+        <div style={{
+          width: '55%',
+          height: '100%',
+          overflowY: 'auto',
+          background: '#fff',
+          borderRight: '1px solid #e2e8f0',
+          display: previewVisible ? 'none' : 'block',
+        }}
+          className="md:block"
+        >
           <FormPanel />
         </div>
 
         {/* Preview Panel */}
-        <div className={`
-          w-full md:w-[45%]
-          md:overflow-y-auto
-          bg-slate-100
-          ${previewVisible ? 'block' : 'hidden md:block'}
-        `}>
+        <div style={{
+          width: '45%',
+          height: '100%',
+          overflowY: 'auto',
+          background: '#f1f5f9',
+          display: previewVisible ? 'block' : 'none',
+        }}
+          className="md:block md:!display-block"
+        >
           <PreviewPanel />
         </div>
+
       </div>
 
       {/* Status Bar */}
-      <div className="border-t border-slate-200 bg-white px-4 py-2 flex items-center justify-between shrink-0">
-        <span className="text-[11px] font-medium text-slate-500">
+      <div style={{
+        background: '#fff',
+        borderTop: '1px solid #e2e8f0',
+        padding: '6px 16px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexShrink: 0,
+      }}>
+        <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
           💾 Auto-saved · No account needed · 100% Free
         </span>
-        <span className="hidden text-[11px] text-slate-500 sm:block">
+        <span style={{ fontSize: '11px', color: '#64748b' }}>
           Built with ❤️ — ResumeForge
         </span>
       </div>
 
-      {/* ✅ Footer — always visible, no gap */}
       <Footer />
+
     </div>
   )
 }

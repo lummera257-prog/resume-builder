@@ -3,14 +3,17 @@ export const blogPosts = [
     id: 1,
     slug: 'how-to-write-ats-resume',
     title: 'How to Write an ATS-Friendly Resume in 2026',
-    description: 'Learn how to format your resume so it passes automated screening systems used by top companies.',
+    description: 'Learn how to format your resume so it passes automated screening systems used by top companies. Step-by-step guide with examples.',
     excerpt: 'Learn how to format your resume so it passes automated screening systems used by top companies.',
     date: '2026-04-10',
     readTime: '5 min read',
     category: 'ATS Tips',
+    keywords: 'ATS resume, ATS-friendly resume, applicant tracking system, free resume builder',
     content: `## What is an ATS and Why Does It Matter?
 
-An Applicant Tracking System (ATS) is software used by over 98% of Fortune 500 companies to filter resumes before a human ever sees them. If your resume isn't formatted correctly, it gets rejected automatically.
+An Applicant Tracking System (ATS) is software used by over 98% of Fortune 500 companies to filter resumes before a human ever sees them. If your resume is not formatted correctly, it gets rejected automatically — no matter how qualified you are.
+
+Using a free resume builder like ResumeForge ensures your resume is always ATS-compatible from the start.
 
 ## Key Rules for ATS-Friendly Resumes
 
@@ -18,7 +21,7 @@ An Applicant Tracking System (ATS) is software used by over 98% of Fortune 500 c
 - Avoid tables, columns, images, and text boxes
 - Use common fonts like Arial, Calibri, or Times New Roman
 - Save as PDF unless the employer requests Word format
-- Include keywords from the job description
+- Include exact keywords from the job description
 
 ## Formatting Tips
 
@@ -39,20 +42,27 @@ ATS systems scan resumes for keywords, skills, and relevance — not just design
 - Keywords from the job description
 - No images, tables, or graphics
 - Saved as PDF
-- Contact info in document body`
+- Contact info in document body
+
+## Build Your ATS Resume Free
+
+ResumeForge is a free ATS resume builder with 6 professional templates. No login required. Start building your resume in 2 minutes.`
   },
   {
     id: 2,
     slug: 'resume-tips-for-freshers',
-    title: 'Resume Tips for Freshers with No Experience',
-    description: 'Building your first resume? Here is exactly what to include when you have little or no work experience.',
+    title: 'Resume Tips for Freshers with No Experience in 2026',
+    description: 'Building your first resume? Here is exactly what to include when you have little or no work experience. Free resume builder for freshers.',
     excerpt: 'Building your first resume? Here is exactly what to include when you have little or no work experience.',
     date: '2026-04-12',
     readTime: '4 min read',
     category: 'Freshers',
-    content: `## You Don't Need Experience to Have a Great Resume
+    keywords: 'resume for freshers, fresher resume, first resume, no experience resume, free resume builder',
+    content: `## You Do Not Need Experience to Have a Great Resume
 
-As a fresher, you may not have years of work experience — but that doesn't mean your resume has to be empty. Recruiters hiring freshers look for potential, willingness to learn, and relevant skills.
+As a fresher, you may not have years of work experience — but that does not mean your resume has to be empty. Recruiters hiring freshers look for potential, willingness to learn, and relevant skills.
+
+A free online resume builder like ResumeForge helps freshers create professional, ATS-friendly resumes in minutes — no experience required.
 
 ## What to Include in a Fresher Resume
 
@@ -73,10 +83,10 @@ Online courses from Coursera, Udemy, or Google count. Include them.
 
 ## Common Fresher Mistakes to Avoid
 
-- Don't use a photo (especially for US/UK/Canada applications)
-- Don't include irrelevant personal details like religion or birthdate
-- Don't write long paragraphs — use bullet points
-- Don't make the resume more than 1 page
+- Do not use a photo (especially for US/UK/Canada applications)
+- Do not include irrelevant personal details like religion or birthdate
+- Do not write long paragraphs — use bullet points
+- Do not make the resume more than 1 page
 
 ## Action Verbs for Freshers
 
@@ -84,17 +94,18 @@ Use strong action verbs: Developed, Designed, Built, Analyzed, Coordinated, Impl
 
 ## One Page is Enough
 
-For freshers, one page is ideal. Keep it concise, relevant, and focused on the value you bring.`
+For freshers, one page is ideal. Keep it concise, relevant, and focused on the value you bring. Use our free resume builder to keep your layout clean and ATS-friendly automatically.`
   },
   {
     id: 3,
     slug: 'software-engineer-resume-guide',
-    title: 'Software Engineer Resume Guide 2026',
-    description: 'Everything you need to know to build a resume that gets you interviews at top tech companies.',
+    title: 'Software Engineer Resume Guide 2026 — Get Hired at Top Tech Companies',
+    description: 'Everything you need to know to build a software engineer resume that gets you interviews at top tech companies. ATS-optimized with real examples.',
     excerpt: 'Everything you need to know to build a resume that gets you interviews at top tech companies.',
     date: '2026-04-14',
     readTime: '6 min read',
     category: 'Tech',
+    keywords: 'software engineer resume, tech resume, developer resume, ATS resume, free resume builder',
     content: `## What Recruiters at Tech Companies Look For
 
 Tech recruiters spend an average of 6 seconds on the first scan of your resume. Your resume must instantly communicate your technical stack, years of experience, and measurable impact.
@@ -128,6 +139,7 @@ Include 2-3 noteworthy personal or open-source projects with GitHub links and im
 - Use exact keywords from the job description
 - Spell out acronyms at least once (e.g., "CI/CD (Continuous Integration/Continuous Deployment)")
 - Avoid skill bars — list skills as plain text
+- Use a single-column ATS-friendly template
 
 ## Resume Length
 
@@ -139,36 +151,40 @@ Include 2-3 noteworthy personal or open-source projects with GitHub links and im
 Listing responsibilities instead of achievements. Every bullet point should answer: "What did you accomplish and what was the impact?"
 
 Wrong: Worked on backend APIs.
-Right: Designed and deployed 12 REST APIs serving 5M+ daily requests with 99.9% uptime.`
+Right: Designed and deployed 12 REST APIs serving 5M+ daily requests with 99.9% uptime.
+
+## Build Your Software Engineer Resume Free
+
+Use ResumeForge — a free ATS resume builder with modern tech-friendly templates. No login, instant PDF download.`
   },
   {
     id: 4,
     slug: 'why-resume-not-getting-shortlisted',
     title: 'Why Your Resume Is Not Getting Shortlisted (And How to Fix It)',
-    description: 'Applying for jobs but hearing nothing? Discover why your resume is not getting shortlisted and how to fix it today.',
+    description: 'Applying for jobs but hearing nothing? Discover why your resume is not getting shortlisted and how to fix it today with a free ATS resume builder.',
     excerpt: 'Applying for jobs but hearing nothing? Discover why your resume is not getting shortlisted and how to fix it today.',
     date: '2026-04-15',
     readTime: '6 min read',
     category: 'Job Search',
+    keywords: 'resume not getting shortlisted, resume rejected, ATS resume tips, free resume builder',
     content: `## The Silence Is Not About Your Talent
 
 You have the degree. You have the experience. But your inbox stays empty. The reason your resume is not getting shortlisted is almost always technical — not personal.
 
 ## Reason 1: ATS Is Rejecting You Before a Human Sees You
 
-70–75% of resumes are rejected by Applicant Tracking Systems before a recruiter ever opens them. Common ATS rejection reasons:
+70-75% of resumes are rejected by Applicant Tracking Systems before a recruiter ever opens them. Common ATS rejection reasons:
 
 - Complex layouts with tables or multiple columns
 - Missing keywords from the job description
 - Contact info placed in headers/footers
 - Skills shown as visual bars instead of text
-- Resume saved as an image file
 
-**Fix:** Use a clean, single-column ATS-friendly template. Remove all graphics, charts, and tables.
+**Fix:** Use a clean, single-column ATS-friendly template like the ones available on ResumeForge — completely free.
 
 ## Reason 2: Missing Keywords
 
-ATS systems scan resumes for keywords, skills, and relevance — not just design. If the job description says "Agile Methodology" and your resume says "flexible workflows," you won't appear in search results.
+ATS systems scan resumes for keywords. If the job description says "Agile Methodology" and your resume says "flexible workflows," you will not appear in search results.
 
 **Fix:** Read the job description three times. Pull out the hard skills and exact phrases. Include them naturally in your Skills section and experience bullets.
 
@@ -187,36 +203,35 @@ Shortlisted: Led a team of 10 to increase regional sales by 25% in one year, man
 
 ## Reason 5: Poor Visual Hierarchy
 
-If your resume is a wall of text, no one will read it. Recruiters need to see your value in 6 seconds.
+If your resume is a wall of text, no one will read it.
 
 **Fix:** Use clear headers, bullet points, and white space. Put your most impressive achievements in the top third of the page.
 
 ## 3-Step Recovery Plan
 
-1. **Formatting Reset** — Switch to a clean, single-column ATS-friendly layout
+1. **Formatting Reset** — Switch to a clean, single-column ATS-friendly layout using ResumeForge
 2. **Keyword Injection** — Find the 5 most common keywords in your target job description and add them
-3. **Achievement Audit** — Rewrite every bullet point that doesn't have a number or specific tool`
+3. **Achievement Audit** — Rewrite every bullet point that does not have a number or specific tool`
   },
   {
     id: 5,
     slug: 'how-to-pass-ats-resume-screening',
-    title: 'How to Pass ATS Resume Screening: A Complete Guide',
+    title: 'How to Pass ATS Resume Screening: Complete Guide 2026',
     description: 'Master the art of getting noticed. Learn how to pass ATS resume screening using the right keywords, clean formatting, and proven strategies.',
     excerpt: 'Master the art of getting noticed. Learn how to pass ATS resume screening using the right keywords, clean formatting, and proven strategies.',
     date: '2026-04-16',
     readTime: '7 min read',
     category: 'ATS Tips',
+    keywords: 'pass ATS screening, ATS resume, resume keywords, ATS-friendly resume, free resume builder',
     content: `## Why ATS Screening Is Your First Battle
 
-In the modern job market, your first hurdle isn't a human recruiter — it's an algorithm. Studies show that 75% of resumes are never seen by a human eye because of automated filtering.
+In the modern job market, your first hurdle is not a human recruiter — it is an algorithm. Studies show that 75% of resumes are never seen by a human eye because of automated filtering.
 
 ## Rule 1: Use the Right Layout
 
-**The problem with creative templates:**
 Complex layouts, while visually striking to humans, are a nightmare for parsing software. Two-column resumes often get read in mixed-up order by the ATS.
 
-**The fix:**
-Use a minimal, single-column layout. Clean formatting improves ATS readability significantly. This ensures the machine follows the chronological order of your career perfectly.
+**The fix:** Use a minimal, single-column layout. ResumeForge offers free ATS-friendly resume templates that are optimized for maximum ATS readability.
 
 ## Rule 2: Keyword Integration
 
@@ -234,19 +249,16 @@ Resume keywords are essential for passing ATS filters. The software scans your d
 
 ## Rule 3: Standard Section Headers
 
-Robots are literal. Use standard headings:
+Use standard headings only:
 - Work Experience or Professional Experience
 - Education
 - Skills
 - Certifications
 
-Avoid creative titles like "Where I've Been" or "My Journey."
-
 ## Elements to Remove Immediately
 
 - Photos (can cause automatic rejection in US/UK/Canada)
 - Images and icons next to contact info
-- Contact info in Word header/footer sections
 - Skill bars and charts
 - Tables and text boxes
 
@@ -254,48 +266,49 @@ Avoid creative titles like "Where I've Been" or "My Journey."
 
 **Keyword stuffing:** Writing keywords in tiny white text is detected by modern ATS systems and results in automatic rejection.
 
-**Misspelling job titles:** A typo in "Managerr" means you don't show up for any management searches.
-
-**Wrong date format:** Use Month/Year (May 2021) or MM/YYYY consistently.
+**Misspelling job titles:** A typo in your title means you do not show up for any related searches.
 
 ## Final Step: Test Your Resume
 
-Open your PDF. Try to highlight and copy the text into Notepad. If the text looks scrambled or sections are missing, your resume is not ATS-readable.`
+Open your PDF. Try to highlight and copy the text into Notepad. If the text looks scrambled or sections are missing, your resume is not ATS-readable.
+
+Build a properly formatted ATS resume for free using ResumeForge — no login required, instant PDF download.`
   },
   {
     id: 6,
     slug: 'resume-mistakes-that-cost-you-jobs',
-    title: '10 Deadly Resume Mistakes That Cost You Jobs',
-    description: "Don't let a small error stop your career. Learn the top resume mistakes that cost you jobs and how to fix them today.",
+    title: '10 Deadly Resume Mistakes That Cost You Jobs in 2026',
+    description: "Don't let a small error stop your career. Learn the top 10 resume mistakes that cost you jobs and how to fix them today using a free resume builder.",
     excerpt: "Don't let a small error stop your career. Learn the top resume mistakes that cost you jobs and how to fix them today.",
     date: '2026-04-17',
     readTime: '7 min read',
     category: 'Resume Tips',
+    keywords: 'resume mistakes, resume errors, ATS resume, free resume builder, resume tips 2026',
     content: `## The 6-Second Rule
 
-Recruiters spend an average of six to seven seconds scanning a CV before deciding its fate. Avoiding these mistakes isn't just about spelling — it's about technical strategy.
+Recruiters spend an average of six seconds scanning a resume before deciding its fate. Avoiding these mistakes is not just about spelling — it is about technical strategy.
 
 ## Mistake 1: Failing the ATS Screening
 
-The single most common mistake is building a resume for a human and forgetting about the robot. Roughly 70–75% of resumes get rejected before human review because they are not formatted correctly.
+Roughly 70-75% of resumes get rejected before human review because they are not formatted correctly.
 
-**Fix:** Use a clean, single-column layout. Avoid columns, tables, or complex graphic dividers.
+**Fix:** Use a clean, single-column layout. Use ResumeForge — a free ATS resume builder that formats your resume correctly automatically.
 
 ## Mistake 2: Missing Keywords
 
-Resume keywords are essential for passing ATS filters. If an HR manager searches for "Project Manager with Agile experience" and your resume says "managed teams using flexible workflows," you won't show up.
+If an HR manager searches for "Project Manager with Agile experience" and your resume says "managed teams using flexible workflows," you will not show up.
 
 **Fix:** Analyze the job description and include exact keywords naturally throughout your Skills section and experience bullets.
 
 ## Mistake 3: Generic Content
 
-Sending the same resume to 50 different employers guarantees failure. A generic resume makes it look like you haven't put effort into understanding the company's needs.
+Sending the same resume to 50 different employers guarantees failure.
 
 **Fix:** Tailor every application. Swap out bullet points that align specifically with each job.
 
 ## Mistake 4: Typos and Grammar Errors
 
-A typo suggests a lack of attention to detail. If you can't double-check your own career document, why would a company trust you with their clients or code?
+A typo suggests a lack of attention to detail.
 
 **Fix:** Proofread three times. Have a friend read it. Use a grammar checker.
 
@@ -308,7 +321,7 @@ Right: Managed a team of 12, increasing quarterly revenue by 22% ($500k increase
 
 ## Mistake 6: Wrong File Format
 
-Most ATS systems cannot read text saved inside an image file. If the machine can't see the text, you have zero keywords.
+Most ATS systems cannot read text saved inside an image file.
 
 **Fix:** Always save as PDF or .DOCX. PDF is preferred because it locks your formatting.
 
@@ -316,23 +329,17 @@ Most ATS systems cannot read text saved inside an image file. If the machine can
 
 Including your birthdate, religion, or a photo can lead to automatic rejection in the US, UK, and Canada.
 
-**Fix:** Keep only: name, email, phone, location (city/state), LinkedIn, and GitHub.
+**Fix:** Keep only: name, email, phone, location, LinkedIn, and GitHub.
 
 ## Mistake 8: Poor Visual Hierarchy
-
-If your resume is a wall of text, no one will read it.
 
 **Fix:** Use clear headers, bullet points, and white space. The top third of your resume should contain your name and a punchy professional summary.
 
 ## Mistake 9: No Professional Links
 
-Recruiters want to verify your claims. Without a LinkedIn or GitHub, you look less credible.
-
-**Fix:** Include active links in your header. Make sure your LinkedIn matches your resume.
+**Fix:** Include active LinkedIn and GitHub links in your header.
 
 ## Mistake 10: Focusing on the Past Instead of Your Value
-
-Companies aren't buying your past; they are buying their own future.
 
 **Fix:** Rewrite your summary to focus on how you solve the employer's current problems.
 
@@ -348,21 +355,22 @@ Companies aren't buying your past; they are buying their own future.
     id: 7,
     slug: 'best-resume-keywords-for-ats',
     title: '100+ Best Resume Keywords for ATS to Land Your Next Interview',
-    description: 'Discover the best resume keywords for ATS across industries. Learn how to place skills and action verbs to pass automated screening.',
+    description: 'Discover the best resume keywords for ATS across industries. Learn how to place skills and action verbs to pass automated screening and get more interviews.',
     excerpt: 'Discover the best resume keywords for ATS across industries. Learn how to place skills and action verbs to pass automated screening.',
     date: '2026-04-18',
     readTime: '8 min read',
     category: 'ATS Tips',
+    keywords: 'resume keywords, ATS keywords, best resume keywords, ATS resume, free resume builder',
     content: `## Why Resume Keywords Are the SEO of Your Career
 
-Most major employers use an Applicant Tracking System (ATS) — a specialized search engine for HR. When a recruiter looks for a candidate, they type words like "SQL," "B2B Sales," or "Project Management" into a search bar. If your resume doesn't contain those phrases, you don't appear in results.
+Most major employers use an Applicant Tracking System (ATS) — a specialized search engine for HR. When a recruiter looks for a candidate, they type words like "SQL," "B2B Sales," or "Project Management" into a search bar. If your resume does not contain those phrases, you do not appear in results.
 
-Research shows that 70–75% of resumes get rejected before human review due to missing keywords or poor formatting.
+Research shows that 70-75% of resumes get rejected before human review due to missing keywords or poor formatting.
 
 ## The Three Categories of ATS Keywords
 
 ### 1. Hard Skills (The Must-Haves)
-Technical abilities, software proficiencies, and certifications. These are the primary terms recruiters search for.
+Technical abilities, software proficiencies, and certifications.
 
 Examples: Python, QuickBooks, SEO, Google Analytics, Nursing License, PMP Certification
 
@@ -372,8 +380,6 @@ These words prove you are an achiever, not just a task-doer.
 Examples: Orchestrated, Streamlined, Spearheaded, Accelerated, Maximized, Delivered, Reduced, Increased
 
 ### 3. Soft Skills (The Support Words)
-These help establish cultural fit and leadership potential.
-
 Examples: Stakeholder Management, Strategic Planning, Conflict Resolution, Cross-functional Leadership
 
 ## Industry-Specific Keyword Lists
@@ -394,29 +400,25 @@ Conflict Management, Employee Relations, Onboarding, CSAT, Talent Acquisition, R
 
 **Analyze the job description:** The first three bullet points under Requirements are the highest priority keywords.
 
-**Frequency counts:** If "Leadership" appears four times in a job post but your resume only says "Managed," add "Leadership."
-
 **Title alignment:** If you are applying for "Content Manager" but your title was "Senior Writer," use "Content Management" in your summary.
 
 ## Where to Place Keywords
 
-**Professional Summary:** Include your top 3-4 keywords here. This is the first section both the machine and recruiter read.
+**Professional Summary:** Include your top 3-4 keywords here.
 
 **Dedicated Skills Section:** Create a clear list. This allows ATS to log your skills as structured data points.
 
-**Experience Bullets:** Don't just list keywords in Skills. Weave them into accomplishments.
+**Experience Bullets:** Weave keywords into accomplishments.
 
 Wrong: Managed projects.
 Right: Used Agile Methodology to manage 5 cross-functional projects with 100% on-time delivery.
 
 ## Avoid Keyword Stuffing
 
-Modern ATS systems detect hidden white text and will automatically flag your resume for rejection. Balance is everything — your resume must read naturally for the human recruiter in round two.
+Modern ATS systems detect hidden white text and will automatically flag your resume for rejection.
 
-## Common Keyword Mistakes
+## Build Your Keyword-Optimized Resume Free
 
-- Using "SaaS" but never spelling out "Software as a Service" — use both
-- Ignoring verb tense — if the JD asks for "Reporting," don't just write "Reported"
-- Adding keywords for jobs you don't want — this clutters your relevance score`
+ResumeForge automatically formats your resume in an ATS-friendly layout. Add your keywords, choose a template, and download your PDF — completely free, no login required.`
   }
 ]

@@ -6,6 +6,49 @@ import PreviewPanel from '../components/PreviewPanel'
 import Footer from '../components/Footer'
 import { useResume } from '../context/ResumeContext'
 
+// Google Ads Conversion Tracking
+function trackConversion(action) {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', action, {
+      event_category: 'Resume Builder',
+      event_label: 'User Engagement',
+    })
+  }
+}
+
+// Trust Bar — Google Ads Quality Score बढ़ाता है
+function TrustBar() {
+  return (
+    <div style={{
+      background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
+      padding: '6px 16px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '24px',
+      flexWrap: 'wrap',
+      flexShrink: 0,
+    }}>
+      {[
+        '✅ 100% Free',
+        '⚡ No Login Required',
+        '📄 Instant PDF Download',
+        '🎯 ATS-Friendly',
+        '🔒 Private & Secure',
+      ].map((item, i) => (
+        <span key={i} style={{
+          fontSize: '11px',
+          color: 'rgba(255,255,255,0.92)',
+          fontWeight: 500,
+          whiteSpace: 'nowrap',
+        }}>
+          {item}
+        </span>
+      ))}
+    </div>
+  )
+}
+
 export default function Builder() {
   const [previewVisible, setPreviewVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -27,14 +70,19 @@ export default function Builder() {
       })
       window.history.replaceState({}, document.title)
     }
+    // Google Ads — page visit track करें
+    trackConversion('page_view')
   }, [])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
       <h1 className="sr-only">
-        ResumeForge — Free ATS Resume Builder & CV Maker Online
+        Free Resume Builder Online — ATS-Friendly Resume Maker | ResumeForge
       </h1>
+
+      {/* Trust Bar */}
+      <TrustBar />
 
       {/* Header */}
       <div style={{ flexShrink: 0 }}>
@@ -81,14 +129,12 @@ export default function Builder() {
         /* ════ DESKTOP ════ */
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
 
-          {/* Split Panels */}
           <div style={{
             display: 'flex',
-            height: 'calc(100vh - 56px - 20px)',
+            height: 'calc(100vh - 56px - 28px - 20px)',
             overflow: 'hidden',
             flexShrink: 0,
           }}>
-
             {/* Form */}
             <div style={{
               width: '55%',
@@ -114,7 +160,6 @@ export default function Builder() {
             }}>
               <PreviewPanel />
             </div>
-
           </div>
 
           {/* Status Bar */}
@@ -128,13 +173,15 @@ export default function Builder() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>💾 Auto-saved · No account needed · 100% Free</span>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>Built with ❤️ — ResumeForge</span>
+            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+              💾 Auto-saved · No account needed · 100% Free
+            </span>
+            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+              Built with ❤️ — ResumeForge
+            </span>
           </div>
 
-          {/* Footer */}
           <Footer />
-
         </div>
       )}
 

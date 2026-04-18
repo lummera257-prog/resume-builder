@@ -37,11 +37,17 @@ export default function Header({ previewVisible, setPreviewVisible }) {
           <Link to="/contact" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100">Contact</Link>
         </div>
 
+        {/* ── Google Translate ── */}
+        <div id="google_translate_element" className="hidden md:flex items-center ml-1" />
+
         <div className="flex-1" />
 
         {/* Actions */}
         <div className="flex items-center gap-2">
-          <button onClick={loadSample} className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200">
+          <button
+            onClick={loadSample}
+            className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200"
+          >
             <Sparkles size={13} />
             <span className="hidden md:inline">Sample</span>
           </button>
@@ -49,26 +55,47 @@ export default function Header({ previewVisible, setPreviewVisible }) {
           {showConfirm ? (
             <div className="flex items-center gap-1">
               <span className="text-xs">Clear?</span>
-              <button onClick={() => { resetResume(); setShowConfirm(false) }} className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded">Yes</button>
-              <button onClick={() => setShowConfirm(false)} className="text-xs px-2 py-1 bg-slate-200 rounded">No</button>
+              <button
+                onClick={() => { resetResume(); setShowConfirm(false) }}
+                className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded"
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="text-xs px-2 py-1 bg-slate-200 rounded"
+              >
+                No
+              </button>
             </div>
           ) : (
-            <button onClick={() => setShowConfirm(true)} className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 hover:bg-slate-100 rounded-lg">
+            <button
+              onClick={() => setShowConfirm(true)}
+              className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 hover:bg-slate-100 rounded-lg"
+            >
               <RotateCcw size={13} />
               <span className="hidden md:inline">Reset</span>
             </button>
           )}
 
-          <button onClick={() => setPreviewVisible(v => !v)} className="md:hidden flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg">
+          <button
+            onClick={() => setPreviewVisible(v => !v)}
+            className="md:hidden flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg"
+          >
             {previewVisible ? <EyeOff size={13} /> : <Eye size={13} />}
             <span>{previewVisible ? 'Form' : 'Preview'}</span>
           </button>
 
-          <button onClick={handleExport} disabled={exporting} className="flex items-center gap-1 text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-70">
+          <button
+            onClick={handleExport}
+            disabled={exporting}
+            className="flex items-center gap-1 text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-70"
+          >
             <Download size={14} className={exporting ? 'animate-bounce' : ''} />
             {exporting ? 'Generating…' : 'Download'}
           </button>
         </div>
+
       </div>
     </header>
   )

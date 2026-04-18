@@ -27,7 +27,7 @@
     <meta name="twitter:description" content="Create ATS-friendly resumes online free. No login required. Instant PDF download." />
     <meta name="twitter:image" content="https://freeresumeforgebuilder.com/og-image.png" />
 
-    <!-- FAQ Schema for Google -->
+    <!-- FAQ Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -88,6 +88,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- ── Google Translate ── -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+            multilanguagePage: true,
+          },
+          'google_translate_element'
+        );
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+
+    <!-- Hide Google Translate top banner -->
+    <style>
+      body { top: 0 !important; }
+      .goog-te-banner-frame { display: none !important; }
+      .goog-te-gadget { font-size: 0 !important; }
+      .goog-te-gadget .goog-te-combo {
+        font-size: 13px !important;
+        padding: 4px 8px !important;
+        border-radius: 6px !important;
+        border: 1px solid #cbd5e1 !important;
+        background: white !important;
+        color: #334155 !important;
+        cursor: pointer !important;
+        outline: none !important;
+      }
+      #google_translate_element {
+        display: inline-block;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

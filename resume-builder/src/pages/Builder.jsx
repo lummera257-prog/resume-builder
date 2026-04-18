@@ -89,24 +89,24 @@ export default function Builder() {
         <span style={{ fontSize: '10px', color: '#94a3b8' }}>Built with ❤️ — ResumeForge</span>
       </div>
 
-      {/* Desktop Footer */}
-      <div className="hidden md:block">
+      {/* Desktop Footer — scroll karke aayega */}
+      <div className="hidden md:block" style={{ flexShrink: 0 }}>
         <Footer />
       </div>
 
       {/* ════ MOBILE ════ */}
       <div className="md:hidden" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
 
-        {/* Form — tab dikhega jab preview band ho */}
+        {/* Form */}
         {!previewVisible && (
           <div style={{ background: '#fff' }}>
             <FormPanel />
           </div>
         )}
 
-        {/* Preview — tab dikhega jab toggle ON ho */}
+        {/* Preview */}
         {previewVisible && (
-          <div style={{ background: '#f1f5f9', minHeight: '70vh' }}>
+          <div style={{ background: '#f1f5f9' }}>
             <PreviewPanel />
           </div>
         )}
@@ -125,7 +125,7 @@ export default function Builder() {
           <span style={{ fontSize: '10px', color: '#94a3b8' }}>Built with ❤️</span>
         </div>
 
-        {/* Mobile Footer — hamesha visible */}
+        {/* Mobile Footer */}
         <Footer />
 
       </div>

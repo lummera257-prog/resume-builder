@@ -22,43 +22,47 @@ export default function Builder() {
   }, [])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden', background: '#f1f5f9' }}>
+    <div className="flex flex-col" style={{ height: '100vh', overflow: 'hidden' }}>
 
       <h1 className="sr-only">
         ResumeForge — Free ATS Resume Builder & CV Maker Online
       </h1>
 
-      <Header
-        previewVisible={previewVisible}
-        setPreviewVisible={setPreviewVisible}
-      />
+      {/* Header — fixed top */}
+      <div style={{ flexShrink: 0 }}>
+        <Header
+          previewVisible={previewVisible}
+          setPreviewVisible={setPreviewVisible}
+        />
+      </div>
 
-      {/* Main Split Area */}
-      <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+      {/* Middle — form + preview, takes all remaining space */}
+      <div style={{ flex: 1, display: 'flex', minHeight: 0, overflow: 'hidden' }}>
 
         {/* Form Panel */}
-        <div style={{
-          width: '55%',
-          height: '100%',
-          overflowY: 'auto',
-          background: '#fff',
-          borderRight: '1px solid #e2e8f0',
-          display: previewVisible ? 'none' : 'block',
-        }}
-          className="md:block"
+        <div
+          style={{
+            width: '55%',
+            height: '100%',
+            overflowY: 'auto',
+            background: '#ffffff',
+            borderRight: '1px solid #e2e8f0',
+            flexShrink: 0,
+          }}
+          className={previewVisible ? 'hidden md:block' : 'block'}
         >
           <FormPanel />
         </div>
 
         {/* Preview Panel */}
-        <div style={{
-          width: '45%',
-          height: '100%',
-          overflowY: 'auto',
-          background: '#f1f5f9',
-          display: previewVisible ? 'block' : 'none',
-        }}
-          className="md:block md:!display-block"
+        <div
+          style={{
+            flex: 1,
+            height: '100%',
+            overflowY: 'auto',
+            background: '#f1f5f9',
+          }}
+          className={previewVisible ? 'block' : 'hidden md:block'}
         >
           <PreviewPanel />
         </div>
@@ -67,13 +71,13 @@ export default function Builder() {
 
       {/* Status Bar */}
       <div style={{
-        background: '#fff',
+        flexShrink: 0,
+        background: '#ffffff',
         borderTop: '1px solid #e2e8f0',
-        padding: '6px 16px',
+        padding: '5px 16px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexShrink: 0,
       }}>
         <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
           💾 Auto-saved · No account needed · 100% Free
@@ -83,7 +87,10 @@ export default function Builder() {
         </span>
       </div>
 
-      <Footer />
+      {/* Footer */}
+      <div style={{ flexShrink: 0 }}>
+        <Footer />
+      </div>
 
     </div>
   )

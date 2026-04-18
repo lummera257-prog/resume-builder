@@ -2,35 +2,35 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#111827', color: '#d1d5db', padding: '24px 0 16px', flexShrink: 0 }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
+    <footer style={{ background: '#111827', color: '#d1d5db', flexShrink: 0 }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '16px 20px' }}>
 
-        {/* Grid */}
+        {/* Desktop: 3 columns | Mobile: 2 columns compact */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-          gap: '32px',
-          marginBottom: '32px',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '16px',
+          marginBottom: '12px',
         }}>
 
           {/* Brand */}
           <div>
-            <div style={{ color: '#fff', fontWeight: 700, fontSize: '15px', marginBottom: '6px' }}>ResumeForge</div>
-            <div style={{ color: '#9ca3af', fontSize: '12px', lineHeight: 1.6 }}>Free ATS Resume Builder</div>
+            <div style={{ color: '#fff', fontWeight: 700, fontSize: '13px', marginBottom: '4px' }}>ResumeForge</div>
+            <div style={{ color: '#9ca3af', fontSize: '11px' }}>Free ATS Resume Builder</div>
           </div>
 
           {/* Tools */}
           <div>
-            <div style={{ color: '#fff', fontWeight: 600, fontSize: '13px', marginBottom: '12px' }}>Resume Tools</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ color: '#fff', fontWeight: 600, fontSize: '11px', marginBottom: '8px' }}>Resume Tools</div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
               {[
                 { to: '/free-resume-builder', label: 'Free Resume Builder' },
                 { to: '/ats-resume-builder',  label: 'ATS Resume Builder' },
                 { to: '/cv-builder',          label: 'CV Builder' },
-                { to: '/ats-resume-checker',  label: 'ATS Resume Checker' },
-                { to: '/resume-templates',    label: 'Resume Templates' },
+                { to: '/ats-resume-checker',  label: 'ATS Checker' },
+                { to: '/resume-templates',    label: 'Templates' },
               ].map((l, i) => (
-                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '12px', textDecoration: 'none', transition: 'color 0.15s' }}
+                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none' }}
                   onMouseEnter={e => e.target.style.color = '#fff'}
                   onMouseLeave={e => e.target.style.color = '#9ca3af'}>
                   {l.label}
@@ -41,16 +41,16 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <div style={{ color: '#fff', fontWeight: 600, fontSize: '13px', marginBottom: '12px' }}>Resources</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ color: '#fff', fontWeight: 600, fontSize: '11px', marginBottom: '8px' }}>Resources</div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
               {[
-                { to: '/blog',                    label: 'Blog' },
-                { to: '/resume-examples',         label: 'Resume Examples' },
-                { to: '/resume-for-freshers',     label: 'Resume for Freshers' },
-                { to: '/software-engineer-resume',label: 'Software Engineer Resume' },
-                { to: '/how-to-make-a-resume',    label: 'How to Make a Resume' },
+                { to: '/blog',                     label: 'Blog' },
+                { to: '/resume-examples',          label: 'Examples' },
+                { to: '/resume-for-freshers',      label: 'Freshers' },
+                { to: '/software-engineer-resume', label: 'SWE Resume' },
+                { to: '/how-to-make-a-resume',     label: 'How to Make' },
               ].map((l, i) => (
-                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '12px', textDecoration: 'none', transition: 'color 0.15s' }}
+                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none' }}
                   onMouseEnter={e => e.target.style.color = '#fff'}
                   onMouseLeave={e => e.target.style.color = '#9ca3af'}>
                   {l.label}
@@ -64,17 +64,17 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div style={{
           borderTop: '1px solid #374151',
-          paddingTop: '20px',
+          paddingTop: '10px',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
-          gap: '12px',
+          gap: '6px',
         }}>
-          <div style={{ fontSize: '11px', color: '#6b7280' }}>
+          <div style={{ fontSize: '10px', color: '#6b7280' }}>
             © {new Date().getFullYear()} ResumeForge
           </div>
-          <nav style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+          <nav style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
             {[
               { to: '/blog',    label: 'Blog' },
               { to: '/about',   label: 'About' },
@@ -82,7 +82,7 @@ export default function Footer() {
               { to: '/privacy', label: 'Privacy' },
               { to: '/terms',   label: 'Terms' },
             ].map((l, i) => (
-              <Link key={i} to={l.to} style={{ fontSize: '11px', color: '#6b7280', textDecoration: 'none', transition: 'color 0.15s' }}
+              <Link key={i} to={l.to} style={{ fontSize: '10px', color: '#6b7280', textDecoration: 'none' }}
                 onMouseEnter={e => e.target.style.color = '#fff'}
                 onMouseLeave={e => e.target.style.color = '#6b7280'}>
                 {l.label}

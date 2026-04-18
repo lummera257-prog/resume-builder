@@ -36,7 +36,7 @@ export default function Builder() {
         />
       </div>
 
-      {/* DESKTOP: side by side fixed panels */}
+      {/* ════ DESKTOP ════ */}
       <div
         className="hidden md:flex"
         style={{
@@ -72,7 +72,7 @@ export default function Builder() {
         </div>
       </div>
 
-      {/* DESKTOP: status bar */}
+      {/* Desktop Status Bar */}
       <div
         className="hidden md:flex"
         style={{
@@ -89,32 +89,29 @@ export default function Builder() {
         <span style={{ fontSize: '10px', color: '#94a3b8' }}>Built with ❤️ — ResumeForge</span>
       </div>
 
-      {/* DESKTOP: footer */}
+      {/* Desktop Footer */}
       <div className="hidden md:block">
         <Footer />
       </div>
 
-      {/* MOBILE: normal page scroll */}
-      <div className="md:hidden" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      {/* ════ MOBILE ════ */}
+      <div className="md:hidden" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
 
-        {/* Form */}
-        <div style={{
-          display: previewVisible ? 'none' : 'block',
-          background: '#fff',
-        }}>
-          <FormPanel />
-        </div>
+        {/* Form — tab dikhega jab preview band ho */}
+        {!previewVisible && (
+          <div style={{ background: '#fff' }}>
+            <FormPanel />
+          </div>
+        )}
 
-        {/* Preview */}
-        <div style={{
-          display: previewVisible ? 'block' : 'none',
-          background: '#f1f5f9',
-          minHeight: 'auto',
-        }}>
-          <PreviewPanel />
-        </div>
+        {/* Preview — tab dikhega jab toggle ON ho */}
+        {previewVisible && (
+          <div style={{ background: '#f1f5f9', minHeight: '70vh' }}>
+            <PreviewPanel />
+          </div>
+        )}
 
-        {/* Status Bar */}
+        {/* Mobile Status Bar */}
         <div style={{
           background: '#f8fafc',
           borderTop: '1px solid #e2e8f0',
@@ -122,12 +119,15 @@ export default function Builder() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          flexShrink: 0,
         }}>
           <span style={{ fontSize: '10px', color: '#94a3b8' }}>💾 Auto-saved · 100% Free</span>
           <span style={{ fontSize: '10px', color: '#94a3b8' }}>Built with ❤️</span>
         </div>
 
+        {/* Mobile Footer — hamesha visible */}
         <Footer />
+
       </div>
 
     </div>

@@ -36,7 +36,7 @@ export default function Builder() {
         />
       </div>
 
-      {/* Builder Area — fixed height, independent scroll */}
+      {/* Builder Area */}
       <div style={{
         display: 'flex',
         height: 'calc(100vh - 56px - 32px)',
@@ -44,15 +44,17 @@ export default function Builder() {
         flexShrink: 0,
       }}>
 
-        {/* Form Panel — mobile: full width, desktop: 55% */}
-        <div style={{
-          overflowY: 'auto',
-          background: '#ffffff',
-          borderRight: '1px solid #e2e8f0',
-          flexShrink: 0,
-          // Mobile default
-          width: '100%',
-        }}
+        {/* Form Panel */}
+        <div
+          style={{
+            overflowY: 'auto',
+            background: '#ffffff',
+            borderRight: '1px solid #e2e8f0',
+            flexShrink: 0,
+            width: '100%',
+            WebkitOverflowScrolling: 'touch',
+            scrollBehavior: 'smooth',
+          }}
           className={`
             ${previewVisible ? 'hidden' : 'block'}
             md:block md:!w-[55%]
@@ -61,12 +63,15 @@ export default function Builder() {
           <FormPanel />
         </div>
 
-        {/* Preview Panel — mobile: full width, desktop: 45% */}
-        <div style={{
-          overflowY: 'auto',
-          background: '#f1f5f9',
-          flex: 1,
-        }}
+        {/* Preview Panel */}
+        <div
+          style={{
+            overflowY: 'auto',
+            background: '#f1f5f9',
+            flex: 1,
+            WebkitOverflowScrolling: 'touch',
+            scrollBehavior: 'smooth',
+          }}
           className={`
             ${previewVisible ? 'block' : 'hidden'}
             md:block
@@ -95,7 +100,7 @@ export default function Builder() {
         </span>
       </div>
 
-      {/* Footer — scroll karke dekho */}
+      {/* Footer */}
       <Footer />
 
     </div>

@@ -1,5 +1,15 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.freeresumeforgebuilder.com"
+        }
+      ],
+      "destination": "https://freeresumeforgebuilder.com/:path*",
+      "permanent": true
+    }
   ]
 }

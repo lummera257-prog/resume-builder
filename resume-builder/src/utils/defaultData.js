@@ -21,7 +21,7 @@ export const defaultResumeData = {
   achievements: [],
   customSections: [],
   settings: {
-    template: 'clarity',
+    template: 'creative',
     layout: 'single',
     colorScheme: 'blue',
     fontSize: 'medium',
@@ -150,7 +150,7 @@ export const sampleResumeData = {
   ],
   customSections: [],
   settings: {
-    template: 'clarity',
+    template: 'creative',
     layout: 'single',
     colorScheme: 'blue',
     fontSize: 'medium',

@@ -39,7 +39,7 @@ export default function Builder() {
       {/* Builder Area — fixed height, independent scroll */}
       <div style={{
         display: 'flex',
-        height: 'calc(100vh - 56px)',
+        height: 'calc(100vh - 56px - 32px)',
         overflow: 'hidden',
         flexShrink: 0,
       }}>

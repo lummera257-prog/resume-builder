@@ -17,7 +17,6 @@ export default function Builder() {
         template: location.state.templateKey,
         colorScheme: location.state.colorScheme || 'blue',
       })
-      // State clear करें ताकि refresh पर फिर से apply न हो
       window.history.replaceState({}, document.title)
     }
   }, [])
@@ -33,16 +32,31 @@ export default function Builder() {
         setPreviewVisible={setPreviewVisible}
       />
 
-      <div className="flex flex-row h-[calc(100vh-56px)]">
-        <div className={`w-full md:w-[55%] overflow-y-auto bg-white border-r border-slate-200 ${previewVisible ? 'hidden md:block' : 'block'}`}>
+      {/* ✅ Mobile: natural scroll | Desktop: fixed viewport height */}
+      <div className="flex flex-row md:h-[calc(100vh-56px)] flex-1">
+        {/* Form Panel */}
+        <div className={`
+          w-full md:w-[55%]
+          md:overflow-y-auto
+          bg-white border-r border-slate-200
+          ${previewVisible ? 'hidden md:block' : 'block'}
+        `}>
           <FormPanel />
         </div>
-        <div className={`w-full md:w-[45%] overflow-y-auto bg-slate-100 ${previewVisible ? 'block' : 'hidden md:block'}`}>
+
+        {/* Preview Panel */}
+        <div className={`
+          w-full md:w-[45%]
+          md:overflow-y-auto
+          bg-slate-100
+          ${previewVisible ? 'block' : 'hidden md:block'}
+        `}>
           <PreviewPanel />
         </div>
       </div>
 
-      <div className="h-7 border-t border-slate-200 bg-white px-4 flex items-center justify-between">
+      {/* Status Bar */}
+      <div className="border-t border-slate-200 bg-white px-4 py-2 flex items-center justify-between shrink-0">
         <span className="text-[11px] font-medium text-slate-500">
           💾 Auto-saved · No account needed · 100% Free
         </span>
@@ -51,6 +65,7 @@ export default function Builder() {
         </span>
       </div>
 
+      {/* ✅ Footer — always visible, no gap */}
       <Footer />
     </div>
   )

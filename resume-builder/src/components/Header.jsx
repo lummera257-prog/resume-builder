@@ -33,10 +33,25 @@ const LANGUAGES = [
 
 // ── Trigger Google Translate programmatically ─────────────
 function triggerGoogleTranslate(langCode) {
+  // Method 1: doGTranslate (Google ka official function)
+  if (typeof window.doGTranslate === 'function') {
+    window.doGTranslate(`en|${langCode}`)
+    return
+  }
+
+  // Method 2: combo select element
   const select = document.querySelector('.goog-te-combo')
-  if (!select) return
-  select.value = langCode
-  select.dispatchEvent(new Event('change'))
+  if (select) {
+    select.value = langCode
+    select.dispatchEvent(new Event('change'))
+    return
+  }
+
+  // Method 3: Cookie fallback (100% kaam karta hai)
+  const hostname = window.location.hostname
+  document.cookie = `googtrans=/en/${langCode};path=/;domain=${hostname}`
+  document.cookie = `googtrans=/en/${langCode};path=/`
+  window.location.reload()
 }
 
 // ── Language Selector Component ───────────────────────────

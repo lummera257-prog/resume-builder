@@ -28,18 +28,34 @@ const TEMPLATE_LABELS = {
 
 export default function PreviewPanel() {
   const { resume } = useResume()
-  const [scale, setScale] = useState(0.6)
-  const templateRef  = useRef(null)
+  const [scale, setScale] = useState(0.55)
+  const templateRef = useRef(null)
+  const containerRef = useRef(null)
   const [templateHeight, setTemplateHeight] = useState(1123)
 
   const Template = TEMPLATES[resume.settings.template] || ClassicTemplate
-  const label    = TEMPLATE_LABELS[resume.settings.template] || '📄 Classic'
+  const label = TEMPLATE_LABELS[resume.settings.template] || '📄 Classic'
+
+  // Auto scale based on container width
+  useEffect(() => {
+    const updateScale = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth
+        const A4_MM = 794 // 210mm in px at 96dpi
+        const padding = 32
+        const newScale = Math.min((containerWidth - padding) / A4_MM, 1.0)
+        setScale(Math.max(newScale, 0.3))
+      }
+    }
+    updateScale()
+    const observer = new ResizeObserver(updateScale)
+    if (containerRef.current) observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const measure = () => {
-      if (templateRef.current) {
-        setTemplateHeight(templateRef.current.scrollHeight)
-      }
+      if (templateRef.current) setTemplateHeight(templateRef.current.scrollHeight)
     }
     measure()
     const t = setTimeout(measure, 300)
@@ -48,86 +64,73 @@ export default function PreviewPanel() {
 
   const zoomIn  = () => setScale(s => Math.min(s + 0.07, 1.4))
   const zoomOut = () => setScale(s => Math.max(s - 0.07, 0.3))
-  const reset   = () => setScale(0.6)
+  const reset   = () => {
+    if (containerRef.current) {
+      const w = containerRef.current.offsetWidth
+      setScale(Math.max(Math.min((w - 32) / 794, 1.0), 0.3))
+    }
+  }
 
-  // Actual visual height after scaling
   const visualHeight = templateHeight * scale
 
   return (
-    <div className="h-full flex flex-col bg-slate-100">
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', background: '#f1f5f9' }}>
 
       {/* Toolbar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-white border-b border-slate-300 flex-shrink-0">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider">
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '8px 16px', background: '#fff', borderBottom: '1px solid #e2e8f0',
+        flexShrink: 0,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Live Preview
           </span>
-          <span className="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full font-medium">
+          <span style={{ fontSize: '11px', color: '#64748b', background: '#f1f5f9', padding: '2px 8px', borderRadius: '20px' }}>
             {label}
           </span>
         </div>
-        <div className="flex items-center gap-1">
-          <button onClick={zoomOut} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors" title="Zoom out">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <button onClick={zoomOut} style={{ padding: '6px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#64748b' }}>
             <ZoomOut size={14} />
           </button>
-          <button onClick={reset} className="px-2 py-1 text-xs text-slate-600 font-medium hover:bg-slate-100 rounded-lg transition-colors min-w-[42px]">
+          <button onClick={reset} style={{ padding: '4px 8px', fontSize: '11px', fontWeight: 600, color: '#374151', border: 'none', background: '#f1f5f9', borderRadius: '6px', cursor: 'pointer', minWidth: '40px' }}>
             {Math.round(scale * 100)}%
           </button>
-          <button onClick={zoomIn} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors" title="Zoom in">
+          <button onClick={zoomIn} style={{ padding: '6px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#64748b' }}>
             <ZoomIn size={14} />
           </button>
         </div>
       </div>
 
-      {/* Scrollable area */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="flex flex-col items-center px-4 pt-6 pb-10">
+      {/* Scrollable Preview */}
+      <div ref={containerRef} style={{ flex: 1, overflowY: 'auto', padding: '20px 12px 40px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
 
-          {/*
-            KEY FIX:
-            - Outer div height = visualHeight (what user sees)
-            - Inner div is absolutely positioned and scaled
-            - This way "End of Preview" always appears BELOW the visual resume
-          */}
-          <div
-            style={{
-              width: '210mm',
-              height: `${visualHeight}px`,
-              flexShrink: 0,
-              position: 'relative',
-              overflow: 'visible',
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: '50%',
-                transform: `translateX(-50%) scale(${scale})`,
-                transformOrigin: 'top center',
-                width: '210mm',
-              }}
-            >
-              <div ref={templateRef} className="shadow-2xl ring-1 ring-slate-900/10">
+          {/* Scaled Resume */}
+          <div style={{ position: 'relative', width: '794px', height: `${visualHeight}px`, flexShrink: 0 }}>
+            <div style={{
+              position: 'absolute', top: 0, left: '50%',
+              transform: `translateX(-50%) scale(${scale})`,
+              transformOrigin: 'top center',
+              width: '794px',
+            }}>
+              <div ref={templateRef} style={{ boxShadow: '0 4px 32px rgba(0,0,0,0.12)', borderRadius: '2px', overflow: 'hidden' }}>
                 <Template resume={resume} />
               </div>
             </div>
           </div>
 
-          {/* End of Preview — always below visual resume */}
-          <div className="flex flex-col items-center gap-2 mt-8 mb-4 w-full max-w-sm">
-            <div className="flex items-center gap-3 w-full">
-              <div className="flex-1 h-px bg-slate-300" />
-              <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
-                End of Preview
-              </span>
-              <div className="flex-1 h-px bg-slate-300" />
-            </div>
-            <p className="text-xs text-slate-400 text-center">
-              ✅ Scroll up to review · Use zoom to inspect details
-            </p>
-          </div>
+        </div>
 
+        {/* End of Preview */}
+        <div style={{ marginTop: '32px', textAlign: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', maxWidth: '320px', margin: '0 auto 8px' }}>
+            <div style={{ flex: 1, height: '1px', background: '#cbd5e1' }} />
+            <span style={{ fontSize: '11px', color: '#94a3b8', whiteSpace: 'nowrap' }}>End of Preview</span>
+            <div style={{ flex: 1, height: '1px', background: '#cbd5e1' }} />
+          </div>
+          <p style={{ fontSize: '11px', color: '#94a3b8', margin: 0 }}>✅ Scroll up to review · Use zoom to inspect details</p>
         </div>
       </div>
 

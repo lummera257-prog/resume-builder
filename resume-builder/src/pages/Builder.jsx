@@ -36,7 +36,7 @@ export default function Builder() {
         />
       </div>
 
-      {/* Form + Preview — fixed height, independent scroll */}
+      {/* Builder Area — fixed height, independent scroll */}
       <div style={{
         display: 'flex',
         height: 'calc(100vh - 56px)',
@@ -44,30 +44,33 @@ export default function Builder() {
         flexShrink: 0,
       }}>
 
-        {/* Form Panel */}
-        <div
-          style={{
-            width: '55%',
-            height: '100%',
-            overflowY: 'auto',
-            background: '#ffffff',
-            borderRight: '1px solid #e2e8f0',
-            flexShrink: 0,
-          }}
-          className={previewVisible ? 'hidden md:block' : 'block'}
+        {/* Form Panel — mobile: full width, desktop: 55% */}
+        <div style={{
+          overflowY: 'auto',
+          background: '#ffffff',
+          borderRight: '1px solid #e2e8f0',
+          flexShrink: 0,
+          // Mobile default
+          width: '100%',
+        }}
+          className={`
+            ${previewVisible ? 'hidden' : 'block'}
+            md:block md:!w-[55%]
+          `}
         >
           <FormPanel />
         </div>
 
-        {/* Preview Panel */}
-        <div
-          style={{
-            flex: 1,
-            height: '100%',
-            overflowY: 'auto',
-            background: '#f1f5f9',
-          }}
-          className={previewVisible ? 'block' : 'hidden md:block'}
+        {/* Preview Panel — mobile: full width, desktop: 45% */}
+        <div style={{
+          overflowY: 'auto',
+          background: '#f1f5f9',
+          flex: 1,
+        }}
+          className={`
+            ${previewVisible ? 'block' : 'hidden'}
+            md:block
+          `}
         >
           <PreviewPanel />
         </div>
@@ -76,13 +79,13 @@ export default function Builder() {
 
       {/* Status Bar */}
       <div style={{
+        flexShrink: 0,
         background: '#ffffff',
         borderTop: '1px solid #e2e8f0',
         padding: '5px 16px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexShrink: 0,
       }}>
         <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
           💾 Auto-saved · No account needed · 100% Free
@@ -92,7 +95,7 @@ export default function Builder() {
         </span>
       </div>
 
-      {/* Footer — page scroll ke saath aayega */}
+      {/* Footer — scroll karke dekho */}
       <Footer />
 
     </div>

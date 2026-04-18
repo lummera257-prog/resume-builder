@@ -39,7 +39,7 @@ export default function Builder() {
       {/* Builder Area */}
       <div style={{
         display: 'flex',
-        height: 'calc(100vh - 54px - 22px)',
+        height: 'calc(100vh - 56px - 20px)',
         overflow: 'hidden',
         flexShrink: 0,
       }}>
@@ -82,20 +82,21 @@ export default function Builder() {
 
       </div>
 
-      {/* Status Bar */}
+      {/* Status Bar — minimal */}
       <div style={{
         flexShrink: 0,
-        background: '#ffffff',
+        background: '#f8fafc',
         borderTop: '1px solid #e2e8f0',
-        padding: '5px 16px',
+        padding: '2px 16px',
+        height: '20px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-        <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
+        <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 500 }}>
           💾 Auto-saved · No account needed · 100% Free
         </span>
-        <span style={{ fontSize: '11px', color: '#64748b' }}>
+        <span style={{ fontSize: '10px', color: '#94a3b8' }}>
           Built with ❤️ — ResumeForge
         </span>
       </div>

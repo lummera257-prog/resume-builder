@@ -77,7 +77,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    <!-- Google Translate Init -->
+    <!-- ── Google Translate Init ── -->
     <script type="text/javascript">
       function googleTranslateElementInit() {
         new google.translate.TranslateElement(
@@ -95,26 +95,67 @@
       src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
 
-    <!-- ✅ Hide Google bar + prevent layout shift -->
+    <!-- ── CSS: Hide Google bar ── -->
     <style>
-      /* Prevent body from shifting down */
-      body                          { top: 0 !important; position: static !important; }
-      body.translated-ltr           { margin-top: 0 !important; top: 0 !important; }
-      body.translated-rtl           { margin-top: 0 !important; top: 0 !important; }
-
-      /* Hide the Google top bar iframe completely */
-      .goog-te-banner-frame         { display: none !important; }
-      .goog-te-banner-frame.skiptranslate { display: none !important; }
-      iframe.goog-te-banner-frame   { display: none !important; }
-
-      /* Hide the default Google widget (we use our own UI) */
-      .goog-te-gadget               { display: none !important; }
-      #google_translate_element     { display: none !important; }
-
-      /* Prevent yellow highlight on translated text */
-      font[color="green"]           { color: inherit !important; }
-      .goog-text-highlight          { background: none !important; box-shadow: none !important; }
+      body                               { top: 0 !important; position: static !important; }
+      body.translated-ltr                { margin-top: 0 !important; top: 0 !important; }
+      body.translated-rtl                { margin-top: 0 !important; top: 0 !important; }
+      .goog-te-banner-frame              { display: none !important; }
+      .goog-te-banner-frame.skiptranslate{ display: none !important; }
+      iframe.goog-te-banner-frame        { display: none !important; }
+      .goog-te-gadget                    { display: none !important; }
+      #google_translate_element          { display: none !important; }
+      .goog-text-highlight               { background: none !important; box-shadow: none !important; }
+      font[color="green"]                { color: inherit !important; }
     </style>
+
+    <!-- ── JS: Force hide Google bar (CSS alone is not enough) ── -->
+    <script>
+      (function () {
+        function hideGoogleBar() {
+          // 1. Fix body shift
+          document.body.style.top        = '0px';
+          document.body.style.marginTop  = '0px';
+          document.body.style.position   = 'static';
+
+          // 2. Hide all Google banner iframes
+          document
+            .querySelectorAll('iframe.goog-te-banner-frame, .goog-te-banner-frame')
+            .forEach(function (el) { el.style.display = 'none'; });
+
+          // 3. Hide skiptranslate iframes specifically
+          document
+            .querySelectorAll('.skiptranslate')
+            .forEach(function (el) {
+              if (el.tagName === 'IFRAME') el.style.display = 'none';
+            });
+        }
+
+        // Run immediately
+        hideGoogleBar();
+
+        // Run every 200ms for 10 seconds (catches lazy-injected bar)
+        var timer = setInterval(hideGoogleBar, 200);
+        setTimeout(function () { clearInterval(timer); }, 10000);
+
+        // MutationObserver — catches bar the moment it appears in DOM
+        var observer = new MutationObserver(hideGoogleBar);
+
+        // Start observing once DOM is ready
+        function startObserver() {
+          observer.observe(document.body, { childList: true, subtree: true });
+          // Disconnect after 10s to save memory
+          setTimeout(function () { observer.disconnect(); }, 10000);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', startObserver);
+        } else {
+          startObserver();
+        }
+      })();
+    </script>
+
   </head>
   <body>
     <div id="root"></div>

@@ -29,7 +29,7 @@ const TEMPLATE_LABELS = {
 export default function PreviewPanel() {
   const { resume } = useResume()
   const [scale, setScale] = useState(0.6)
-  const templateRef = useRef(null)
+  const templateRef  = useRef(null)
   const [templateHeight, setTemplateHeight] = useState(1123)
 
   const Template = TEMPLATES[resume.settings.template] || ClassicTemplate
@@ -42,7 +42,6 @@ export default function PreviewPanel() {
       }
     }
     measure()
-    // re-measure after short delay (fonts/images load)
     const t = setTimeout(measure, 300)
     return () => clearTimeout(t)
   }, [resume, resume.settings.template])
@@ -51,7 +50,8 @@ export default function PreviewPanel() {
   const zoomOut = () => setScale(s => Math.max(s - 0.07, 0.3))
   const reset   = () => setScale(0.6)
 
-  const scaledHeight = templateHeight * scale
+  // Actual visual height after scaling
+  const visualHeight = templateHeight * scale
 
   return (
     <div className="h-full flex flex-col bg-slate-100">
@@ -67,66 +67,70 @@ export default function PreviewPanel() {
           </span>
         </div>
         <div className="flex items-center gap-1">
-          <button
-            onClick={zoomOut}
-            className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"
-            title="Zoom out"
-          >
+          <button onClick={zoomOut} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors" title="Zoom out">
             <ZoomOut size={14} />
           </button>
-          <button
-            onClick={reset}
-            className="px-2 py-1 text-xs text-slate-600 font-medium hover:bg-slate-100 rounded-lg transition-colors min-w-[42px]"
-          >
+          <button onClick={reset} className="px-2 py-1 text-xs text-slate-600 font-medium hover:bg-slate-100 rounded-lg transition-colors min-w-[42px]">
             {Math.round(scale * 100)}%
           </button>
-          <button
-            onClick={zoomIn}
-            className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"
-            title="Zoom in"
-          >
+          <button onClick={zoomIn} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors" title="Zoom in">
             <ZoomIn size={14} />
           </button>
         </div>
       </div>
 
-      {/* Scrollable preview area */}
+      {/* Scrollable area */}
       <div className="flex-1 overflow-y-auto">
-        <div className="flex justify-center py-6 px-4">
+        <div className="flex flex-col items-center px-4 pt-6 pb-10">
 
-          {/* Scaled template wrapper */}
+          {/*
+            KEY FIX:
+            - Outer div height = visualHeight (what user sees)
+            - Inner div is absolutely positioned and scaled
+            - This way "End of Preview" always appears BELOW the visual resume
+          */}
           <div
             style={{
               width: '210mm',
+              height: `${visualHeight}px`,
               flexShrink: 0,
-              transform: `scale(${scale})`,
-              transformOrigin: 'top center',
-              height: `${scaledHeight}px`,
-              marginBottom: `${scaledHeight - templateHeight}px`,
+              position: 'relative',
+              overflow: 'visible',
             }}
           >
-            <div ref={templateRef} className="shadow-2xl ring-1 ring-slate-900/10">
-              <Template resume={resume} />
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: '50%',
+                transform: `translateX(-50%) scale(${scale})`,
+                transformOrigin: 'top center',
+                width: '210mm',
+              }}
+            >
+              <div ref={templateRef} className="shadow-2xl ring-1 ring-slate-900/10">
+                <Template resume={resume} />
+              </div>
             </div>
           </div>
 
-        </div>
-
-        {/* ── Bottom "end of preview" indicator ── */}
-        <div className="flex flex-col items-center gap-2 py-6 px-4">
-          <div className="flex items-center gap-3 w-full max-w-xs">
-            <div className="flex-1 h-px bg-slate-300" />
-            <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
-              End of Preview
-            </span>
-            <div className="flex-1 h-px bg-slate-300" />
+          {/* End of Preview — always below visual resume */}
+          <div className="flex flex-col items-center gap-2 mt-8 mb-4 w-full max-w-sm">
+            <div className="flex items-center gap-3 w-full">
+              <div className="flex-1 h-px bg-slate-300" />
+              <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
+                End of Preview
+              </span>
+              <div className="flex-1 h-px bg-slate-300" />
+            </div>
+            <p className="text-xs text-slate-400 text-center">
+              ✅ Scroll up to review · Use zoom to inspect details
+            </p>
           </div>
-          <p className="text-xs text-slate-400 text-center">
-            ✅ Scroll up to review · Use zoom to inspect details
-          </p>
-        </div>
 
+        </div>
       </div>
+
     </div>
   )
 }

@@ -113,18 +113,17 @@ export default function Builder() {
 
           {/* Mobile Status Bar */}
           <div style={{
-            background: '#1e293b',
-            borderTop: '1px solid #2563eb',
+            background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
             padding: '4px 16px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexShrink: 0,
           }}>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
               💾 Auto-saved · 100% Free
             </span>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
               Built with ❤️
             </span>
           </div>
@@ -174,21 +173,20 @@ export default function Builder() {
             </div>
           </div>
 
-          {/* Desktop Status Bar — dark theme */}
+          {/* Desktop Status Bar — TrustBar जैसा */}
           <div style={{
             flexShrink: 0,
-            background: '#1e293b',
-            borderTop: '1px solid #2563eb',
+            background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
             height: '24px',
             padding: '0 16px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
               💾 Auto-saved · No account needed · 100% Free
             </span>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
               Built with ❤️ — ResumeForge
             </span>
           </div>

@@ -1,12 +1,13 @@
 import { useResume } from '../context/ResumeContext'
-import ClassicTemplate from '../templates/ClassicTemplate'
-import ModernTemplate from '../templates/ModernTemplate'
-import MinimalTemplate from '../templates/MinimalTemplate'
-import ElegantTemplate from '../templates/ElegantTemplate'
-import ExecutiveTemplate from '../templates/ExecutiveTemplate'
-import CreativeTemplate from '../templates/CreativeTemplate'
 import { ZoomIn, ZoomOut } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, lazy, Suspense } from 'react'
+
+const ClassicTemplate   = lazy(() => import('../templates/ClassicTemplate'))
+const ModernTemplate    = lazy(() => import('../templates/ModernTemplate'))
+const MinimalTemplate   = lazy(() => import('../templates/MinimalTemplate'))
+const ElegantTemplate   = lazy(() => import('../templates/ElegantTemplate'))
+const ExecutiveTemplate = lazy(() => import('../templates/ExecutiveTemplate'))
+const CreativeTemplate  = lazy(() => import('../templates/CreativeTemplate'))
 
 const TEMPLATES = {
   clarity:   ClassicTemplate,
@@ -36,12 +37,11 @@ export default function PreviewPanel() {
   const Template = TEMPLATES[resume.settings.template] || ClassicTemplate
   const label = TEMPLATE_LABELS[resume.settings.template] || '📄 Classic'
 
-  // Auto scale based on container width
   useEffect(() => {
     const updateScale = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth
-        const A4_MM = 794 // 210mm in px at 96dpi
+        const A4_MM = 794
         const padding = 32
         const newScale = Math.min((containerWidth - padding) / A4_MM, 1.0)
         setScale(Math.max(newScale, 0.3))
@@ -116,7 +116,9 @@ export default function PreviewPanel() {
               width: '794px',
             }}>
               <div ref={templateRef} style={{ boxShadow: '0 4px 32px rgba(0,0,0,0.12)', borderRadius: '2px', overflow: 'hidden' }}>
-                <Template resume={resume} />
+                <Suspense fallback={<div style={{ height: '1123px', background: '#fff' }} />}>
+                  <Template resume={resume} />
+                </Suspense>
               </div>
             </div>
           </div>

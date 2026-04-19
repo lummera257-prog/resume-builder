@@ -71,15 +71,25 @@ export default function Builder() {
     trackConversion('page_view')
   }, [])
 
+  // TrustBar ~28px + Header ~56px + StatusBar ~20px = ~104px
+  const CHROME_HEIGHT = 104
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      overflowY: 'auto',
+    }}>
 
       <h1 className="sr-only">
         Free Resume Builder Online — ATS-Friendly Resume Maker | ResumeForge
       </h1>
 
+      {/* Trust Bar */}
       <TrustBar />
 
+      {/* Header */}
       <div style={{ flexShrink: 0 }}>
         <Header
           previewVisible={previewVisible}
@@ -112,8 +122,12 @@ export default function Builder() {
             alignItems: 'center',
             flexShrink: 0,
           }}>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>💾 Auto-saved · 100% Free</span>
-            <span style={{ fontSize: '10px', color: '#94a3b8' }}>Built with ❤️</span>
+            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+              💾 Auto-saved · 100% Free
+            </span>
+            <span style={{ fontSize: '10px', color: '#94a3b8' }}>
+              Built with ❤️
+            </span>
           </div>
 
           <Footer />
@@ -122,16 +136,17 @@ export default function Builder() {
       ) : (
 
         /* ════ DESKTOP ════ */
-        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
 
-          {/* ✅ FIXED — flex:1 instead of fixed height */}
+          {/* Form + Preview panels */}
           <div style={{
             display: 'flex',
-            flex: 1,
+            height: `calc(100vh - ${CHROME_HEIGHT}px)`,
             overflow: 'hidden',
-            minHeight: 0,
+            flexShrink: 0,
           }}>
-            {/* Form */}
+
+            {/* Form Panel */}
             <div style={{
               width: '55%',
               height: '100%',
@@ -145,7 +160,7 @@ export default function Builder() {
               <FormPanel />
             </div>
 
-            {/* Preview */}
+            {/* Preview Panel */}
             <div style={{
               flex: 1,
               height: '100%',
@@ -177,7 +192,9 @@ export default function Builder() {
             </span>
           </div>
 
+          {/* Footer — scroll करने पर दिखेगा */}
           <Footer />
+
         </div>
       )}
 

@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 // Use '/' for Vercel/Netlify or local dev
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: '/',
   build: {
     outDir: 'dist',
     sourcemap: false,

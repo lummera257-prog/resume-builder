@@ -6,7 +6,6 @@ import PreviewPanel from '../components/PreviewPanel'
 import Footer from '../components/Footer'
 import { useResume } from '../context/ResumeContext'
 
-// Google Ads Conversion Tracking
 function trackConversion(action) {
   if (typeof window.gtag === 'function') {
     window.gtag('event', action, {
@@ -16,7 +15,6 @@ function trackConversion(action) {
   }
 }
 
-// Trust Bar — Google Ads Quality Score बढ़ाता है
 function TrustBar() {
   return (
     <div style={{
@@ -70,7 +68,6 @@ export default function Builder() {
       })
       window.history.replaceState({}, document.title)
     }
-    // Google Ads — page visit track करें
     trackConversion('page_view')
   }, [])
 
@@ -81,10 +78,8 @@ export default function Builder() {
         Free Resume Builder Online — ATS-Friendly Resume Maker | ResumeForge
       </h1>
 
-      {/* Trust Bar */}
       <TrustBar />
 
-      {/* Header */}
       <div style={{ flexShrink: 0 }}>
         <Header
           previewVisible={previewVisible}
@@ -129,11 +124,12 @@ export default function Builder() {
         /* ════ DESKTOP ════ */
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
 
+          {/* ✅ FIXED — flex:1 instead of fixed height */}
           <div style={{
             display: 'flex',
-            height: 'calc(100vh - 56px - 28px - 20px)',
+            flex: 1,
             overflow: 'hidden',
-            flexShrink: 0,
+            minHeight: 0,
           }}>
             {/* Form */}
             <div style={{

@@ -13,11 +13,16 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Geist', system-ui, sans-serif;
   background: #f1f5f9;
   color: #0f172a;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 /* ─── Scrollbars ─────────────────────────────────── */
@@ -25,6 +30,11 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ─── Smooth scroll all elements ─────────────────── */
+* {
+  -webkit-overflow-scrolling: touch;
+}
 
 /* ─── Form inputs global style ───────────────────── */
 .form-input {

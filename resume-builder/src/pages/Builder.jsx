@@ -80,6 +80,7 @@ export default function Builder() {
       flexDirection: 'column',
       height: '100vh',
       overflowY: 'auto',
+      scrollBehavior: 'smooth',
     }}>
 
       <h1 className="sr-only">
@@ -156,6 +157,7 @@ export default function Builder() {
               flexShrink: 0,
               WebkitOverflowScrolling: 'touch',
               overscrollBehavior: 'contain',
+              scrollBehavior: 'smooth',
             }}>
               <FormPanel />
             </div>
@@ -168,6 +170,7 @@ export default function Builder() {
               background: '#f1f5f9',
               WebkitOverflowScrolling: 'touch',
               overscrollBehavior: 'contain',
+              scrollBehavior: 'smooth',
             }}>
               <PreviewPanel />
             </div>
@@ -192,7 +195,7 @@ export default function Builder() {
             </span>
           </div>
 
-          {/* Footer — scroll करने पर दिखेगा */}
+          {/* Footer */}
           <Footer />
 
         </div>

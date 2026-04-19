@@ -5,7 +5,7 @@ export default function Footer() {
     <footer style={{ background: '#111827', color: '#d1d5db', flexShrink: 0 }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '16px 20px' }}>
 
-        {/* Desktop: 3 columns | Mobile: 2 columns compact */}
+        {/* Desktop: 3 columns */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
@@ -30,7 +30,8 @@ export default function Footer() {
                 { to: '/ats-resume-checker',  label: 'ATS Checker' },
                 { to: '/resume-templates',    label: 'Templates' },
               ].map((l, i) => (
-                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none' }}
+                <Link key={i} to={l.to}
+                  style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none' }}
                   onMouseEnter={e => e.target.style.color = '#fff'}
                   onMouseLeave={e => e.target.style.color = '#9ca3af'}>
                   {l.label}
@@ -50,7 +51,8 @@ export default function Footer() {
                 { to: '/software-engineer-resume', label: 'SWE Resume' },
                 { to: '/how-to-make-a-resume',     label: 'How to Make' },
               ].map((l, i) => (
-                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none' }}
+                <Link key={i} to={l.to}
+                  style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none' }}
                   onMouseEnter={e => e.target.style.color = '#fff'}
                   onMouseLeave={e => e.target.style.color = '#9ca3af'}>
                   {l.label}
@@ -61,9 +63,9 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar — ✅ border color blue जैसा header */}
         <div style={{
-          borderTop: '1px solid #374151',
+          borderTop: '1px solid #2563eb',
           paddingTop: '10px',
           display: 'flex',
           flexWrap: 'wrap',
@@ -82,7 +84,8 @@ export default function Footer() {
               { to: '/privacy', label: 'Privacy' },
               { to: '/terms',   label: 'Terms' },
             ].map((l, i) => (
-              <Link key={i} to={l.to} style={{ fontSize: '10px', color: '#6b7280', textDecoration: 'none' }}
+              <Link key={i} to={l.to}
+                style={{ fontSize: '10px', color: '#6b7280', textDecoration: 'none' }}
                 onMouseEnter={e => e.target.style.color = '#fff'}
                 onMouseLeave={e => e.target.style.color = '#6b7280'}>
                 {l.label}

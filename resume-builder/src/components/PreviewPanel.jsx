@@ -54,7 +54,7 @@ export default function PreviewPanel() {
     return () => observer.disconnect()
   }, [])
 
-  // Measure actual template height
+  // Measure actual template height after render
   useEffect(() => {
     const measure = () => {
       if (templateRef.current) {
@@ -62,7 +62,7 @@ export default function PreviewPanel() {
       }
     }
     measure()
-    const t = setTimeout(measure, 300)
+    const t = setTimeout(measure, 400)
     return () => clearTimeout(t)
   }, [resume, resume.settings.template])
 
@@ -75,8 +75,8 @@ export default function PreviewPanel() {
     }
   }
 
-  // Correct visual height after scaling
-  const visualHeight = templateHeight * scale
+  // Visual height = actual height × scale
+  const visualHeight = Math.ceil(templateHeight * scale)
 
   return (
     <div style={{
@@ -84,7 +84,7 @@ export default function PreviewPanel() {
       display: 'flex',
       flexDirection: 'column',
       background: '#f1f5f9',
-      overflow: 'hidden', // ✅ outer overflow block
+      overflow: 'hidden',
     }}>
 
       {/* Toolbar */}
@@ -134,42 +134,39 @@ export default function PreviewPanel() {
         </div>
       </div>
 
-      {/* Scrollable Preview Area */}
+      {/* Scrollable area */}
       <div
         ref={containerRef}
         style={{
           flex: 1,
           overflowY: 'auto',
-          overflowX: 'hidden', // ✅ horizontal overflow block
-          padding: '20px 12px 40px',
+          overflowX: 'hidden',
+          padding: '20px 16px 40px',
           scrollBehavior: 'smooth',
         }}
       >
-        {/* Center wrapper */}
-        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-
-          {/* Fixed height box — visual size of scaled resume */}
+        {/* Resume wrapper — exact visual height */}
+        <div style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '32px',
+        }}>
           <div style={{
-            position: 'relative',
-            width: '794px',
-            maxWidth: '100%',        // ✅ container से बाहर नहीं जाएगा
-            height: `${visualHeight}px`,
+            width: `${794 * scale}px`,   // ✅ scaled width
+            height: `${visualHeight}px`, // ✅ scaled height
             flexShrink: 0,
-            overflow: 'visible',
+            overflow: 'hidden',          // ✅ overflow block
+            boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
+            borderRadius: '2px',
           }}>
+            {/* Scale wrapper */}
             <div style={{
-              position: 'absolute',
-              top: 0,
-              left: '50%',
-              transform: `translateX(-50%) scale(${scale})`,
-              transformOrigin: 'top center',
               width: '794px',
+              transformOrigin: 'top left',       // ✅ top left से scale
+              transform: `scale(${scale})`,
             }}>
-              <div ref={templateRef} style={{
-                boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
-                borderRadius: '2px',
-                overflow: 'hidden',
-              }}>
+              <div ref={templateRef}>
                 <Suspense fallback={
                   <div style={{ height: '1123px', background: '#fff' }} />
                 }>
@@ -178,14 +175,13 @@ export default function PreviewPanel() {
               </div>
             </div>
           </div>
-
         </div>
 
-        {/* End of Preview indicator */}
-        <div style={{ marginTop: '32px', textAlign: 'center' }}>
+        {/* End of Preview */}
+        <div style={{ textAlign: 'center' }}>
           <div style={{
             display: 'flex', alignItems: 'center', gap: '12px',
-            marginBottom: '8px', maxWidth: '320px', margin: '0 auto 8px',
+            maxWidth: '320px', margin: '0 auto 8px',
           }}>
             <div style={{ flex: 1, height: '1px', background: '#cbd5e1' }} />
             <span style={{ fontSize: '11px', color: '#94a3b8', whiteSpace: 'nowrap' }}>

@@ -1,0 +1,77 @@
+[33m398f6db[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m fix double layout - use JS isMobile instead of Tailwind classes
+[33m964d888[m fix desktop footer visible on home page
+[33md1b4eec[m fix mobile preview and footer
+[33mbc80d92[m fix mobile preview blank space
+[33m1d2dbfb[m fix mobile scroll - separate mobile and desktop layout
+[33mb39f726[m compact footer mobile friendly
+[33m6bf4f9e[m minimize status bar height
+[33m1e9c6ac[m reduce footer size
+[33m46a05e2[m equal gap form preview footer
+[33me597233[m equal gap form preview footer
+[33m2028f46[m smooth scroll fix all devices
+[33md3153b1[m reduce gap below preview panel
+[33m580d267[m fully responsive layout - mobile tablet desktop fixed
+[33m064e263[m footer scrollable with page after builder panels
+[33m6695c4a[m fix layout height scroll and footer position
+[33me1d1be6[m fix 404 routing with vercel.json
+[33mda4533e[m fix: mobile dropdown centered + builder footer gap removed
+[33mee430b6[m fix: JS MutationObserver to permanently hide Google translate bar
+[33mc6f8f8b[m fix: hide google bar permanently, add language selector to NavBar
+[33m3f87897[m fix: google translate language switching
+[33m2674122[m fix: language selector redesign, double footer fix, nav links, contact useEffect bug
+[33m1780a24[m Add Google Translate widget to Header and index.html
+[33mf78b7c8[m Fix End of Preview position - always below visual resume
+[33m84e80d5[m Fix FormPanel scroll and add end indicators
+[33me1b243e[m Fix PreviewPanel scroll - measure actual template height
+[33mfa129db[m Fix scroll overflow in Classic, Minimal, Elegant templates
+[33m040b020[m fix: creative default template, resume examples pre-fill
+[33mbd07e53[m remove vercel.json, redirect handled by Vercel dashboard
+[33m82f400f[m fix: redirect www to non-www
+[33m5d78541[m add blog link to header, update sitemap with all blog posts
+[33m826e6cf[m update sitemap: add blog and blog post URLs
+[33m3c2c66e[m add Blog to navbar and footer
+[33m64701bb[m fix: add missing blogPosts data file
+[33m27d1846[m feat: add Blog and BlogPost pages
+[33m6cb40fd[m feat: add 4 new real templates - minimal, elegant, executive, creative
+[33m14dbbfc[m 6 templates in dropdown
+[33m7f5563c[m update
+[33me256358[m resume examples + seo update
+[33m30c2459[m add SEO links to footer
+[33m18acab9[m add SEO landing pages, sitemap, robots, schema
+[33m52428d5[m fix classic and modern templates
+[33m751b462[m fix classic and modern templates
+[33m3230018[m fix classic and modern templates
+[33m559d0b2[m fix classic and modern templates
+[33m27612e4[m fix classic and modern templates
+[33m9652258[m fix classic and modern templates
+[33m578967e[m fix preview height and modern template display
+[33m4888bec[m fix layout
+[33m5c187a8[m final ui update
+[33m99ada7c[m removed emailjs correctly
+[33m0b19681[m fix: contact page gmail + copy email
+[33m4c2d5da[m simplified contact page without emailjs
+[33m62cc2e1[m update: contact form + fixes
+[33me6b1c47[m feat: EmailJS contact form working
+[33md8a615c[m fix: install @vercel/speed-insights package
+[33m87d830c[m fix: use Vite-compatible Vercel analytics and speed insights
+[33m7f57e6a[m fix: correct speed insights import for vite
+[33m69ad244[m added vercel speed insights
+[33m2ac9510[m fix: auto-load sample resume for empty/new users
+[33md88736d[m feat: auto-load sample resume for new users
+[33mcf21403[m fix: improved preview panel layout and scaling
+[33ma9bcf79[m ui improvements + header + layout fixes
+[33m7ac2525[m fix: contact page + terms UI + CTA improvements
+[33m87f96e8[m final UI + layout + pages update
+[33md1630a2[m fix: remove duplicate Footer from Builder.jsx
+[33maac2367[m fix: add Footer component and vercel.json for SPA routing
+[33mbf388d0[m fix: added react-router-dom for vercel build
+[33m9e698ba[m Added footer + pages + routing
+[33m23129ad[m Add favicon
+[33m527a456[m added sitemap
+[33m4667abd[m SEO + verification update
+[33mc1bc94e[m Fix H1 tag and meta description
+[33m3a5cd1e[m Add Bing verification
+[33mb0f3b17[m Add comprehensive SEO keywords 2026
+[33mf480f47[m Add Vercel Analytics
+[33md26dbad[m Add GSC verification
+[33me655fd5[m Initial commit

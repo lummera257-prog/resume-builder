@@ -71,7 +71,6 @@ export default function Builder() {
     trackConversion('page_view')
   }, [])
 
-  // TrustBar ~28px + Header ~56px + StatusBar ~20px = ~104px
   const CHROME_HEIGHT = 104
 
   return (
@@ -87,10 +86,8 @@ export default function Builder() {
         Free Resume Builder Online — ATS-Friendly Resume Maker | ResumeForge
       </h1>
 
-      {/* Trust Bar */}
       <TrustBar />
 
-      {/* Header */}
       <div style={{ flexShrink: 0 }}>
         <Header
           previewVisible={previewVisible}
@@ -114,9 +111,10 @@ export default function Builder() {
             </div>
           )}
 
+          {/* Mobile Status Bar */}
           <div style={{
-            background: '#f8fafc',
-            borderTop: '1px solid #e2e8f0',
+            background: '#1e293b',
+            borderTop: '1px solid #2563eb',
             padding: '4px 16px',
             display: 'flex',
             justifyContent: 'space-between',
@@ -139,7 +137,7 @@ export default function Builder() {
         /* ════ DESKTOP ════ */
         <div style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
 
-          {/* Form + Preview panels */}
+          {/* Form + Preview */}
           <div style={{
             display: 'flex',
             height: `calc(100vh - ${CHROME_HEIGHT}px)`,
@@ -176,12 +174,12 @@ export default function Builder() {
             </div>
           </div>
 
-          {/* Status Bar */}
+          {/* Desktop Status Bar — dark theme */}
           <div style={{
             flexShrink: 0,
-            background: '#f8fafc',
-            borderTop: '1px solid #e2e8f0',
-            height: '20px',
+            background: '#1e293b',
+            borderTop: '1px solid #2563eb',
+            height: '24px',
             padding: '0 16px',
             display: 'flex',
             justifyContent: 'space-between',
@@ -195,7 +193,6 @@ export default function Builder() {
             </span>
           </div>
 
-          {/* Footer */}
           <Footer />
 
         </div>

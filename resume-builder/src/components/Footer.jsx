@@ -63,9 +63,9 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Bar — ✅ border color blue जैसा header */}
+        {/* Bottom Bar — पुराना dark grey border */}
         <div style={{
-          borderTop: '1px solid #2563eb',
+          borderTop: '1px solid #374151',
           paddingTop: '10px',
           display: 'flex',
           flexWrap: 'wrap',

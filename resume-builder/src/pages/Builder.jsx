@@ -6,7 +6,6 @@ import PreviewPanel from '../components/PreviewPanel'
 import Footer from '../components/Footer'
 import { useResume } from '../context/ResumeContext'
 
-// Google Ads Conversion Tracking
 function trackConversion(action) {
   if (typeof window.gtag === 'function') {
     window.gtag('event', action, {
@@ -16,7 +15,6 @@ function trackConversion(action) {
   }
 }
 
-// Trust Bar — Google Ads Quality Score बढ़ाता है
 function TrustBar() {
   return (
     <div style={{
@@ -70,7 +68,6 @@ export default function Builder() {
       })
       window.history.replaceState({}, document.title)
     }
-    // Google Ads — page visit track करें
     trackConversion('page_view')
   }, [])
 
@@ -81,10 +78,8 @@ export default function Builder() {
         Free Resume Builder Online — ATS-Friendly Resume Maker | ResumeForge
       </h1>
 
-      {/* Trust Bar */}
       <TrustBar />
 
-      {/* Header */}
       <div style={{ flexShrink: 0 }}>
         <Header
           previewVisible={previewVisible}
@@ -129,17 +124,18 @@ export default function Builder() {
         /* ════ DESKTOP ════ */
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
 
+          {/* Form + Preview — fixed height, independent scroll */}
           <div style={{
             display: 'flex',
-            height: 'calc(100vh - 56px - 28px - 20px)',
+            flex: 1,
+            minHeight: 0,
             overflow: 'hidden',
-            flexShrink: 0,
           }}>
-            {/* Form */}
+            {/* Form Panel */}
             <div style={{
               width: '55%',
               height: '100%',
-              overflowY: 'scroll',
+              overflowY: 'auto',
               background: '#fff',
               borderRight: '1px solid #e2e8f0',
               flexShrink: 0,
@@ -149,11 +145,11 @@ export default function Builder() {
               <FormPanel />
             </div>
 
-            {/* Preview */}
+            {/* Preview Panel */}
             <div style={{
               flex: 1,
               height: '100%',
-              overflowY: 'scroll',
+              overflowY: 'auto',
               background: '#f1f5f9',
               WebkitOverflowScrolling: 'touch',
               overscrollBehavior: 'contain',

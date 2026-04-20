@@ -77,7 +77,6 @@ function LanguageSelector() {
     else setSearch('')
   }, [open])
 
-  // ✅ Escape key se close
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') setOpen(false) }
     document.addEventListener('keydown', handler)
@@ -110,11 +109,10 @@ function LanguageSelector() {
   return (
     <div ref={dropdownRef} style={{ position: 'relative', zIndex: 100 }}>
 
-      {/* ✅ aria-label + aria-expanded + aria-haspopup added */}
       <button
         ref={btnRef}
         onClick={() => setOpen(o => !o)}
-        aria-label={`Change language. Currently selected: ${selected.label}`}
+        aria-label={`Change language. Currently: ${selected.label}`}
         aria-expanded={open}
         aria-haspopup="listbox"
         style={{
@@ -138,7 +136,6 @@ function LanguageSelector() {
           style={{ transform: open ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s ease' }} />
       </button>
 
-      {/* Mobile backdrop */}
       {open && isMobile && (
         <div
           onClick={() => setOpen(false)}
@@ -147,20 +144,16 @@ function LanguageSelector() {
         />
       )}
 
-      {/* Dropdown */}
       {open && (
-        <div
-          style={dropdownStyle}
-          role="dialog"
-          aria-label="Select language"
-        >
+        <div style={dropdownStyle} role="dialog" aria-label="Select language">
+
           {isMobile && (
             <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0 4px' }}>
-              <div aria-hidden="true" style={{ width: '36px', height: '4px', borderRadius: '2px', background: '#e5e7eb' }} />
+              <div aria-hidden="true"
+                style={{ width: '36px', height: '4px', borderRadius: '2px', background: '#e5e7eb' }} />
             </div>
           )}
 
-          {/* ✅ aria-label on search input */}
           <div style={{ padding: '10px 10px 8px', borderBottom: '1px solid #f1f5f9' }}>
             <input
               ref={searchRef}
@@ -168,20 +161,17 @@ function LanguageSelector() {
               onChange={e => setSearch(e.target.value)}
               placeholder="Search language..."
               aria-label="Search language"
-              role="searchbox"
               style={{
                 width: '100%', padding: '8px 12px', borderRadius: '8px',
-                border: '1px solid #e5e7eb', fontSize: '13px',
-                color: '#1f2937',
-                outline: 'none', boxSizing: 'border-box',
-                background: '#f8fafc', fontFamily: 'inherit',
+                border: '1px solid #e5e7eb', fontSize: '13px', color: '#1f2937',
+                outline: 'none', boxSizing: 'border-box', background: '#f8fafc',
+                fontFamily: 'inherit',
               }}
               onFocus={e => (e.target.style.borderColor = '#93c5fd')}
               onBlur={e  => (e.target.style.borderColor = '#e5e7eb')}
             />
           </div>
 
-          {/* ✅ role="listbox" for screen readers */}
           <ul
             role="listbox"
             aria-label="Available languages"
@@ -217,7 +207,9 @@ function LanguageSelector() {
                     onMouseEnter={e => { if (!active) e.currentTarget.style.background = '#f1f5f9' }}
                     onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent' }}
                   >
-                    <span aria-hidden="true" style={{ fontSize: '18px', lineHeight: 1, flexShrink: 0 }}>{lang.flag}</span>
+                    <span aria-hidden="true" style={{ fontSize: '18px', lineHeight: 1, flexShrink: 0 }}>
+                      {lang.flag}
+                    </span>
                     <span style={{ flex: 1 }}>{lang.label}</span>
                     {active && <Check size={14} color="#1d4ed8" strokeWidth={2.5} aria-hidden="true" />}
                   </button>
@@ -257,10 +249,8 @@ export default function Header({ previewVisible, setPreviewVisible }) {
   }
 
   return (
-    // ✅ role="banner" — header landmark
-    <header role="banner" className="sticky top-0 z-50 bg-white border-b border-slate-200">
-
-      {/* Skip to main content link — screen readers ke liye */}
+    <>
+      {/* Skip link — screen readers ke liye */}
       
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-1 focus:bg-blue-600 focus:text-white focus:rounded"
@@ -268,99 +258,123 @@ export default function Header({ previewVisible, setPreviewVisible }) {
         Skip to main content
       </a>
 
-      <div id="google_translate_element" style={{ display: 'none' }} aria-hidden="true" />
+      <header role="banner" className="sticky top-0 z-50 bg-white border-b border-slate-200">
+        <div id="google_translate_element" style={{ display: 'none' }} aria-hidden="true" />
 
-      <div className="flex items-center gap-3 px-4 h-14 max-w-screen-2xl mx-auto">
+        <div className="flex items-center gap-3 px-4 h-14 max-w-screen-2xl mx-auto">
 
-        {/* ✅ Logo with aria-label */}
-        <div className="flex items-center gap-2 shrink-0">
-          <Link to="/" aria-label="ResumeForge — Go to homepage">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center" aria-hidden="true">
+          {/* Logo */}
+          <div className="flex items-center gap-2 shrink-0">
+            <div
+              className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center"
+              aria-hidden="true"
+            >
               <FileText size={16} className="text-white" />
             </div>
-          </Link>
-          <div className="hidden sm:block">
-            <span className="font-bold text-slate-900 text-base">ResumeForge</span>
-            <span className="ml-1.5 text-xs text-slate-600 hidden md:inline">Free Resume Builder</span>
+            <div className="hidden sm:block">
+              <span className="font-bold text-slate-900 text-base">ResumeForge</span>
+              <span className="ml-1.5 text-xs text-slate-600 hidden md:inline">
+                Free Resume Builder
+              </span>
+            </div>
+          </div>
+
+          {/* Nav */}
+          <nav aria-label="Main navigation" className="hidden md:flex items-center gap-1 ml-2">
+            <Link to="/blog"
+              className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+              Blog
+            </Link>
+            <Link to="/about"
+              className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+              About
+            </Link>
+            <Link to="/contact"
+              className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+              Contact
+            </Link>
+          </nav>
+
+          <div className="flex-1" />
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-2" role="toolbar" aria-label="Builder actions">
+
+            <LanguageSelector />
+
+            <div
+              style={{ width: '1px', height: '20px', background: '#e2e8f0', margin: '0 2px' }}
+              aria-hidden="true"
+            />
+
+            {/* Sample */}
+            <button
+              onClick={loadSample}
+              aria-label="Load sample resume data"
+              className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors text-slate-700 font-medium"
+            >
+              <Sparkles size={13} aria-hidden="true" />
+              <span className="hidden md:inline">Sample</span>
+            </button>
+
+            {/* Reset */}
+            {showConfirm ? (
+              <div className="flex items-center gap-1" role="group" aria-label="Confirm reset">
+                <span className="text-xs text-slate-600 hidden sm:inline">Clear all?</span>
+                <button
+                  onClick={() => { resetResume(); setShowConfirm(false) }}
+                  aria-label="Confirm clear resume"
+                  className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors font-medium"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => setShowConfirm(false)}
+                  aria-label="Cancel clear resume"
+                  className="text-xs px-2 py-1 bg-slate-200 text-slate-700 rounded hover:bg-slate-300 transition-colors"
+                >
+                  No
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowConfirm(true)}
+                aria-label="Reset resume — clear all data"
+                className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 hover:bg-slate-100 rounded-lg transition-colors text-slate-700"
+              >
+                <RotateCcw size={13} aria-hidden="true" />
+                <span className="hidden md:inline">Reset</span>
+              </button>
+            )}
+
+            {/* Preview Toggle */}
+            <button
+              onClick={() => setPreviewVisible(v => !v)}
+              aria-label={previewVisible ? 'Switch to edit form' : 'Switch to resume preview'}
+              aria-pressed={previewVisible}
+              className="md:hidden flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg text-slate-700 font-medium"
+            >
+              {previewVisible
+                ? <EyeOff size={13} aria-hidden="true" />
+                : <Eye size={13} aria-hidden="true" />
+              }
+              <span>{previewVisible ? 'Form' : 'Preview'}</span>
+            </button>
+
+            {/* Download */}
+            <button
+              onClick={handleExport}
+              disabled={exporting}
+              aria-label={exporting ? 'Generating PDF, please wait' : 'Download resume as PDF'}
+              aria-busy={exporting}
+              className="flex items-center gap-1 text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-70 transition-colors font-medium"
+            >
+              <Download size={14} className={exporting ? 'animate-bounce' : ''} aria-hidden="true" />
+              {exporting ? 'Generating…' : 'Download'}
+            </button>
           </div>
         </div>
-
-        {/* ✅ Nav with aria-label */}
-        <nav aria-label="Main navigation" className="hidden md:flex items-center gap-1 ml-2">
-          <Link to="/blog"    className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Blog</Link>
-          <Link to="/about"   className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">About</Link>
-          <Link to="/contact" className="text-sm font-medium text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Contact</Link>
-        </nav>
-
-        <div className="flex-1" />
-
-        {/* Right Actions */}
-        <div className="flex items-center gap-2" role="toolbar" aria-label="Builder actions">
-
-          <LanguageSelector />
-
-          <div style={{ width: '1px', height: '20px', background: '#e2e8f0', margin: '0 2px' }} aria-hidden="true" />
-
-          {/* ✅ aria-label on Sample button */}
-          <button
-            onClick={loadSample}
-            aria-label="Load sample resume data"
-            className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors text-slate-700 font-medium"
-          >
-            <Sparkles size={13} aria-hidden="true" />
-            <span className="hidden md:inline">Sample</span>
-          </button>
-
-          {/* ✅ aria-label on Reset buttons */}
-          {showConfirm ? (
-            <div className="flex items-center gap-1" role="group" aria-label="Confirm reset">
-              <span className="text-xs text-slate-600 hidden sm:inline">Clear all?</span>
-              <button
-                onClick={() => { resetResume(); setShowConfirm(false) }}
-                aria-label="Confirm clear resume"
-                className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors font-medium"
-              >Yes</button>
-              <button
-                onClick={() => setShowConfirm(false)}
-                aria-label="Cancel clear resume"
-                className="text-xs px-2 py-1 bg-slate-200 text-slate-700 rounded hover:bg-slate-300 transition-colors"
-              >No</button>
-            </div>
-          ) : (
-            <button
-              onClick={() => setShowConfirm(true)}
-              aria-label="Reset resume — clear all data"
-              className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 hover:bg-slate-100 rounded-lg transition-colors text-slate-700"
-            >
-              <RotateCcw size={13} aria-hidden="true" />
-              <span className="hidden md:inline">Reset</span>
-            </button>
-          )}
-
-          {/* ✅ aria-label on Preview Toggle */}
-          <button
-            onClick={() => setPreviewVisible(v => !v)}
-            aria-label={previewVisible ? 'Switch to edit form' : 'Switch to resume preview'}
-            aria-pressed={previewVisible}
-            className="md:hidden flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg text-slate-700 font-medium"
-          >
-            {previewVisible ? <EyeOff size={13} aria-hidden="true" /> : <Eye size={13} aria-hidden="true" />}
-            <span>{previewVisible ? 'Form' : 'Preview'}</span>
-          </button>
-
-          {/* ✅ aria-label on Download button */}
-          <button
-            onClick={handleExport}
-            disabled={exporting}
-            aria-label={exporting ? 'Generating PDF, please wait' : 'Download resume as PDF'}
-            aria-busy={exporting}
-            className="flex items-center gap-1 text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-70 transition-colors font-medium"
-          >
-            <Download size={14} className={exporting ? 'animate-bounce' : ''} aria-hidden="true" />
-            {exporting ? 'Generating…' : 'Download'}
-          </button>
-        </div>
-      </div>
-    </header>
+      </header>
+    </>
   )
 }

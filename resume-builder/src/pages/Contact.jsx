@@ -1,12 +1,41 @@
-import PageLayout from "../components/PageLayout";
+import { useEffect } from "react"
+import PageLayout from "../components/PageLayout"
 
 export default function Contact() {
-  const email = "resumeforgehelp@gmail.com";
+  const email = "resumeforgehelp@gmail.com"
+
+  useEffect(() => {
+    document.title = "Contact ResumeForge | Get Help & Support"
+
+    const setMeta = (name, content) => {
+      let el = document.querySelector(`meta[name="${name}"]`)
+      if (!el) { el = document.createElement('meta'); el.name = name; document.head.appendChild(el) }
+      el.setAttribute('content', content)
+    }
+    const setOg = (prop, content) => {
+      let el = document.querySelector(`meta[property="${prop}"]`)
+      if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el) }
+      el.setAttribute('content', content)
+    }
+    const setCanonical = (url) => {
+      let el = document.querySelector('link[rel="canonical"]')
+      if (!el) { el = document.createElement('link'); el.rel = 'canonical'; document.head.appendChild(el) }
+      el.href = url
+    }
+
+    setMeta('description', 'Contact ResumeForge for support, feedback, or questions about our free resume builder. We are here to help you build the perfect ATS-friendly resume.')
+    setMeta('keywords', 'contact resumeforge, resume builder support, help, feedback')
+    setOg('og:title', 'Contact ResumeForge | Get Help & Support')
+    setOg('og:description', 'Have questions about ResumeForge? Contact us anytime. We are happy to help with your resume building experience.')
+    setOg('og:url', 'https://freeresumeforgebuilder.com/contact')
+    setOg('og:type', 'website')
+    setCanonical('https://freeresumeforgebuilder.com/contact')
+  }, [])
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(email);
-    alert("Email copied!");
-  };
+    navigator.clipboard.writeText(email)
+    alert("Email copied!")
+  }
 
   return (
     <PageLayout>
@@ -25,8 +54,7 @@ export default function Contact() {
           For any kind of support or information, please email us at:
         </p>
 
-        {/* GMAIL BUTTON (BEST FIX) */}
-        <a
+        
           href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=ResumeForge Support Request`}
           target="_blank"
           rel="noopener noreferrer"
@@ -35,10 +63,9 @@ export default function Contact() {
           📩 Send Email
         </a>
 
-        {/* EMAIL TEXT */}
         <p className="mt-6 text-sm text-slate-500">
           Or email directly at{" "}
-          <a
+          
             href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -48,7 +75,6 @@ export default function Contact() {
           </a>
         </p>
 
-        {/* COPY BUTTON */}
         <button
           onClick={handleCopy}
           className="mt-4 text-sm text-blue-600 underline"
@@ -56,12 +82,11 @@ export default function Contact() {
           Copy Email Address
         </button>
 
-        {/* HELPER NOTE */}
         <p className="mt-3 text-xs text-slate-400">
           If email does not open on desktop, please copy the email and send manually.
         </p>
 
       </div>
     </PageLayout>
-  );
+  )
 }

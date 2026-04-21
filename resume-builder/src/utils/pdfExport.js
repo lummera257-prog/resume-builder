@@ -1,8 +1,3 @@
-/**
- * PDF Export Utility
- * Uses html2pdf.js for client-side PDF generation — completely free, no backend needed
- */
-
 export const exportToPDF = async (elementId, filename = 'resume') => {
   const html2pdf = (await import('html2pdf.js')).default
 
@@ -12,31 +7,36 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     return
   }
 
-  // Clone करें ताकि original DOM affect न हो
-  const clone = element.cloneNode(true)
-  clone.style.width = '210mm'
-  clone.style.margin = '0'
-  clone.style.padding = '0'
-  clone.style.boxSizing = 'border-box'
-  clone.style.background = '#ffffff'
+  // सभी parent elements का overflow fix करें
+  const saved = []
+  let node = element
+  while (node && node !== document.body) {
+    saved.push({
+      el:        node,
+      overflow:  node.style.overflow,
+      overflowX: node.style.overflowX,
+      overflowY: node.style.overflowY,
+      maxHeight: node.style.maxHeight,
+      height:    node.style.height,
+    })
+    node.style.overflow  = 'visible'
+    node.style.overflowX = 'visible'
+    node.style.overflowY = 'visible'
+    node.style.maxHeight = 'none'
+    node = node.parentElement
+  }
 
-  // Temporary hidden container
-  const wrapper = document.createElement('div')
-  wrapper.style.position = 'fixed'
-  wrapper.style.top = '-9999px'
-  wrapper.style.left = '-9999px'
-  wrapper.style.width = '210mm'
-  wrapper.style.zIndex = '-1'
-  wrapper.appendChild(clone)
-  document.body.appendChild(wrapper)
+  const origWidth = element.style.width
+  element.style.width = '794px'
 
   const opt = {
     margin:      [0, 0, 0, 0],
     filename:    `${filename.replace(/\s+/g, '_')}_Resume.pdf`,
     image:       { type: 'jpeg', quality: 1.0 },
     html2canvas: {
-      scale:           3,
+      scale:           2,
       useCORS:         true,
+      allowTaint:      true,
       letterRendering: true,
       scrollX:         0,
       scrollY:         0,
@@ -52,43 +52,66 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
       compress:    true,
     },
     pagebreak: {
-      mode:   ['css', 'legacy'],
-      before: '.page-break-before',
-      after:  '.page-break-after',
-      avoid:  ['tr', 'td', '.no-break'],
+      mode:  ['css', 'legacy'],
+      avoid: ['tr', 'td', 'li', 'h2', 'h3'],
     },
   }
 
+  const restore = () => {
+    saved.forEach(({ el, overflow, overflowX, overflowY, maxHeight, height }) => {
+      el.style.overflow  = overflow
+      el.style.overflowX = overflowX
+      el.style.overflowY = overflowY
+      el.style.maxHeight = maxHeight
+      el.style.height    = height
+    })
+    element.style.width = origWidth
+  }
+
   try {
-    await html2pdf().set(opt).from(clone).save()
-    document.body.removeChild(wrapper)
+    // PDF generate + watermark हर page पर
+    const worker = html2pdf().set(opt).from(element)
+    const pdf    = await worker.toPdf().get('pdf')
+    const total  = pdf.internal.getNumberOfPages()
+    const pw     = pdf.internal.pageSize.getWidth()
+    const ph     = pdf.internal.pageSize.getHeight()
+
+    for (let i = 1; i <= total; i++) {
+      pdf.setPage(i)
+      pdf.setFontSize(7.5)
+      pdf.setTextColor(180, 180, 180)
+      pdf.setFont('helvetica', 'normal')
+      pdf.text('freeresumeforgebuilder.com', pw / 2, ph - 4, { align: 'center' })
+    }
+
+    pdf.save(`${filename.replace(/\s+/g, '_')}_Resume.pdf`)
+    restore()
     return { success: true }
+
   } catch (err) {
     console.error('PDF generation failed:', err)
-    if (document.body.contains(wrapper)) document.body.removeChild(wrapper)
+    restore()
     return { success: false, error: err.message }
   }
 }
 
 /**
- * Calculate ATS compatibility score based on resume data
+ * Calculate ATS compatibility score
  */
 export const calculateATSScore = (resumeData) => {
   let score = 0
   const issues = []
-  const tips = []
+  const tips   = []
 
   const { personalInfo, summary, experience, education, skills, settings } = resumeData
 
-  // Personal info (20 pts)
   if (personalInfo.name)     score += 5
   if (personalInfo.email)    score += 5
   if (personalInfo.phone)    score += 5
   if (personalInfo.location) score += 3
-  if (personalInfo.linkedin) { score += 2 }
+  if (personalInfo.linkedin) score += 2
   else tips.push('Add LinkedIn profile URL')
 
-  // Summary (15 pts)
   if (summary) {
     score += 10
     if (summary.length >= 100) score += 5
@@ -97,7 +120,6 @@ export const calculateATSScore = (resumeData) => {
     issues.push('Missing professional summary')
   }
 
-  // Experience (25 pts)
   if (experience.length > 0) {
     score += 15
     const hasQuantified = experience.some(e =>
@@ -109,26 +131,20 @@ export const calculateATSScore = (resumeData) => {
     issues.push('No work experience added')
   }
 
-  // Education (10 pts)
   if (education.length > 0) score += 10
   else tips.push('Add your educational background')
 
-  // Skills (20 pts)
   if (skills.length > 0) {
     score += 10
-    const totalSkills = skills.reduce((acc, s) => acc + (s.items?.length || 0), 0)
-    if (totalSkills >= 8) score += 10
+    const total = skills.reduce((acc, s) => acc + (s.items?.length || 0), 0)
+    if (total >= 8) score += 10
     else { score += 5; tips.push('Add 8+ skills for better ATS matching') }
   } else {
     issues.push('No skills listed — critical for ATS')
   }
 
-  // Layout bonus (10 pts)
-  if (settings.layout === 'single') {
-    score += 10
-  } else {
-    tips.push('Single-column layout has better ATS compatibility')
-  }
+  if (settings.layout === 'single') score += 10
+  else tips.push('Single-column layout has better ATS compatibility')
 
   return {
     score: Math.min(score, 100),

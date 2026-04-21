@@ -36,22 +36,23 @@ export default function CreativeTemplate({ resume }) {
   const scheme = accentVars[settings.colorScheme] || accentVars.blue
   const activeSet = new Set(settings.activeSections)
   const ordered = settings.sectionOrder.filter(s => activeSet.has(s))
-
   const sideKeys = ['skills', 'languages', 'certifications']
   const mainKeys = ordered.filter(k => !sideKeys.includes(k))
 
   return (
     <div id="resume-preview" style={{
-      width: '210mm', minHeight: '297mm', display: 'flex', flexDirection: 'column',
-      fontFamily: "'Arial', 'Helvetica', sans-serif", fontSize: '9.5pt',
+      width: '210mm',
+      display: 'flex',
+      flexDirection: 'column',
+      fontFamily: "'Arial', 'Helvetica', sans-serif",
+      fontSize: '9.5pt',
       background: '#fff',
     }}>
-      {/* TOP HEADER BAND */}
+      {/* HEADER */}
       <div style={{
         background: scheme.main, padding: '12mm 14mm 10mm',
         display: 'flex', alignItems: 'flex-start', gap: '16px',
       }}>
-        {/* Initials circle */}
         <div style={{
           width: '52px', height: '52px', borderRadius: '50%',
           background: 'rgba(255,255,255,0.2)', border: '2px solid rgba(255,255,255,0.6)',
@@ -65,7 +66,7 @@ export default function CreativeTemplate({ resume }) {
             {personalInfo.name || 'Your Name'}
           </h1>
           {personalInfo.title && (
-            <p style={{ margin: '4px 0 8px', color: 'rgba(255,255,255,0.85)', fontSize: '9.5pt', fontWeight: 400 }}>
+            <p style={{ margin: '4px 0 8px', color: 'rgba(255,255,255,0.85)', fontSize: '9.5pt' }}>
               {personalInfo.title}
             </p>
           )}
@@ -80,14 +81,17 @@ export default function CreativeTemplate({ resume }) {
         </div>
       </div>
 
-      {/* BODY: 2 columns */}
+      {/* BODY */}
       <div style={{ display: 'flex', flex: 1 }}>
-        {/* LEFT SIDEBAR */}
+        {/* SIDEBAR */}
         <div style={{
-          width: '62mm', background: scheme.bg, padding: '10mm 8mm',
-          boxSizing: 'border-box', flexShrink: 0,
+          width: '62mm',
+          minHeight: 'auto',
+          background: scheme.bg,
+          padding: '10mm 8mm',
+          boxSizing: 'border-box',
+          flexShrink: 0,
         }}>
-          {/* Skills */}
           {activeSet.has('skills') && skills.length > 0 && (
             <div>
               <Heading title="Skills" color={scheme.main} bg={scheme.light} />
@@ -106,7 +110,6 @@ export default function CreativeTemplate({ resume }) {
             </div>
           )}
 
-          {/* Languages */}
           {activeSet.has('languages') && languages.length > 0 && (
             <div>
               <Heading title="Languages" color={scheme.main} bg={scheme.light} />
@@ -119,7 +122,6 @@ export default function CreativeTemplate({ resume }) {
             </div>
           )}
 
-          {/* Certifications */}
           {activeSet.has('certifications') && certifications.length > 0 && (
             <div>
               <Heading title="Certifications" color={scheme.main} bg={scheme.light} />
@@ -133,7 +135,6 @@ export default function CreativeTemplate({ resume }) {
             </div>
           )}
 
-          {/* Achievements in sidebar */}
           {activeSet.has('achievements') && achievements.length > 0 && (
             <div>
               <Heading title="Achievements" color={scheme.main} bg={scheme.light} />
@@ -147,7 +148,7 @@ export default function CreativeTemplate({ resume }) {
           )}
         </div>
 
-        {/* MAIN CONTENT */}
+        {/* MAIN */}
         <div style={{ flex: 1, padding: '10mm 12mm', boxSizing: 'border-box' }}>
           {mainKeys.map(key => {
             switch (key) {

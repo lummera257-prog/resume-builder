@@ -26,17 +26,10 @@ function SideHeading({ title, color }) {
   return (
     <div style={{ marginTop: '16px', marginBottom: '6px' }}>
       <h3 style={{
-        fontSize: '8pt',
-        fontWeight: 700,
-        letterSpacing: '0.12em',
-        textTransform: 'uppercase',
-        color,
-        borderBottom: `1px solid ${color}`,
-        paddingBottom: '3px',
-        margin: 0,
-      }}>
-        {title}
-      </h3>
+        fontSize: '8pt', fontWeight: 700, letterSpacing: '0.12em',
+        textTransform: 'uppercase', color,
+        borderBottom: `1px solid ${color}`, paddingBottom: '3px', margin: 0,
+      }}>{title}</h3>
     </div>
   )
 }
@@ -45,17 +38,10 @@ function MainHeading({ title, color }) {
   return (
     <div style={{ marginTop: '14px', marginBottom: '6px' }}>
       <h2 style={{
-        fontSize: '9.5pt',
-        fontWeight: 700,
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        color,
-        borderBottom: `2px solid ${color}`,
-        paddingBottom: '3px',
-        margin: 0,
-      }}>
-        {title}
-      </h2>
+        fontSize: '9.5pt', fontWeight: 700, letterSpacing: '0.1em',
+        textTransform: 'uppercase', color,
+        borderBottom: `2px solid ${color}`, paddingBottom: '3px', margin: 0,
+      }}>{title}</h2>
     </div>
   )
 }
@@ -67,8 +53,8 @@ export default function ModernTemplate({ resume }) {
     achievements, customSections, settings
   } = resume
 
-  const scheme   = accentVars[settings.colorScheme] || accentVars.blue
-  const fontCss  = fontMap[settings.fontFamily] || fontMap.modern
+  const scheme  = accentVars[settings.colorScheme] || accentVars.blue
+  const fontCss = fontMap[settings.fontFamily] || fontMap.modern
   const fontSize =
     settings.fontSize === 'small' ? '9pt' :
     settings.fontSize === 'large' ? '10.5pt' : '9.5pt'
@@ -80,7 +66,6 @@ export default function ModernTemplate({ resume }) {
       id="resume-preview"
       style={{
         width: '210mm',
-        minHeight: '297mm',
         display: 'flex',
         flexDirection: 'row',
         fontFamily: fontCss,
@@ -88,42 +73,27 @@ export default function ModernTemplate({ resume }) {
         background: '#fff',
       }}
     >
-
-      {/* ══════════════ SIDEBAR ══════════════ */}
+      {/* SIDEBAR */}
       <div style={{
         width: '68mm',
-        minHeight: '297mm',
+        minHeight: 'auto',
         background: scheme.sidebar,
         color: '#fff',
         padding: '14mm 8mm 14mm 9mm',
         boxSizing: 'border-box',
         flexShrink: 0,
       }}>
-
-        {/* Name & Title */}
         <div style={{ borderBottom: `1px solid rgba(255,255,255,0.2)`, paddingBottom: '10px', marginBottom: '4px' }}>
-          <h1 style={{
-            fontSize: '14pt',
-            fontWeight: 700,
-            margin: 0,
-            color: '#fff',
-            lineHeight: 1.2,
-          }}>
+          <h1 style={{ fontSize: '14pt', fontWeight: 700, margin: 0, color: '#fff', lineHeight: 1.2 }}>
             {personalInfo.name || 'Your Name'}
           </h1>
           {personalInfo.title && (
-            <p style={{
-              fontSize: '8pt',
-              color: scheme.sidebarText,
-              margin: '5px 0 0',
-              lineHeight: 1.4,
-            }}>
+            <p style={{ fontSize: '8pt', color: scheme.sidebarText, margin: '5px 0 0', lineHeight: 1.4 }}>
               {personalInfo.title}
             </p>
           )}
         </div>
 
-        {/* Contact */}
         <SideHeading title="Contact" color={scheme.sidebarText} />
         <div style={{ fontSize: '7.5pt', color: 'rgba(255,255,255,0.85)', lineHeight: 1.8 }}>
           {personalInfo.email    && <div>✉ {personalInfo.email}</div>}
@@ -134,7 +104,6 @@ export default function ModernTemplate({ resume }) {
           {personalInfo.website  && <div>🌐 {personalInfo.website}</div>}
         </div>
 
-        {/* Skills */}
         {activeSet.has('skills') && skills.length > 0 && (
           <div>
             <SideHeading title="Skills" color={scheme.sidebarText} />
@@ -153,7 +122,6 @@ export default function ModernTemplate({ resume }) {
           </div>
         )}
 
-        {/* Languages */}
         {activeSet.has('languages') && languages.length > 0 && (
           <div>
             <SideHeading title="Languages" color={scheme.sidebarText} />
@@ -166,7 +134,6 @@ export default function ModernTemplate({ resume }) {
           </div>
         )}
 
-        {/* Certifications */}
         {activeSet.has('certifications') && certifications.length > 0 && (
           <div>
             <SideHeading title="Certifications" color={scheme.sidebarText} />
@@ -180,7 +147,6 @@ export default function ModernTemplate({ resume }) {
           </div>
         )}
 
-        {/* Achievements */}
         {activeSet.has('achievements') && achievements.length > 0 && (
           <div>
             <SideHeading title="Achievements" color={scheme.sidebarText} />
@@ -193,18 +159,10 @@ export default function ModernTemplate({ resume }) {
             ))}
           </div>
         )}
-
       </div>
 
-      {/* ══════════════ MAIN COLUMN ══════════════ */}
-      <div style={{
-        flex: 1,
-        padding: '14mm 12mm 14mm 10mm',
-        boxSizing: 'border-box',
-        minHeight: '297mm',
-      }}>
-
-        {/* Summary */}
+      {/* MAIN */}
+      <div style={{ flex: 1, padding: '14mm 12mm 14mm 10mm', boxSizing: 'border-box' }}>
         {activeSet.has('summary') && summary && (
           <div>
             <MainHeading title="Professional Summary" color={scheme.main} />
@@ -212,7 +170,6 @@ export default function ModernTemplate({ resume }) {
           </div>
         )}
 
-        {/* Experience */}
         {activeSet.has('experience') && experience.length > 0 && (
           <div>
             <MainHeading title="Work Experience" color={scheme.main} />
@@ -237,7 +194,6 @@ export default function ModernTemplate({ resume }) {
           </div>
         )}
 
-        {/* Education */}
         {activeSet.has('education') && education.length > 0 && (
           <div>
             <MainHeading title="Education" color={scheme.main} />
@@ -250,8 +206,7 @@ export default function ModernTemplate({ resume }) {
                   </span>
                 </div>
                 <div style={{ fontSize: '8.5pt', color: '#555' }}>
-                  {e.degree}{e.field ? ` in ${e.field}` : ''}
-                  {e.gpa ? ` · GPA: ${e.gpa}` : ''}
+                  {e.degree}{e.field ? ` in ${e.field}` : ''}{e.gpa ? ` · GPA: ${e.gpa}` : ''}
                 </div>
                 {e.description && (
                   <div style={{ fontSize: '8pt', color: '#666', marginTop: '2px' }}>{e.description}</div>
@@ -261,7 +216,6 @@ export default function ModernTemplate({ resume }) {
           </div>
         )}
 
-        {/* Projects */}
         {activeSet.has('projects') && projects.length > 0 && (
           <div>
             <MainHeading title="Projects" color={scheme.main} />
@@ -272,9 +226,7 @@ export default function ModernTemplate({ resume }) {
                   {p.link && <span style={{ fontSize: '7.5pt', color: scheme.main }}>{p.link}</span>}
                 </div>
                 {p.technologies && (
-                  <div style={{ fontSize: '8pt', color: scheme.main, marginBottom: '2px' }}>
-                    Tech: {p.technologies}
-                  </div>
+                  <div style={{ fontSize: '8pt', color: scheme.main, marginBottom: '2px' }}>Tech: {p.technologies}</div>
                 )}
                 {p.description && (
                   <div style={{ fontSize: '8.5pt', color: '#333', lineHeight: 1.5 }}>{p.description}</div>
@@ -284,7 +236,6 @@ export default function ModernTemplate({ resume }) {
           </div>
         )}
 
-        {/* Custom Sections */}
         {customSections && customSections.map(cs => (
           cs.items && cs.items.length > 0 ? (
             <div key={cs.id}>
@@ -300,7 +251,6 @@ export default function ModernTemplate({ resume }) {
             </div>
           ) : null
         ))}
-
       </div>
     </div>
   )

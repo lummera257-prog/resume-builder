@@ -43,22 +43,27 @@ export default function ExecutiveTemplate({ resume }) {
   const scheme = accentVars[settings.colorScheme] || accentVars.blue
   const activeSet = new Set(settings.activeSections)
   const ordered = settings.sectionOrder.filter(s => activeSet.has(s))
-
   const sideKeys = ['skills', 'languages', 'certifications', 'achievements']
   const mainKeys = ordered.filter(k => !sideKeys.includes(k))
 
   return (
     <div id="resume-preview" style={{
-      width: '210mm', minHeight: '297mm', display: 'flex',
-      fontFamily: "'Arial', sans-serif", fontSize: '9.5pt',
+      width: '210mm',
+      display: 'flex',
+      fontFamily: "'Arial', sans-serif",
+      fontSize: '9.5pt',
       background: '#fff',
     }}>
       {/* SIDEBAR */}
       <div style={{
-        width: '65mm', minHeight: '297mm', background: scheme.sidebar,
-        padding: '14mm 8mm 14mm 9mm', boxSizing: 'border-box', flexShrink: 0, color: '#fff',
+        width: '65mm',
+        minHeight: 'auto',
+        background: scheme.sidebar,
+        padding: '14mm 8mm 14mm 9mm',
+        boxSizing: 'border-box',
+        flexShrink: 0,
+        color: '#fff',
       }}>
-        {/* Name block */}
         <div style={{ marginBottom: '4px', paddingBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.15)' }}>
           <h1 style={{ fontSize: '18pt', fontWeight: 800, margin: 0, color: '#fff', lineHeight: 1.15 }}>
             {(personalInfo.name || 'Your Name').split(' ')[0]}
@@ -73,7 +78,6 @@ export default function ExecutiveTemplate({ resume }) {
           )}
         </div>
 
-        {/* Contact */}
         <SideHead title="Contact" color={scheme.main} />
         <div style={{ fontSize: '7.5pt', color: 'rgba(255,255,255,0.8)', lineHeight: 2 }}>
           {personalInfo.phone    && <div>📞 {personalInfo.phone}</div>}
@@ -84,7 +88,6 @@ export default function ExecutiveTemplate({ resume }) {
           {personalInfo.website  && <div>🌐 {personalInfo.website}</div>}
         </div>
 
-        {/* Skills */}
         {activeSet.has('skills') && skills.length > 0 && (
           <div>
             <SideHead title="Skills" color={scheme.main} />
@@ -94,8 +97,8 @@ export default function ExecutiveTemplate({ resume }) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px' }}>
                   {(Array.isArray(s.items) ? s.items : (s.items || '').split(',')).map((item, i) => (
                     <span key={i} style={{
-                      fontSize: '7pt', background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.9)',
-                      padding: '1px 6px', borderRadius: '2px',
+                      fontSize: '7pt', background: 'rgba(255,255,255,0.1)',
+                      color: 'rgba(255,255,255,0.9)', padding: '1px 6px', borderRadius: '2px',
                     }}>{item.trim()}</span>
                   ))}
                 </div>
@@ -104,7 +107,6 @@ export default function ExecutiveTemplate({ resume }) {
           </div>
         )}
 
-        {/* Languages */}
         {activeSet.has('languages') && languages.length > 0 && (
           <div>
             <SideHead title="Languages" color={scheme.main} />
@@ -117,7 +119,6 @@ export default function ExecutiveTemplate({ resume }) {
           </div>
         )}
 
-        {/* Certifications */}
         {activeSet.has('certifications') && certifications.length > 0 && (
           <div>
             <SideHead title="Certifications" color={scheme.main} />
@@ -131,7 +132,6 @@ export default function ExecutiveTemplate({ resume }) {
           </div>
         )}
 
-        {/* Achievements */}
         {activeSet.has('achievements') && achievements.length > 0 && (
           <div>
             <SideHead title="Achievements" color={scheme.main} />

@@ -4,7 +4,6 @@
  */
 
 export const exportToPDF = async (elementId, filename = 'resume') => {
-  // Dynamically import html2pdf to avoid SSR issues
   const html2pdf = (await import('html2pdf.js')).default
 
   const element = document.getElementById(elementId)
@@ -13,40 +12,66 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     return
   }
 
+  // Clone करें ताकि original DOM affect न हो
+  const clone = element.cloneNode(true)
+  clone.style.width = '210mm'
+  clone.style.margin = '0'
+  clone.style.padding = '0'
+  clone.style.boxSizing = 'border-box'
+  clone.style.background = '#ffffff'
+
+  // Temporary hidden container
+  const wrapper = document.createElement('div')
+  wrapper.style.position = 'fixed'
+  wrapper.style.top = '-9999px'
+  wrapper.style.left = '-9999px'
+  wrapper.style.width = '210mm'
+  wrapper.style.zIndex = '-1'
+  wrapper.appendChild(clone)
+  document.body.appendChild(wrapper)
+
   const opt = {
-    margin:       [0, 0, 0, 0],
-    filename:     `${filename.replace(/\s+/g, '_')}_Resume.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  {
-      scale: 2,
-      useCORS: true,
+    margin:      [0, 0, 0, 0],
+    filename:    `${filename.replace(/\s+/g, '_')}_Resume.pdf`,
+    image:       { type: 'jpeg', quality: 1.0 },
+    html2canvas: {
+      scale:           3,
+      useCORS:         true,
       letterRendering: true,
-      scrollX: 0,
-      scrollY: 0,
-      windowWidth: 794,
+      scrollX:         0,
+      scrollY:         0,
       backgroundColor: '#ffffff',
+      logging:         false,
+      width:           794,
+      windowWidth:     794,
     },
-    jsPDF:        {
-      unit: 'px',
-      format: 'a4',
+    jsPDF: {
+      unit:        'mm',
+      format:      'a4',
       orientation: 'portrait',
-      hotfixes: ['px_scaling'],
+      compress:    true,
     },
-    pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] },
+    pagebreak: {
+      mode:   ['css', 'legacy'],
+      before: '.page-break-before',
+      after:  '.page-break-after',
+      avoid:  ['tr', 'td', '.no-break'],
+    },
   }
 
   try {
-    await html2pdf().set(opt).from(element).save()
+    await html2pdf().set(opt).from(clone).save()
+    document.body.removeChild(wrapper)
     return { success: true }
   } catch (err) {
     console.error('PDF generation failed:', err)
+    if (document.body.contains(wrapper)) document.body.removeChild(wrapper)
     return { success: false, error: err.message }
   }
 }
 
 /**
  * Calculate ATS compatibility score based on resume data
- * Helps users optimize for Applicant Tracking Systems
  */
 export const calculateATSScore = (resumeData) => {
   let score = 0
@@ -55,12 +80,12 @@ export const calculateATSScore = (resumeData) => {
 
   const { personalInfo, summary, experience, education, skills, settings } = resumeData
 
-  // Personal info completeness (20 pts)
+  // Personal info (20 pts)
   if (personalInfo.name)     score += 5
   if (personalInfo.email)    score += 5
   if (personalInfo.phone)    score += 5
   if (personalInfo.location) score += 3
-  if (personalInfo.linkedin) { score += 2; } 
+  if (personalInfo.linkedin) { score += 2 }
   else tips.push('Add LinkedIn profile URL')
 
   // Summary (15 pts)

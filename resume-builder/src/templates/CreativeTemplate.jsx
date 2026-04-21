@@ -82,11 +82,10 @@ export default function CreativeTemplate({ resume }) {
       </div>
 
       {/* BODY */}
-      <div style={{ display: 'flex', flex: 1 }}>
+      <div style={{ display: 'flex', minHeight: '220mm' }}>
         {/* SIDEBAR */}
         <div style={{
           width: '62mm',
-          minHeight: 'auto',
           background: scheme.bg,
           padding: '10mm 8mm',
           boxSizing: 'border-box',

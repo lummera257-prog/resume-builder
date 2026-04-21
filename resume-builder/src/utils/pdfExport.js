@@ -55,7 +55,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     },
     pagebreak: {
       mode:  ['css', 'legacy'],
-      avoid: ['h1', 'h2', 'h3', 'tr', 'li', '.no-break', 'div'],
+      avoid: ['h1', 'h2', 'h3', 'tr', 'li', '.no-break'],
     },
   }
 

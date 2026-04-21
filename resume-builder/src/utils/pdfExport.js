@@ -2,17 +2,14 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   const html2pdf = (await import('html2pdf.js')).default
 
   const element = document.getElementById(elementId)
-  if (!element) {
-    console.error('Resume element not found:', elementId)
-    return
-  }
+  if (!element) { console.error('Resume element not found:', elementId); return }
 
-  // सभी parent elements का overflow fix करें
+  // सभी ancestors का overflow fix
   const saved = []
   let node = element
   while (node && node !== document.body) {
     saved.push({
-      el:        node,
+      el: node,
       overflow:  node.style.overflow,
       overflowX: node.style.overflowX,
       overflowY: node.style.overflowY,
@@ -23,18 +20,24 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     node.style.overflowX = 'visible'
     node.style.overflowY = 'visible'
     node.style.maxHeight = 'none'
+    node.style.height    = 'auto'
     node = node.parentElement
   }
 
-  const origWidth = element.style.width
-  element.style.width = '794px'
+  const origWidth  = element.style.width
+  const origHeight = element.style.height
+  element.style.width  = '794px'
+  element.style.height = 'auto'
+
+  // Render settle होने दो
+  await new Promise(r => setTimeout(r, 300))
 
   const opt = {
-    margin:      [0, 0, 0, 0],
+    margin:      [8, 0, 8, 0],
     filename:    `${filename.replace(/\s+/g, '_')}_Resume.pdf`,
     image:       { type: 'jpeg', quality: 1.0 },
     html2canvas: {
-      scale:           2,
+      scale:           2.5,
       useCORS:         true,
       allowTaint:      true,
       letterRendering: true,
@@ -44,6 +47,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
       logging:         false,
       width:           794,
       windowWidth:     794,
+      windowHeight:    element.scrollHeight,
     },
     jsPDF: {
       unit:        'mm',
@@ -53,7 +57,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     },
     pagebreak: {
       mode:  ['css', 'legacy'],
-      avoid: ['tr', 'td', 'li', 'h2', 'h3'],
+      avoid: ['h2', 'h3', 'tr', 'li', '.no-break'],
     },
   }
 
@@ -65,11 +69,11 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
       el.style.maxHeight = maxHeight
       el.style.height    = height
     })
-    element.style.width = origWidth
+    element.style.width  = origWidth
+    element.style.height = origHeight
   }
 
   try {
-    // PDF generate + watermark हर page पर
     const worker = html2pdf().set(opt).from(element)
     const pdf    = await worker.toPdf().get('pdf')
     const total  = pdf.internal.getNumberOfPages()
@@ -78,10 +82,29 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
 
     for (let i = 1; i <= total; i++) {
       pdf.setPage(i)
-      pdf.setFontSize(7.5)
-      pdf.setTextColor(180, 180, 180)
+
+      // Watermark — diagonal, visible
+      pdf.saveGraphicsState()
+      pdf.setGState(new pdf.GState({ opacity: 0.12 }))
+      pdf.setFontSize(28)
+      pdf.setTextColor(80, 80, 80)
+      pdf.setFont('helvetica', 'bold')
+      pdf.text('freeresumeforgebuilder.com', pw / 2, ph / 2, {
+        align:  'center',
+        angle:  45,
+      })
+      pdf.restoreGraphicsState()
+
+      // Footer watermark — bottom center, subtle but readable
+      pdf.setFontSize(8)
+      pdf.setTextColor(160, 160, 160)
       pdf.setFont('helvetica', 'normal')
-      pdf.text('freeresumeforgebuilder.com', pw / 2, ph - 4, { align: 'center' })
+      pdf.text(
+        `freeresumeforgebuilder.com  •  Page ${i} of ${total}`,
+        pw / 2,
+        ph - 3,
+        { align: 'center' }
+      )
     }
 
     pdf.save(`${filename.replace(/\s+/g, '_')}_Resume.pdf`)
@@ -95,14 +118,10 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   }
 }
 
-/**
- * Calculate ATS compatibility score
- */
 export const calculateATSScore = (resumeData) => {
   let score = 0
   const issues = []
   const tips   = []
-
   const { personalInfo, summary, experience, education, skills, settings } = resumeData
 
   if (personalInfo.name)     score += 5
@@ -122,10 +141,10 @@ export const calculateATSScore = (resumeData) => {
 
   if (experience.length > 0) {
     score += 15
-    const hasQuantified = experience.some(e =>
+    const hasQ = experience.some(e =>
       /\d+[%x+]|\d+\s*(users|customers|team|million|thousand|k\b)/i.test(e.description)
     )
-    if (hasQuantified) score += 10
+    if (hasQ) score += 10
     else tips.push('Add metrics to experience (e.g., "increased sales by 30%")')
   } else {
     issues.push('No work experience added')

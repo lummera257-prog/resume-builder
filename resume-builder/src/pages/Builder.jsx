@@ -17,16 +17,20 @@ function trackConversion(action) {
 
 function TrustBar() {
   return (
-    <div style={{
-      background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
-      padding: '6px 16px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: '24px',
-      flexWrap: 'wrap',
-      flexShrink: 0,
-    }}>
+    <div
+      role="banner"
+      aria-label="ResumeForge features"
+      style={{
+        background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
+        padding: '6px 16px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '24px',
+        flexWrap: 'wrap',
+        flexShrink: 0,
+      }}
+    >
       {[
         '✅ 100% Free',
         '⚡ No Login Required',
@@ -97,8 +101,12 @@ export default function Builder() {
 
       {isMobile ? (
         /* ════ MOBILE ════ */
-        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-
+        /* ✅ <main> landmark added */
+        <main
+          id="main-content"
+          aria-label="Resume Builder"
+          style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+        >
           {!previewVisible && (
             <div style={{ background: '#fff' }}>
               <FormPanel />
@@ -120,22 +128,26 @@ export default function Builder() {
             alignItems: 'center',
             flexShrink: 0,
           }}>
-            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.92)' }}>
               💾 Auto-saved · 100% Free
             </span>
-            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.92)' }}>
               Built with ❤️
             </span>
           </div>
 
           <Footer />
-        </div>
+        </main>
 
       ) : (
 
         /* ════ DESKTOP ════ */
-        <div style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
-
+        /* ✅ <main> landmark added */
+        <main
+          id="main-content"
+          aria-label="Resume Builder"
+          style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}
+        >
           {/* Form + Preview */}
           <div style={{
             display: 'flex',
@@ -145,57 +157,64 @@ export default function Builder() {
           }}>
 
             {/* Form Panel */}
-            <div style={{
-              width: '55%',
-              height: '100%',
-              overflowY: 'scroll',
-              background: '#fff',
-              borderRight: '1px solid #e2e8f0',
-              flexShrink: 0,
-              WebkitOverflowScrolling: 'touch',
-              overscrollBehavior: 'contain',
-              scrollBehavior: 'smooth',
-            }}>
+            <section
+              aria-label="Resume form"
+              style={{
+                width: '55%',
+                height: '100%',
+                overflowY: 'scroll',
+                background: '#fff',
+                borderRight: '1px solid #e2e8f0',
+                flexShrink: 0,
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'contain',
+                scrollBehavior: 'smooth',
+              }}
+            >
               <FormPanel />
-            </div>
+            </section>
 
             {/* Preview Panel */}
-            <div style={{
-              flex: 1,
-              height: '100%',
-              overflowY: 'scroll',
-              background: '#f1f5f9',
-              WebkitOverflowScrolling: 'touch',
-              overscrollBehavior: 'contain',
-              scrollBehavior: 'smooth',
-            }}>
+            <section
+              aria-label="Resume preview"
+              style={{
+                flex: 1,
+                height: '100%',
+                overflowY: 'scroll',
+                background: '#f1f5f9',
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'contain',
+                scrollBehavior: 'smooth',
+              }}
+            >
               <PreviewPanel />
-            </div>
+            </section>
           </div>
 
-          {/* Desktop Status Bar — TrustBar जैसा */}
-          <div style={{
-            flexShrink: 0,
-            background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
-            height: '24px',
-            padding: '0 16px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
+          {/* Desktop Status Bar */}
+          <div
+            aria-hidden="true"
+            style={{
+              flexShrink: 0,
+              background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
+              height: '24px',
+              padding: '0 16px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.92)' }}>
               💾 Auto-saved · No account needed · 100% Free
             </span>
-            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.85)' }}>
+            <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.92)' }}>
               Built with ❤️ — ResumeForge
             </span>
           </div>
 
           <Footer />
-
-        </div>
+        </main>
       )}
-
     </div>
   )
 }

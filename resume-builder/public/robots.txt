@@ -1,4 +1,4 @@
 User-agent: *  
 Allow: /  
   
-Sitemap: https://resume-builder-delta-rose.vercel.app/sitemap.xml 
+Sitemap: https://freeresumeforgebuilder.com/sitemap.xml 

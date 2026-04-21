@@ -4,7 +4,6 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   const element = document.getElementById(elementId)
   if (!element) { console.error('Resume element not found:', elementId); return }
 
-  // सभी ancestors का overflow fix
   const saved = []
   let node = element
   while (node && node !== document.body) {
@@ -29,11 +28,10 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   element.style.width  = '794px'
   element.style.height = 'auto'
 
-  // Render settle होने दो
   await new Promise(r => setTimeout(r, 300))
 
   const opt = {
-    margin:      [8, 0, 8, 0],
+    margin:      [10, 0, 10, 0],
     filename:    `${filename.replace(/\s+/g, '_')}_Resume.pdf`,
     image:       { type: 'jpeg', quality: 1.0 },
     html2canvas: {
@@ -57,7 +55,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     },
     pagebreak: {
       mode:  ['css', 'legacy'],
-      avoid: ['h2', 'h3', 'tr', 'li', '.no-break'],
+      avoid: ['h1', 'h2', 'h3', 'tr', 'li', '.no-break', 'div'],
     },
   }
 
@@ -83,19 +81,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     for (let i = 1; i <= total; i++) {
       pdf.setPage(i)
 
-      // Watermark — diagonal, visible
-      pdf.saveGraphicsState()
-      pdf.setGState(new pdf.GState({ opacity: 0.12 }))
-      pdf.setFontSize(28)
-      pdf.setTextColor(80, 80, 80)
-      pdf.setFont('helvetica', 'bold')
-      pdf.text('freeresumeforgebuilder.com', pw / 2, ph / 2, {
-        align:  'center',
-        angle:  45,
-      })
-      pdf.restoreGraphicsState()
-
-      // Footer watermark — bottom center, subtle but readable
+      // Footer only watermark — clean, subtle
       pdf.setFontSize(8)
       pdf.setTextColor(160, 160, 160)
       pdf.setFont('helvetica', 'normal')

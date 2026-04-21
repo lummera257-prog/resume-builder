@@ -4,6 +4,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   const element = document.getElementById(elementId)
   if (!element) { console.error('Resume element not found:', elementId); return }
 
+  // Save and reset all ancestor overflow styles so html2pdf can see full content
   const saved = []
   let node = element
   while (node && node !== document.body) {
@@ -28,7 +29,22 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   element.style.width  = '794px'
   element.style.height = 'auto'
 
-  await new Promise(r => setTimeout(r, 300))
+  // Inject print CSS — tells html2pdf where NOT to cut the page
+  // This prevents mid-line and mid-paragraph breaks
+  const printStyle = document.createElement('style')
+  printStyle.id = 'pdf-print-style'
+  printStyle.textContent = `
+    #resume-preview p,
+    #resume-preview li,
+    #resume-preview span { page-break-inside: avoid; }
+    #resume-preview h2,
+    #resume-preview h3,
+    #resume-preview strong { page-break-after: avoid; }
+  `
+  document.head.appendChild(printStyle)
+
+  // Wait for DOM to settle after style injection
+  await new Promise(r => setTimeout(r, 400))
 
   const opt = {
     margin:      [10, 0, 10, 0],
@@ -55,10 +71,11 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     },
     pagebreak: {
       mode:  ['css', 'legacy'],
-      avoid: ['h1', 'h2', 'h3', 'tr', 'li', '.no-break'],
+      avoid: ['h2', 'h3', 'li', '.no-break'],
     },
   }
 
+  // Restore all original styles — always runs even if PDF fails
   const restore = () => {
     saved.forEach(({ el, overflow, overflowX, overflowY, maxHeight, height }) => {
       el.style.overflow  = overflow
@@ -69,6 +86,8 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     })
     element.style.width  = origWidth
     element.style.height = origHeight
+    // Remove injected print styles after PDF generation
+    document.getElementById('pdf-print-style')?.remove()
   }
 
   try {
@@ -80,8 +99,6 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
 
     for (let i = 1; i <= total; i++) {
       pdf.setPage(i)
-
-      // Footer only watermark — clean, subtle
       pdf.setFontSize(8)
       pdf.setTextColor(160, 160, 160)
       pdf.setFont('helvetica', 'normal')

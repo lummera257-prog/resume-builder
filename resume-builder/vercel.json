@@ -1,1 +1,21 @@
-{"rewrites":[{"source":"/(.*)","destination":"/index.html"}]} 
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.freeresumeforgebuilder.com"
+        }
+      ],
+      "destination": "https://freeresumeforgebuilder.com/$1",
+      "permanent": true
+    }
+  ]
+}

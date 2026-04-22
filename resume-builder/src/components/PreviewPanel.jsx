@@ -37,7 +37,6 @@ export default function PreviewPanel() {
   const Template = TEMPLATES[resume.settings.template] || ClassicTemplate
   const label    = TEMPLATE_LABELS[resume.settings.template] || '📄 Classic'
 
-  // Auto-scale to fit container width
   useEffect(() => {
     const updateScale = () => {
       if (containerRef.current) {
@@ -54,7 +53,6 @@ export default function PreviewPanel() {
     return () => observer.disconnect()
   }, [])
 
-  // Measure actual template height after render
   useEffect(() => {
     const measure = () => {
       if (templateRef.current) {
@@ -75,7 +73,6 @@ export default function PreviewPanel() {
     }
   }
 
-  // Visual height = actual height × scale
   const visualHeight = Math.ceil(templateHeight * scale)
 
   return (
@@ -112,23 +109,32 @@ export default function PreviewPanel() {
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <button onClick={zoomOut} style={{
-            padding: '6px', borderRadius: '6px', border: 'none',
-            background: 'transparent', cursor: 'pointer', color: '#64748b',
-          }}>
+          <button
+            onClick={zoomOut}
+            aria-label="Zoom out"
+            style={{
+              padding: '6px', borderRadius: '6px', border: 'none',
+              background: 'transparent', cursor: 'pointer', color: '#64748b',
+            }}>
             <ZoomOut size={14} />
           </button>
-          <button onClick={reset} style={{
-            padding: '4px 8px', fontSize: '11px', fontWeight: 600,
-            color: '#374151', border: 'none', background: '#f1f5f9',
-            borderRadius: '6px', cursor: 'pointer', minWidth: '40px',
-          }}>
+          <button
+            onClick={reset}
+            aria-label="Reset zoom"
+            style={{
+              padding: '4px 8px', fontSize: '11px', fontWeight: 600,
+              color: '#374151', border: 'none', background: '#f1f5f9',
+              borderRadius: '6px', cursor: 'pointer', minWidth: '40px',
+            }}>
             {Math.round(scale * 100)}%
           </button>
-          <button onClick={zoomIn} style={{
-            padding: '6px', borderRadius: '6px', border: 'none',
-            background: 'transparent', cursor: 'pointer', color: '#64748b',
-          }}>
+          <button
+            onClick={zoomIn}
+            aria-label="Zoom in"
+            style={{
+              padding: '6px', borderRadius: '6px', border: 'none',
+              background: 'transparent', cursor: 'pointer', color: '#64748b',
+            }}>
             <ZoomIn size={14} />
           </button>
         </div>
@@ -145,7 +151,6 @@ export default function PreviewPanel() {
           scrollBehavior: 'smooth',
         }}
       >
-        {/* Resume wrapper — exact visual height */}
         <div style={{
           width: '100%',
           display: 'flex',
@@ -153,17 +158,16 @@ export default function PreviewPanel() {
           marginBottom: '32px',
         }}>
           <div style={{
-            width: `${794 * scale}px`,   // ✅ scaled width
-            height: `${visualHeight}px`, // ✅ scaled height
+            width: `${794 * scale}px`,
+            height: `${visualHeight}px`,
             flexShrink: 0,
-            overflow: 'hidden',          // ✅ overflow block
+            overflow: 'hidden',
             boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
             borderRadius: '2px',
           }}>
-            {/* Scale wrapper */}
             <div style={{
               width: '794px',
-              transformOrigin: 'top left',       // ✅ top left से scale
+              transformOrigin: 'top left',
               transform: `scale(${scale})`,
             }}>
               <div ref={templateRef}>

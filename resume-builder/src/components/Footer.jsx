@@ -19,7 +19,7 @@ export default function Footer() {
 
           <div>
             <div style={{ color: '#fff', fontWeight: 600, fontSize: '11px', marginBottom: '4px' }}>Resume Tools</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
               {[
                 { to: '/free-resume-builder', label: 'Free Resume Builder' },
                 { to: '/ats-resume-builder',  label: 'ATS Resume Builder' },
@@ -27,7 +27,7 @@ export default function Footer() {
                 { to: '/ats-resume-checker',  label: 'ATS Checker' },
                 { to: '/resume-templates',    label: 'Templates' },
               ].map((l, i) => (
-                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none', lineHeight: '1.6' }}
+                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none', lineHeight: '1.8' }}
                   onMouseEnter={e => e.target.style.color = '#fff'}
                   onMouseLeave={e => e.target.style.color = '#9ca3af'}>
                   {l.label}
@@ -38,7 +38,7 @@ export default function Footer() {
 
           <div>
             <div style={{ color: '#fff', fontWeight: 600, fontSize: '11px', marginBottom: '4px' }}>Resources</div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
               {[
                 { to: '/blog',                     label: 'Blog' },
                 { to: '/resume-examples',          label: 'Examples' },
@@ -46,7 +46,7 @@ export default function Footer() {
                 { to: '/software-engineer-resume', label: 'SWE Resume' },
                 { to: '/how-to-make-a-resume',     label: 'How to Make' },
               ].map((l, i) => (
-                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none', lineHeight: '1.6' }}
+                <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none', lineHeight: '1.8' }}
                   onMouseEnter={e => e.target.style.color = '#fff'}
                   onMouseLeave={e => e.target.style.color = '#9ca3af'}>
                   {l.label}

@@ -2,8 +2,30 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ResumeProvider } from './context/ResumeContext'
 
-import Builder from './pages/Builder'
+// Loading fallback
+function PageLoader() {
+  return (
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: '#f8fafc',
+    }}>
+      <div style={{
+        width: '32px', height: '32px',
+        border: '3px solid #e2e8f0',
+        borderTop: '3px solid #2563eb',
+        borderRadius: '50%',
+        animation: 'spin 0.8s linear infinite',
+      }} />
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  )
+}
 
+// सभी pages lazy load
+const Builder                = lazy(() => import('./pages/Builder'))
 const About                  = lazy(() => import('./pages/About'))
 const Contact                = lazy(() => import('./pages/Contact'))
 const Privacy                = lazy(() => import('./pages/Privacy'))
@@ -24,28 +46,24 @@ export default function App() {
   return (
     <ResumeProvider>
       <Router>
-        <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+        <Suspense fallback={<PageLoader />}>
           <Routes>
-            <Route path="/" element={<Builder />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-
-            {/* Blog */}
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-
-            {/* SEO Pages */}
-            <Route path="/free-resume-builder" element={<FreeResumeBuilder />} />
-            <Route path="/cv-builder" element={<CvBuilder />} />
-            <Route path="/ats-resume-builder" element={<AtsResumeBuilder />} />
-            <Route path="/resume-templates" element={<ResumeTemplates />} />
-            <Route path="/resume-examples" element={<ResumeExamples />} />
-            <Route path="/resume-for-freshers" element={<ResumeForFreshers />} />
+            <Route path="/"                        element={<Builder />} />
+            <Route path="/about"                   element={<About />} />
+            <Route path="/contact"                 element={<Contact />} />
+            <Route path="/privacy"                 element={<Privacy />} />
+            <Route path="/terms"                   element={<Terms />} />
+            <Route path="/blog"                    element={<Blog />} />
+            <Route path="/blog/:slug"              element={<BlogPost />} />
+            <Route path="/free-resume-builder"     element={<FreeResumeBuilder />} />
+            <Route path="/cv-builder"              element={<CvBuilder />} />
+            <Route path="/ats-resume-builder"      element={<AtsResumeBuilder />} />
+            <Route path="/resume-templates"        element={<ResumeTemplates />} />
+            <Route path="/resume-examples"         element={<ResumeExamples />} />
+            <Route path="/resume-for-freshers"     element={<ResumeForFreshers />} />
             <Route path="/software-engineer-resume" element={<SoftwareEngineerResume />} />
-            <Route path="/how-to-make-a-resume" element={<HowToMakeResume />} />
-            <Route path="/ats-resume-checker" element={<AtsResumeChecker />} />
+            <Route path="/how-to-make-a-resume"    element={<HowToMakeResume />} />
+            <Route path="/ats-resume-checker"      element={<AtsResumeChecker />} />
           </Routes>
         </Suspense>
       </Router>

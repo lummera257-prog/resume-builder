@@ -13,6 +13,11 @@ export default function BlogPost() {
     // Meta Title
     document.title = `${post.title} | ResumeForge Blog`
 
+    // Favicon Fix
+    let f = document.querySelector('link[rel="icon"]')
+    if (!f) { f = document.createElement('link'); f.rel = 'icon'; document.head.appendChild(f) }
+    f.href = '/favicon.ico'
+
     // Meta Description
     let m = document.querySelector('meta[name="description"]')
     if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }

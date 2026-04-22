@@ -420,8 +420,7 @@ Modern ATS systems detect hidden white text and will automatically flag your res
 ## Build Your Keyword-Optimized Resume Free
 
 ResumeForge automatically formats your resume in an ATS-friendly layout. Add your keywords, choose a template, and download your PDF — completely free, no login required.`
-  }
-]
+  },
   {
     id: 8,
     slug: 'how-to-write-resume-summary',
@@ -734,3 +733,4 @@ Never force content onto one page if it requires extremely small fonts or margin
 
 👉 Build your perfectly formatted resume for free at **freeresumeforgebuilder.com**. Choose from Classic, Modern, Minimal, Elegant, Executive, and Creative templates — all ATS-optimized.`
   }
+]

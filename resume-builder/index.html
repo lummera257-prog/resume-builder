@@ -108,6 +108,7 @@
       "@type": "SoftwareApplication",
       "name": "ResumeForge Resume Builder",
       "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Resume Builder",
       "operatingSystem": "Web, iOS, Android",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "aggregateRating": {
@@ -115,22 +116,43 @@
         "ratingValue": "4.8", "ratingCount": "1250",
         "bestRating": "5", "worstRating": "1"
       },
-      "description": "Free online resume builder with 6 ATS-friendly templates.",
-      "url": "https://freeresumeforgebuilder.com/"
+      "featureList": "ATS-Friendly Templates, PDF Download, No Login Required, 6 Resume Templates, Auto-Save",
+      "description": "Free online resume builder with 6 ATS-friendly templates. Create, customize and download your resume instantly.",
+      "url": "https://freeresumeforgebuilder.com/",
+      "screenshot": "https://freeresumeforgebuilder.com/og-image.png"
     }
     </script>
 
-    <!-- ✅ PERFORMANCE: Fonts — non-blocking load -->
+    <!-- Sitelinks Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "ResumeForge Tools",
+      "description": "Free resume building tools and resources",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Free Resume Builder", "url": "https://freeresumeforgebuilder.com/free-resume-builder" },
+        { "@type": "ListItem", "position": 2, "name": "Resume Templates", "url": "https://freeresumeforgebuilder.com/resume-templates" },
+        { "@type": "ListItem", "position": 3, "name": "Resume Examples", "url": "https://freeresumeforgebuilder.com/resume-examples" },
+        { "@type": "ListItem", "position": 4, "name": "ATS Resume Builder", "url": "https://freeresumeforgebuilder.com/ats-resume-builder" },
+        { "@type": "ListItem", "position": 5, "name": "CV Builder", "url": "https://freeresumeforgebuilder.com/cv-builder" },
+        { "@type": "ListItem", "position": 6, "name": "Resume for Freshers", "url": "https://freeresumeforgebuilder.com/resume-for-freshers" },
+        { "@type": "ListItem", "position": 7, "name": "Blog", "url": "https://freeresumeforgebuilder.com/blog" }
+      ]
+    }
+    </script>
+
+    <!-- PERFORMANCE: Font preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Load fonts async — won't block render -->
+
+    <!-- PERFORMANCE: Fonts non-blocking load -->
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
-      media="print"
-      onload="this.media='all'"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <!-- Fallback for no-JS -->
     <noscript>
       <link
         rel="stylesheet"
@@ -138,15 +160,25 @@
       />
     </noscript>
 
-    <!-- ✅ CSS: Hide Google Translate Bar immediately -->
+    <!-- CSS: Critical styles inline — prevent layout shift -->
     <style>
-      /* Prevent body shift */
-      body, body.translated-ltr, body.translated-rtl {
+      /* Font fallback — prevent layout shift while fonts load */
+      body {
+        font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Prevent body shift from Google Translate */
+      body,
+      body.translated-ltr,
+      body.translated-rtl {
         top: 0 !important;
         margin-top: 0 !important;
         position: static !important;
       }
-      /* Hide Google bar elements */
+
+      /* Hide Google Translate bar */
       .goog-te-banner-frame,
       .goog-te-banner-frame.skiptranslate,
       iframe.goog-te-banner-frame { display: none !important; }
@@ -155,14 +187,17 @@
       .goog-text-highlight         { background: none !important; box-shadow: none !important; }
       font[color="green"]          { color: inherit !important; }
 
-      /* ✅ Font fallback — prevent layout shift while fonts load */
-      body {
-        font-family: 'Geist', system-ui, -apple-system, sans-serif;
+      /* Root loading state */
+      #root:empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f8fafc;
       }
     </style>
 
-    <!-- ✅ PERFORMANCE: Google Translate — load AFTER page is interactive -->
-    <!-- Using setTimeout so it never blocks FCP/LCP -->
+    <!-- Google Translate — defer after page load -->
     <script>
       function googleTranslateElementInit() {
         new google.translate.TranslateElement(
@@ -176,8 +211,6 @@
         );
       }
 
-      // ✅ Load Google Translate only after page is fully loaded
-      // This prevents it from blocking FCP and TBT
       function loadGoogleTranslate() {
         var s = document.createElement('script');
         s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
@@ -186,17 +219,16 @@
         document.head.appendChild(s);
       }
 
-      // Wait for page load — dont block render
       if (document.readyState === 'complete') {
-        setTimeout(loadGoogleTranslate, 2000);
+        setTimeout(loadGoogleTranslate, 3000);
       } else {
-        window.addEventListener('load', function() {
-          setTimeout(loadGoogleTranslate, 2000);
+        window.addEventListener('load', function () {
+          setTimeout(loadGoogleTranslate, 3000);
         });
       }
     </script>
 
-    <!-- ✅ JS: Force Hide Google Bar — runs after load -->
+    <!-- JS: Force hide Google bar — runs after load only -->
     <script>
       (function () {
         function hideGoogleBar() {
@@ -214,12 +246,10 @@
             });
         }
 
-        // ✅ Only run after page load — not during critical render
         window.addEventListener('load', function () {
           hideGoogleBar();
           var timer = setInterval(hideGoogleBar, 300);
           setTimeout(function () { clearInterval(timer); }, 15000);
-
           var observer = new MutationObserver(hideGoogleBar);
           observer.observe(document.body, { childList: true, subtree: true });
           setTimeout(function () { observer.disconnect(); }, 15000);

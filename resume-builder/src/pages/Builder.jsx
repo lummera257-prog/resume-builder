@@ -28,7 +28,7 @@ function TrustBar() {
         alignItems: 'center',
         gap: '24px',
         flexWrap: 'wrap',
-        flexShrink: 0,   // kabhi shrink mat karo
+        flexShrink: 0,
       }}
     >
       {[
@@ -76,27 +76,18 @@ export default function Builder() {
   }, [])
 
   return (
-    /*
-      Outer wrapper:
-      - height: 100vh   → poori screen height
-      - overflow: hidden → bahar kuch nahi jaayega
-      - flex column      → sab elements upar se neeche stack honge
-    */
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      height: '100vh',
-      overflow: 'hidden',
+      minHeight: '100vh',
     }}>
 
       <h1 className="sr-only">
         Free Resume Builder Online — ATS-Friendly Resume Maker | ResumeForge
       </h1>
 
-      {/* TrustBar — apni natural height lega, shrink nahi karega */}
       <TrustBar />
 
-      {/* Header — apni natural height lega, shrink nahi karega */}
       <div style={{ flexShrink: 0 }}>
         <Header
           previewVisible={previewVisible}
@@ -106,13 +97,7 @@ export default function Builder() {
 
       {isMobile ? (
 
-        /* ══════════════════════════════
-           MOBILE LAYOUT
-           main: flex:1 → baaki saari
-           height apne aap le lega.
-           overflowY:auto → andar scroll
-           hoga, bahar nahi
-        ══════════════════════════════ */
+        /* ════ MOBILE ════ */
         <main
           id="main-content"
           aria-label="Resume Builder"
@@ -120,8 +105,6 @@ export default function Builder() {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
-            overflowY: 'auto',
-            WebkitOverflowScrolling: 'touch',
           }}
         >
           {!previewVisible && (
@@ -136,7 +119,6 @@ export default function Builder() {
             </div>
           )}
 
-          {/* Mobile Status Bar */}
           <div style={{
             background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
             padding: '4px 16px',
@@ -158,38 +140,24 @@ export default function Builder() {
 
       ) : (
 
-        /* ══════════════════════════════
-           DESKTOP LAYOUT
-           main: flex:1 + overflow:hidden
-           → TrustBar + Header ke baad
-             baaki saari height yahi lega
-           → Footer neeche fit hoga
-           → Koi extra space nahi
-        ══════════════════════════════ */
+        /* ════ DESKTOP ════ */
         <main
           id="main-content"
           aria-label="Resume Builder"
           style={{
             display: 'flex',
             flexDirection: 'column',
-            flex: 1,          // baaki saari height lo
-            overflow: 'hidden', // andar panels scroll karenge
+            flex: 1,
           }}
         >
-
-          {/*
-            Panels row:
-            flex:1 → Status Bar aur Footer ke
-            baad jo bachi height ho woh lo.
-            overflow:hidden → panels khud scroll karenge
-          */}
+          {/* Form + Preview panels — fixed height using calc */}
           <div style={{
             display: 'flex',
             flex: 1,
-            overflow: 'hidden',
+            height: 'calc(100vh - 28px - 56px - 24px - 80px)',
+            minHeight: '400px',
           }}>
 
-            {/* Form Panel */}
             <section
               aria-label="Resume form"
               style={{
@@ -201,13 +169,11 @@ export default function Builder() {
                 flexShrink: 0,
                 WebkitOverflowScrolling: 'touch',
                 overscrollBehavior: 'contain',
-                scrollBehavior: 'smooth',
               }}
             >
               <FormPanel />
             </section>
 
-            {/* Preview Panel */}
             <section
               aria-label="Resume preview"
               style={{
@@ -217,14 +183,13 @@ export default function Builder() {
                 background: '#f1f5f9',
                 WebkitOverflowScrolling: 'touch',
                 overscrollBehavior: 'contain',
-                scrollBehavior: 'smooth',
               }}
             >
               <PreviewPanel />
             </section>
           </div>
 
-          {/* Status Bar — apni fixed height lega, flex se nahi hatega */}
+          {/* Status Bar */}
           <div
             aria-hidden="true"
             style={{
@@ -245,11 +210,7 @@ export default function Builder() {
             </span>
           </div>
 
-          {/* Footer — flexShrink:0 → apni natural height lega, panels upar compress honge */}
-          <div style={{ flexShrink: 0 }}>
-            <Footer />
-          </div>
-
+          <Footer />
         </main>
       )}
     </div>

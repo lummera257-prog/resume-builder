@@ -51,6 +51,11 @@ function TrustBar() {
   )
 }
 
+// TrustBar ~30px + Header ~50px + StatusBar ~24px
+const CHROME_HEIGHT = 104
+// Footer ki actual height
+const FOOTER_HEIGHT = 140
+
 export default function Builder() {
   const [previewVisible, setPreviewVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -75,16 +80,12 @@ export default function Builder() {
     trackConversion('page_view')
   }, [])
 
-  const CHROME_HEIGHT = 104
-
   return (
-    // ✅ FIX 1: overflow 'auto' → 'hidden' — bahar scroll band, andar panels scroll karenge
     <div style={{
       display: 'flex',
       flexDirection: 'column',
       height: '100vh',
       overflow: 'hidden',
-      scrollBehavior: 'smooth',
     }}>
 
       <h1 className="sr-only">
@@ -106,7 +107,6 @@ export default function Builder() {
         <main
           id="main-content"
           aria-label="Resume Builder"
-          // ✅ FIX 2 (mobile): flex: 1 + overflowY: auto — footer ke baad space nahi aayega
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -153,8 +153,6 @@ export default function Builder() {
         <main
           id="main-content"
           aria-label="Resume Builder"
-          // ✅ FIX 3 (desktop): flexShrink:0 → flex:1 + overflow:hidden
-          // flex:1 = baaki saari height le lo, overflow:hidden = footer ke niche kuch nahi
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -162,12 +160,11 @@ export default function Builder() {
             overflow: 'hidden',
           }}
         >
-          {/* Form + Preview */}
+          {/* Form + Preview panels — footer height minus karke */}
           <div style={{
             display: 'flex',
-            height: `calc(100vh - ${CHROME_HEIGHT}px)`,
+            height: `calc(100vh - ${CHROME_HEIGHT + FOOTER_HEIGHT}px)`,
             overflow: 'hidden',
-            flex: 1,
           }}>
 
             {/* Form Panel */}
@@ -226,6 +223,7 @@ export default function Builder() {
             </span>
           </div>
 
+          {/* Footer — niche bilkul fit */}
           <Footer />
         </main>
       )}

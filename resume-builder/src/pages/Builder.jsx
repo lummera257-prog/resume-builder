@@ -28,7 +28,7 @@ function TrustBar() {
         alignItems: 'center',
         gap: '24px',
         flexWrap: 'wrap',
-        flexShrink: 0,
+        flexShrink: 0,   // kabhi shrink mat karo
       }}
     >
       {[
@@ -50,11 +50,6 @@ function TrustBar() {
     </div>
   )
 }
-
-// TrustBar ~30px + Header ~50px + StatusBar ~24px
-const CHROME_HEIGHT = 104
-// Footer ki actual height
-const FOOTER_HEIGHT = 140
 
 export default function Builder() {
   const [previewVisible, setPreviewVisible] = useState(false)
@@ -81,6 +76,12 @@ export default function Builder() {
   }, [])
 
   return (
+    /*
+      Outer wrapper:
+      - height: 100vh   → poori screen height
+      - overflow: hidden → bahar kuch nahi jaayega
+      - flex column      → sab elements upar se neeche stack honge
+    */
     <div style={{
       display: 'flex',
       flexDirection: 'column',
@@ -92,8 +93,10 @@ export default function Builder() {
         Free Resume Builder Online — ATS-Friendly Resume Maker | ResumeForge
       </h1>
 
+      {/* TrustBar — apni natural height lega, shrink nahi karega */}
       <TrustBar />
 
+      {/* Header — apni natural height lega, shrink nahi karega */}
       <div style={{ flexShrink: 0 }}>
         <Header
           previewVisible={previewVisible}
@@ -103,7 +106,13 @@ export default function Builder() {
 
       {isMobile ? (
 
-        /* ════ MOBILE ════ */
+        /* ══════════════════════════════
+           MOBILE LAYOUT
+           main: flex:1 → baaki saari
+           height apne aap le lega.
+           overflowY:auto → andar scroll
+           hoga, bahar nahi
+        ══════════════════════════════ */
         <main
           id="main-content"
           aria-label="Resume Builder"
@@ -149,21 +158,34 @@ export default function Builder() {
 
       ) : (
 
-        /* ════ DESKTOP ════ */
+        /* ══════════════════════════════
+           DESKTOP LAYOUT
+           main: flex:1 + overflow:hidden
+           → TrustBar + Header ke baad
+             baaki saari height yahi lega
+           → Footer neeche fit hoga
+           → Koi extra space nahi
+        ══════════════════════════════ */
         <main
           id="main-content"
           aria-label="Resume Builder"
           style={{
             display: 'flex',
             flexDirection: 'column',
-            flex: 1,
-            overflow: 'hidden',
+            flex: 1,          // baaki saari height lo
+            overflow: 'hidden', // andar panels scroll karenge
           }}
         >
-          {/* Form + Preview panels — footer height minus karke */}
+
+          {/*
+            Panels row:
+            flex:1 → Status Bar aur Footer ke
+            baad jo bachi height ho woh lo.
+            overflow:hidden → panels khud scroll karenge
+          */}
           <div style={{
             display: 'flex',
-            height: `calc(100vh - ${CHROME_HEIGHT + FOOTER_HEIGHT}px)`,
+            flex: 1,
             overflow: 'hidden',
           }}>
 
@@ -202,7 +224,7 @@ export default function Builder() {
             </section>
           </div>
 
-          {/* Desktop Status Bar */}
+          {/* Status Bar — apni fixed height lega, flex se nahi hatega */}
           <div
             aria-hidden="true"
             style={{
@@ -223,8 +245,11 @@ export default function Builder() {
             </span>
           </div>
 
-          {/* Footer — niche bilkul fit */}
-          <Footer />
+          {/* Footer — flexShrink:0 → apni natural height lega, panels upar compress honge */}
+          <div style={{ flexShrink: 0 }}>
+            <Footer />
+          </div>
+
         </main>
       )}
     </div>

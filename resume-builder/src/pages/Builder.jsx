@@ -75,12 +75,16 @@ export default function Builder() {
     trackConversion('page_view')
   }, [])
 
+  const CHROME_HEIGHT = 104
+
   return (
+    // ✅ FIX 1: overflow 'auto' → 'hidden' — bahar scroll band, andar panels scroll karenge
     <div style={{
       display: 'flex',
       flexDirection: 'column',
       height: '100vh',
       overflow: 'hidden',
+      scrollBehavior: 'smooth',
     }}>
 
       <h1 className="sr-only">
@@ -102,6 +106,7 @@ export default function Builder() {
         <main
           id="main-content"
           aria-label="Resume Builder"
+          // ✅ FIX 2 (mobile): flex: 1 + overflowY: auto — footer ke baad space nahi aayega
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -122,6 +127,7 @@ export default function Builder() {
             </div>
           )}
 
+          {/* Mobile Status Bar */}
           <div style={{
             background: 'linear-gradient(90deg, #1e3a5f 0%, #2563eb 100%)',
             padding: '4px 16px',
@@ -147,6 +153,8 @@ export default function Builder() {
         <main
           id="main-content"
           aria-label="Resume Builder"
+          // ✅ FIX 3 (desktop): flexShrink:0 → flex:1 + overflow:hidden
+          // flex:1 = baaki saari height le lo, overflow:hidden = footer ke niche kuch nahi
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -154,14 +162,15 @@ export default function Builder() {
             overflow: 'hidden',
           }}
         >
-          {/* Form + Preview — flex:1, minHeight:0 */}
+          {/* Form + Preview */}
           <div style={{
             display: 'flex',
-            flex: 1,
-            minHeight: 0,
+            height: `calc(100vh - ${CHROME_HEIGHT}px)`,
             overflow: 'hidden',
+            flex: 1,
           }}>
 
+            {/* Form Panel */}
             <section
               aria-label="Resume form"
               style={{
@@ -173,11 +182,13 @@ export default function Builder() {
                 flexShrink: 0,
                 WebkitOverflowScrolling: 'touch',
                 overscrollBehavior: 'contain',
+                scrollBehavior: 'smooth',
               }}
             >
               <FormPanel />
             </section>
 
+            {/* Preview Panel */}
             <section
               aria-label="Resume preview"
               style={{
@@ -187,13 +198,14 @@ export default function Builder() {
                 background: '#f1f5f9',
                 WebkitOverflowScrolling: 'touch',
                 overscrollBehavior: 'contain',
+                scrollBehavior: 'smooth',
               }}
             >
               <PreviewPanel />
             </section>
           </div>
 
-          {/* Status Bar */}
+          {/* Desktop Status Bar */}
           <div
             aria-hidden="true"
             style={{

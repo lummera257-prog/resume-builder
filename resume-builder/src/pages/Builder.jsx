@@ -79,7 +79,8 @@ export default function Builder() {
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      minHeight: '100vh',
+      height: '100vh',
+      overflow: 'hidden',
     }}>
 
       <h1 className="sr-only">
@@ -105,6 +106,8 @@ export default function Builder() {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
           }}
         >
           {!previewVisible && (
@@ -148,14 +151,15 @@ export default function Builder() {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
+            overflow: 'hidden',
           }}
         >
-          {/* Form + Preview panels — fixed height using calc */}
+          {/* Form + Preview — flex:1, minHeight:0 */}
           <div style={{
             display: 'flex',
             flex: 1,
-            height: 'calc(100vh - 28px - 56px - 24px - 80px)',
-            minHeight: '400px',
+            minHeight: 0,
+            overflow: 'hidden',
           }}>
 
             <section

@@ -78,11 +78,12 @@ export default function Builder() {
   const CHROME_HEIGHT = 104
 
   return (
+    // ✅ FIX 1: overflow 'auto' → 'hidden' — bahar scroll band, andar panels scroll karenge
     <div style={{
       display: 'flex',
       flexDirection: 'column',
       height: '100vh',
-      overflowY: 'auto',
+      overflow: 'hidden',
       scrollBehavior: 'smooth',
     }}>
 
@@ -100,12 +101,19 @@ export default function Builder() {
       </div>
 
       {isMobile ? (
+
         /* ════ MOBILE ════ */
-        /* ✅ <main> landmark added */
         <main
           id="main-content"
           aria-label="Resume Builder"
-          style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+          // ✅ FIX 2 (mobile): flex: 1 + overflowY: auto — footer ke baad space nahi aayega
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+          }}
         >
           {!previewVisible && (
             <div style={{ background: '#fff' }}>
@@ -142,18 +150,24 @@ export default function Builder() {
       ) : (
 
         /* ════ DESKTOP ════ */
-        /* ✅ <main> landmark added */
         <main
           id="main-content"
           aria-label="Resume Builder"
-          style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}
+          // ✅ FIX 3 (desktop): flexShrink:0 → flex:1 + overflow:hidden
+          // flex:1 = baaki saari height le lo, overflow:hidden = footer ke niche kuch nahi
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            overflow: 'hidden',
+          }}
         >
           {/* Form + Preview */}
           <div style={{
             display: 'flex',
             height: `calc(100vh - ${CHROME_HEIGHT}px)`,
             overflow: 'hidden',
-            flexShrink: 0,
+            flex: 1,
           }}>
 
             {/* Form Panel */}

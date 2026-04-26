@@ -24,7 +24,7 @@ export default function ResumeTemplates() {
   ]
 
   const handleUseTemplate = (t) => {
-    navigate('/', { state: { templateKey: t.key, colorScheme: t.colorScheme } })
+    navigate('/builder', { state: { templateKey: t.key, colorScheme: t.colorScheme } })
   }
 
   return (

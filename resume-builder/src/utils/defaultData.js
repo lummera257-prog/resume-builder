@@ -37,14 +37,14 @@ export const defaultResumeData = {
 // ─── Sample/Demo resume data (USA) ───────────────────────────────────────────
 export const sampleResumeData = {
   personalInfo: {
-    name: 'Michael Bennett',
+    name: 'James Carter',
     title: 'Senior Full-Stack Software Engineer',
-    email: 'michael.bennett@email.com',
-    phone: '(415) 555-0192',
+    email: 'james.carter@email.com',
+    phone: '+1 (555) 847-2910',
     location: 'San Francisco, CA',
-    website: 'michaelbennett.dev',
-    linkedin: 'linkedin.com/in/michaelbennett',
-    github: 'github.com/michaelbennett',
+    website: 'jamescarter.dev',
+    linkedin: 'linkedin.com/in/jamescarter',
+    github: 'github.com/jamescarter',
     photo: '',
   },
   summary: 'Results-driven Full-Stack Software Engineer with 7+ years of experience designing and delivering scalable web applications. Proficient in React, Node.js, and AWS cloud infrastructure. Proven track record of leading cross-functional engineering teams and shipping products used by 1M+ users. Passionate about clean architecture, developer productivity, and measurable business impact.',
@@ -83,7 +83,7 @@ export const sampleResumeData = {
   education: [
     {
       id: '1',
-      institution: 'University of California, Berkeley',
+      institution: 'University of Michigan',
       degree: 'Bachelor of Science',
       field: 'Computer Science',
       startDate: '2013-08',
@@ -104,7 +104,7 @@ export const sampleResumeData = {
       name: 'OpenReview — AI Code Review Assistant',
       description: 'Built an open-source AI-powered code review tool integrating GPT-4 with GitHub Pull Requests. Automatically surfaces bugs, security vulnerabilities, and style issues. Reached 3,500+ GitHub stars within 6 weeks of launch.',
       technologies: 'React, Node.js, OpenAI API, GitHub API, PostgreSQL',
-      link: 'github.com/michaelbennett/openreview',
+      link: 'github.com/jamescarter/openreview',
     },
     {
       id: '2',

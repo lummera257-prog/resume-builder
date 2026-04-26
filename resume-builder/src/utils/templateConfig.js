@@ -1,6 +1,6 @@
 export const TEMPLATES = [
   {
-    key: 'clarity',
+    key: 'classic',
     name: 'Classic',
     icon: '📄',
     desc: 'Single-column, clean ATS-friendly design. Best for corporate, finance, and traditional roles.',
@@ -8,7 +8,7 @@ export const TEMPLATES = [
     colorScheme: 'blue',
   },
   {
-    key: 'prism',
+    key: 'modern',
     name: 'Modern',
     icon: '✨',
     desc: 'Two-column design with sidebar. Best for tech, creative, and design-forward roles.',
@@ -16,7 +16,7 @@ export const TEMPLATES = [
     colorScheme: 'blue',
   },
   {
-    key: 'clarity',
+    key: 'minimal',
     name: 'Minimal',
     icon: '⬜',
     desc: 'Ultra-clean layout with minimal styling. Perfect for academic and research roles.',
@@ -24,7 +24,7 @@ export const TEMPLATES = [
     colorScheme: 'slate',
   },
   {
-    key: 'clarity',
+    key: 'elegant',
     name: 'Elegant',
     icon: '💎',
     desc: 'Sophisticated design with elegant typography. Great for executive and senior roles.',
@@ -32,7 +32,7 @@ export const TEMPLATES = [
     colorScheme: 'violet',
   },
   {
-    key: 'prism',
+    key: 'executive',
     name: 'Executive',
     icon: '🏆',
     desc: 'Bold sidebar layout with professional dark accent. Ideal for leadership roles.',
@@ -40,7 +40,7 @@ export const TEMPLATES = [
     colorScheme: 'emerald',
   },
   {
-    key: 'prism',
+    key: 'creative',
     name: 'Creative',
     icon: '🎨',
     desc: 'Vibrant two-column design for creative professionals in design, media, and marketing.',

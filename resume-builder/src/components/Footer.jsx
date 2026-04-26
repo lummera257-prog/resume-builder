@@ -24,7 +24,9 @@ export default function Footer() {
                 { to: '/free-resume-builder', label: 'Free Resume Builder' },
                 { to: '/ats-resume-builder',  label: 'ATS Resume Builder' },
                 { to: '/cv-builder',          label: 'CV Builder' },
-                { to: '/ats-resume-checker',  label: 'ATS Checker' },
+                { to: '/tools/ats-checker',       label: 'ATS Checker' },
+                { to: '/tools/cover-letter',      label: 'Cover Letter' },
+                { to: '/tools/resignation-letter',label: 'Resignation Letter' },
                 { to: '/resume-templates',    label: 'Templates' },
               ].map((l, i) => (
                 <Link key={i} to={l.to} style={{ color: '#9ca3af', fontSize: '11px', textDecoration: 'none', lineHeight: '1.8' }}

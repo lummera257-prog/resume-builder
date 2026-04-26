@@ -72,8 +72,8 @@ function SettingsPanel() {
           <div style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', marginBottom: '8px' }}>Template</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
             {[
-              { id: 'clarity',   label: '📄 Classic',   desc: 'ATS-friendly' },
-              { id: 'prism',     label: '✨ Modern',    desc: 'Sidebar layout' },
+              { id: 'classic',   label: '📄 Classic',   desc: 'ATS-friendly' },
+              { id: 'modern',    label: '✨ Modern',    desc: 'Sidebar layout' },
               { id: 'minimal',   label: '🪄 Minimal',   desc: 'Clean typography' },
               { id: 'elegant',   label: '💎 Elegant',   desc: 'Timeline layout' },
               { id: 'executive', label: '🏆 Executive', desc: 'Bold sidebar' },

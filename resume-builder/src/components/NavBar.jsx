@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { FileText, Globe, ChevronDown, Check } from 'lucide-react'
+import { FileText, Globe, ChevronDown, Check, Menu, X, Wrench, FileEdit, LogOut } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
 // ── Languages ─────────────────────────────────────────────
@@ -28,19 +28,16 @@ const LANGUAGES = [
 
 // ── Google Translate Trigger ──────────────────────────────
 function triggerGoogleTranslate(langCode) {
-  // Method 1: Official doGTranslate function
   if (typeof window.doGTranslate === 'function') {
     window.doGTranslate(`en|${langCode}`)
     return
   }
-  // Method 2: combo select
   const select = document.querySelector('.goog-te-combo')
   if (select) {
     select.value = langCode
     select.dispatchEvent(new Event('change'))
     return
   }
-  // Method 3: cookie fallback
   const host = window.location.hostname
   document.cookie = `googtrans=/en/${langCode};path=/;domain=${host}`
   document.cookie = `googtrans=/en/${langCode};path=/`
@@ -80,8 +77,6 @@ function LanguageSelector() {
 
   return (
     <div ref={ref} style={{ position: 'relative', zIndex: 100 }}>
-
-      {/* Trigger */}
       <button
         onClick={() => setOpen(o => !o)}
         style={{
@@ -106,7 +101,6 @@ function LanguageSelector() {
           style={{ transform: open ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
       </button>
 
-      {/* Dropdown */}
       {open && (
         <div style={{
           position: 'absolute', top: 'calc(100% + 8px)', right: 0,
@@ -115,7 +109,6 @@ function LanguageSelector() {
           boxShadow: '0 10px 40px rgba(0,0,0,0.13)',
           overflow: 'hidden', animation: 'navLangDrop 0.15s ease',
         }}>
-          {/* Search */}
           <div style={{ padding: '10px 10px 8px', borderBottom: '1px solid #f1f5f9' }}>
             <input ref={searchRef} value={search}
               onChange={e => setSearch(e.target.value)}
@@ -131,7 +124,6 @@ function LanguageSelector() {
             />
           </div>
 
-          {/* List */}
           <ul style={{
             listStyle: 'none', margin: 0, padding: '6px',
             maxHeight: '224px', overflowY: 'auto', scrollbarWidth: 'thin',
@@ -167,7 +159,6 @@ function LanguageSelector() {
             })}
           </ul>
 
-          {/* Footer */}
           <div style={{
             padding: '7px 12px', borderTop: '1px solid #f1f5f9',
             fontSize: '11px', color: '#9ca3af', textAlign: 'center',
@@ -187,9 +178,106 @@ function LanguageSelector() {
   )
 }
 
+// ── Tools Dropdown ──────────────────────────────────────────
+function ToolsDropdown({ isMobile, closeMobileMenu }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (isMobile) return
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isMobile])
+
+  const tools = [
+    { to: '/tools/ats-checker', label: 'ATS Resume Checker', desc: 'Scan and score your resume for ATS compatibility', icon: <Wrench size={16} className="text-blue-600" /> },
+    { to: '/tools/cover-letter', label: 'Cover Letter Generator', desc: 'AI-generated, tailored cover letters instantly', icon: <FileEdit size={16} className="text-blue-600" /> },
+    { to: '/tools/resignation-letter', label: 'Resignation Letter', desc: 'Professional resignation letter templates', icon: <LogOut size={16} className="text-blue-600" /> },
+  ]
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col gap-1 w-full">
+        <button onClick={() => setOpen(!open)} className="flex items-center justify-between w-full text-left text-sm font-medium px-3 py-2 text-slate-800 hover:bg-slate-50 rounded-lg">
+          Tools
+          <ChevronDown size={14} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        </button>
+        {open && (
+          <div className="pl-4 flex flex-col gap-1 border-l-2 border-slate-100 ml-3">
+            {tools.map(tool => (
+              <Link key={tool.to} to={tool.to} onClick={closeMobileMenu} className="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50">
+                <div className="mt-0.5">{tool.icon}</div>
+                <div>
+                  <div className="text-sm font-medium text-slate-800">{tool.label}</div>
+                  <div className="text-xs text-slate-500">{tool.desc}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <div ref={ref} className="relative inline-block text-left z-50">
+      <button 
+        onClick={() => setOpen(!open)}
+        onMouseEnter={() => setOpen(true)}
+        className="text-sm font-medium px-3 py-1.5 rounded-lg transition-colors text-slate-500 hover:text-slate-800 hover:bg-slate-100 flex items-center gap-1 focus:outline-none"
+      >
+        Tools
+        <ChevronDown size={12} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <div 
+          onMouseLeave={() => setOpen(false)}
+          className="absolute left-0 mt-1 w-72 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden transition-all duration-200 origin-top-left"
+          style={{ animation: 'navLangDrop 0.15s ease' }}
+        >
+          <div className="py-2">
+            {tools.map(tool => (
+              <Link 
+                key={tool.to} 
+                to={tool.to} 
+                className="group flex items-start gap-3 px-4 py-3 hover:bg-slate-50 transition-colors outline-none focus:bg-slate-50"
+                onClick={() => setOpen(false)}
+              >
+                <div className="mt-0.5 p-1.5 bg-blue-50 rounded-md group-hover:bg-blue-100 transition-colors">
+                  {tool.icon}
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                    {tool.label}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-0.5">
+                    {tool.desc}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── NavBar ────────────────────────────────────────────────
 export default function NavBar() {
   const location = useLocation()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navLinks = [
     { to: '/blog',    label: 'Blog'    },
@@ -197,13 +285,18 @@ export default function NavBar() {
     { to: '/contact', label: 'Contact' },
   ]
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [location.pathname])
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
 
       {/* Hidden Google Translate mount — DO NOT REMOVE */}
       <div id="google_translate_element" style={{ display: 'none' }} />
 
-      <div className="flex items-center justify-between px-4 h-14 max-w-4xl mx-auto">
+      <div className="flex items-center justify-between px-4 h-14 max-w-6xl mx-auto">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
@@ -215,13 +308,12 @@ export default function NavBar() {
           </span>
         </Link>
 
-        {/* Right Side */}
-        <div className="flex items-center gap-1 sm:gap-3">
-
-          {/* Nav Links */}
+        {/* Desktop Nav */}
+        <div className="hidden sm:flex flex-1 justify-center items-center gap-2 px-6">
+          <ToolsDropdown isMobile={false} />
           {navLinks.map(link => (
             <Link key={link.to} to={link.to}
-              className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-colors hidden sm:inline-block ${
+              className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
                 location.pathname === link.to
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
@@ -229,17 +321,52 @@ export default function NavBar() {
               {link.label}
             </Link>
           ))}
+        </div>
+
+        {/* Right Side */}
+        <div className="flex items-center gap-2 sm:gap-3">
 
           {/* 🌐 Language Selector */}
           <LanguageSelector />
 
-          {/* CTA */}
-          <Link to="/"
-            className="text-sm bg-blue-600 text-white px-4 py-1.5 rounded-lg hover:bg-blue-700 transition-colors font-semibold whitespace-nowrap">
+          {/* CTA Desktop */}
+          <Link to="/builder"
+            className="hidden sm:inline-flex text-sm bg-blue-600 text-white px-4 py-1.5 rounded-lg hover:bg-blue-700 transition-colors font-semibold whitespace-nowrap items-center justify-center h-[32px]">
             Build My Resume →
           </Link>
+
+          {/* Hamburger Menu Toggle */}
+          <button 
+            className="sm:hidden p-1 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="sm:hidden absolute top-14 left-0 w-full bg-white border-b border-slate-200 shadow-lg animate-fade-in flex flex-col p-4 gap-4 z-40">
+          <ToolsDropdown isMobile={true} closeMobileMenu={() => setMobileMenuOpen(false)} />
+          <div className="h-px bg-slate-100 w-full"></div>
+          {navLinks.map(link => (
+            <Link key={link.to} to={link.to}
+              className={`text-sm font-medium px-3 py-2 rounded-lg transition-colors ${
+                location.pathname === link.to
+                  ? 'text-blue-600 bg-blue-50'
+                  : 'text-slate-800 hover:bg-slate-50'
+              }`}>
+              {link.label}
+            </Link>
+          ))}
+          <Link to="/builder"
+            className="mt-2 text-sm bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-center w-full">
+            Build My Resume Free
+          </Link>
+        </div>
+      )}
     </header>
   )
 }

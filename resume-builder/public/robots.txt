@@ -1,4 +1,5 @@
-User-agent: *  
-Allow: /  
-  
-Sitemap: https://freeresumeforgebuilder.com/sitemap.xml 
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://freeresumeforgebuilder.com/sitemap.xml

@@ -25,6 +25,7 @@ function PageLoader() {
 }
 
 // सभी pages lazy load
+const Home                   = lazy(() => import('./pages/Home'))
 const Builder                = lazy(() => import('./pages/Builder'))
 const About                  = lazy(() => import('./pages/About'))
 const Contact                = lazy(() => import('./pages/Contact'))
@@ -41,14 +42,20 @@ const ResumeForFreshers      = lazy(() => import('./pages/seo/ResumeForFreshers'
 const SoftwareEngineerResume = lazy(() => import('./pages/seo/SoftwareEngineerResume'))
 const HowToMakeResume        = lazy(() => import('./pages/seo/HowToMakeResume'))
 const AtsResumeChecker       = lazy(() => import('./pages/seo/AtsResumeChecker'))
-
+const ToolAtsChecker         = lazy(() => import('./pages/tools/AtsChecker'))
+const ToolCoverLetter        = lazy(() => import('./pages/tools/CoverLetter'))
+const ToolResignationLetter  = lazy(() => import('./pages/tools/ResignationLetter'))
 export default function App() {
   return (
     <ResumeProvider>
       <Router>
         <Suspense fallback={<PageLoader />}>
           <Routes>
-            <Route path="/"                        element={<Builder />} />
+            <Route path="/"                        element={<Home />} />
+            <Route path="/builder"                 element={<Builder />} />
+            <Route path="/tools/ats-checker"       element={<ToolAtsChecker />} />
+            <Route path="/tools/cover-letter"      element={<ToolCoverLetter />} />
+            <Route path="/tools/resignation-letter" element={<ToolResignationLetter />} />
             <Route path="/about"                   element={<About />} />
             <Route path="/contact"                 element={<Contact />} />
             <Route path="/privacy"                 element={<Privacy />} />

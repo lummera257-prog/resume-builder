@@ -10,8 +10,8 @@ const ExecutiveTemplate = lazy(() => import('../templates/ExecutiveTemplate'))
 const CreativeTemplate  = lazy(() => import('../templates/CreativeTemplate'))
 
 const TEMPLATES = {
-  clarity:   ClassicTemplate,
-  prism:     ModernTemplate,
+  classic:   ClassicTemplate,
+  modern:    ModernTemplate,
   minimal:   MinimalTemplate,
   elegant:   ElegantTemplate,
   executive: ExecutiveTemplate,
@@ -19,8 +19,8 @@ const TEMPLATES = {
 }
 
 const TEMPLATE_LABELS = {
-  clarity:   '📄 Classic',
-  prism:     '✨ Modern',
+  classic:   '📄 Classic',
+  modern:    '✨ Modern',
   minimal:   '🪄 Minimal',
   elegant:   '💎 Elegant',
   executive: '🏆 Executive',

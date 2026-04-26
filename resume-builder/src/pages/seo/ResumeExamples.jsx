@@ -6,188 +6,172 @@ import { genId } from '../../utils/defaultData'
 
 const examples = [
   {
-    role: 'Software Engineer',
+    role: 'Financial Analyst',
     level: 'Mid-Senior',
-    tags: ['Tech', 'Engineering'],
+    tags: ['Finance', 'Banking'],
     data: {
       personalInfo: {
-        name: 'Alex Johnson', title: 'Senior Software Engineer',
-        email: 'alex.johnson@email.com', phone: '(415) 555-0101',
-        location: 'San Francisco, CA', linkedin: 'linkedin.com/in/alexjohnson',
-        github: 'github.com/alexjohnson', website: '', photo: '',
+        name: 'James Carter', title: 'Financial Analyst',
+        email: 'james.carter@email.com', phone: '+1 (555) 214-9032',
+        location: 'New York, NY', linkedin: 'linkedin.com/in/jamescarter',
+        github: '', website: '', photo: '',
       },
-      summary: 'Senior Software Engineer with 6+ years of experience building scalable web applications. Proficient in React, Node.js, and AWS. Passionate about clean code and developer productivity.',
+      summary: 'Detail-oriented Financial Analyst with 6+ years of experience in financial modeling, risk analysis, and corporate finance. Proven track record of delivering actionable insights that drive revenue growth and operational efficiency.',
       experience: [
-        { id: genId(), company: 'Google', position: 'Senior Software Engineer', startDate: '2021-03', endDate: '', current: true, location: 'San Francisco, CA', description: '• Led development of core search features used by 500M+ users\n• Reduced page load time by 35% through performance optimization\n• Mentored 4 junior engineers and conducted 50+ code reviews' },
-        { id: genId(), company: 'Meta', position: 'Software Engineer', startDate: '2018-06', endDate: '2021-02', current: false, location: 'Menlo Park, CA', description: '• Built React components for Facebook News Feed used by 2B+ users\n• Improved API response time by 40% through caching strategies\n• Collaborated with product and design teams on 3 major feature launches' },
+        { id: genId(), company: 'Goldman Sachs', position: 'Senior Financial Analyst', startDate: '2021-01', endDate: '', current: true, location: 'New York, NY', description: '• Developed complex financial models forecasting $500M+ in quarterly revenues\n• Conducted variance analysis reducing forecasting errors by 15%\n• Presented monthly financial reports to C-suite executives' },
+        { id: genId(), company: 'JPMorgan Chase', position: 'Financial Analyst', startDate: '2018-06', endDate: '2021-01', current: false, location: 'New York, NY', description: '• Analyzed market trends and competitive landscape to inform investment strategies\n• Automated financial reporting using Excel macros, saving 10 hours weekly\n• Assisted in the underwriting of $2B in corporate loans' },
       ],
-      education: [{ id: genId(), institution: 'Stanford University', degree: 'B.S.', field: 'Computer Science', startDate: '2014-09', endDate: '2018-06', gpa: '3.7/4.0', description: '' }],
+      education: [{ id: genId(), institution: 'NYU Stern', degree: 'B.S.', field: 'Finance', startDate: '2013-09', endDate: '2017-05', gpa: '3.8/4.0', description: '' }],
       skills: [
-        { id: genId(), category: 'Frontend', items: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'] },
-        { id: genId(), category: 'Backend', items: ['Node.js', 'Python', 'GraphQL', 'REST APIs'] },
-        { id: genId(), category: 'Cloud', items: ['AWS', 'Docker', 'Kubernetes', 'CI/CD'] },
-      ],
-      projects: [{ id: genId(), name: 'DevTools Pro', description: 'Open-source developer productivity tool with 2,000+ GitHub stars.', technologies: 'React, Node.js, PostgreSQL', link: 'github.com/alexjohnson/devtools' }],
-      certifications: [{ id: genId(), name: 'AWS Certified Solutions Architect', issuer: 'Amazon Web Services', date: '2022-05', link: '' }],
-      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }],
-      achievements: [{ id: genId(), title: 'Hackathon Winner — TechCrunch 2022', description: 'Won 1st place among 400+ teams.', date: '2022-09' }],
-      customSections: [],
-      settings: { template: 'creative', colorScheme: 'blue', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','projects','certifications','languages','achievements'], activeSections: ['summary','experience','education','skills','projects','certifications','languages','achievements'] },
-    }
-  },
-  {
-    role: 'Product Manager',
-    level: 'Mid-Level',
-    tags: ['Product', 'Management'],
-    data: {
-      personalInfo: {
-        name: 'Sarah Chen', title: 'Product Manager',
-        email: 'sarah.chen@email.com', phone: '(212) 555-0202',
-        location: 'New York, NY', linkedin: 'linkedin.com/in/sarahchen',
-        github: '', website: 'sarahchen.io', photo: '',
-      },
-      summary: 'Product Manager with 5+ years driving 0-to-1 product launches and cross-functional team alignment. Delivered products with $10M+ ARR impact across SaaS and consumer markets.',
-      experience: [
-        { id: genId(), company: 'Spotify', position: 'Product Manager', startDate: '2020-04', endDate: '', current: true, location: 'New York, NY', description: '• Owned podcast discovery feature driving 25% increase in podcast listening hours\n• Defined product roadmap and aligned 3 engineering teams across 2 time zones\n• Launched A/B tests improving user retention by 18%' },
-        { id: genId(), company: 'HubSpot', position: 'Associate Product Manager', startDate: '2018-07', endDate: '2020-03', current: false, location: 'Boston, MA', description: '• Shipped CRM pipeline feature adopted by 40,000+ users in first month\n• Conducted 100+ user interviews to identify top pain points\n• Reduced onboarding drop-off by 30% through UX improvements' },
-      ],
-      education: [{ id: genId(), institution: 'Harvard Business School', degree: 'MBA', field: 'Business Administration', startDate: '2016-09', endDate: '2018-05', gpa: '', description: '' }],
-      skills: [
-        { id: genId(), category: 'Product', items: ['Product Strategy', 'Roadmapping', 'A/B Testing', 'User Research'] },
-        { id: genId(), category: 'Analytics', items: ['SQL', 'Mixpanel', 'Google Analytics', 'Tableau'] },
-        { id: genId(), category: 'Tools', items: ['Jira', 'Figma', 'Confluence', 'Notion'] },
+        { id: genId(), category: 'Core Skills', items: ['Financial Modeling', 'Excel', 'Bloomberg', 'SQL', 'Risk Analysis'] },
       ],
       projects: [],
-      certifications: [{ id: genId(), name: 'Certified Scrum Product Owner (CSPO)', issuer: 'Scrum Alliance', date: '2021-03', link: '' }],
-      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }, { id: genId(), language: 'Mandarin', proficiency: 'Fluent' }],
-      achievements: [{ id: genId(), title: 'Product of the Year — HubSpot 2019', description: 'Recognized for CRM pipeline feature launch.', date: '2019-12' }],
+      certifications: [{ id: genId(), name: 'Chartered Financial Analyst (CFA) Level II', issuer: 'CFA Institute', date: '2020-08', link: '' }],
+      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }],
+      achievements: [],
       customSections: [],
-      settings: { template: 'creative', colorScheme: 'violet', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','projects','certifications','languages','achievements'], activeSections: ['summary','experience','education','skills','certifications','languages','achievements'] },
+      settings: { template: 'classic', colorScheme: 'blue', fontSize: 'medium', fontFamily: 'classic', sectionOrder: ['summary','experience','education','skills','certifications','languages'], activeSections: ['summary','experience','education','skills','certifications','languages'] },
     }
   },
   {
-    role: 'Fresh Graduate',
-    level: 'Entry Level',
-    tags: ['Fresher', 'Student'],
-    data: {
-      personalInfo: {
-        name: 'Rahul Sharma', title: 'Computer Science Graduate',
-        email: 'rahul.sharma@email.com', phone: '+91 98765 43210',
-        location: 'Bangalore, India', linkedin: 'linkedin.com/in/rahulsharma',
-        github: 'github.com/rahulsharma', website: '', photo: '',
-      },
-      summary: 'Recent Computer Science graduate with strong foundation in full-stack development. Built 3 projects with real users during college. Eager to contribute to a fast-growing engineering team.',
-      experience: [
-        { id: genId(), company: 'Infosys', position: 'Software Intern', startDate: '2024-05', endDate: '2024-08', current: false, location: 'Bangalore, India', description: '• Developed REST APIs for internal HR portal using Node.js and Express\n• Fixed 20+ bugs in legacy codebase and improved test coverage from 40% to 75%\n• Collaborated with senior engineers in daily standups and sprint planning' },
-      ],
-      education: [{ id: genId(), institution: 'IIT Delhi', degree: 'B.Tech', field: 'Computer Science', startDate: '2020-08', endDate: '2024-05', gpa: '8.4/10', description: 'Relevant coursework: Data Structures, DBMS, Operating Systems, Web Development' }],
-      skills: [
-        { id: genId(), category: 'Languages', items: ['JavaScript', 'Python', 'Java', 'C++'] },
-        { id: genId(), category: 'Web', items: ['React', 'Node.js', 'HTML/CSS', 'Express'] },
-        { id: genId(), category: 'Tools', items: ['Git', 'MySQL', 'MongoDB', 'VS Code'] },
-      ],
-      projects: [
-        { id: genId(), name: 'StudyBuddy — Peer Learning App', description: 'Built a platform connecting students for peer tutoring. 200+ active users from college campus.', technologies: 'React, Node.js, MongoDB', link: 'github.com/rahulsharma/studybuddy' },
-        { id: genId(), name: 'Expense Tracker', description: 'Personal finance app with budget alerts and spending analytics.', technologies: 'Python, Flask, SQLite', link: 'github.com/rahulsharma/expense-tracker' },
-      ],
-      certifications: [{ id: genId(), name: 'Meta Front-End Developer Certificate', issuer: 'Coursera', date: '2023-11', link: '' }],
-      languages: [{ id: genId(), language: 'English', proficiency: 'Fluent' }, { id: genId(), language: 'Hindi', proficiency: 'Native' }],
-      achievements: [{ id: genId(), title: 'Smart India Hackathon 2023 — Finalist', description: 'Top 10 among 5,000+ teams nationwide.', date: '2023-08' }],
-      customSections: [],
-      settings: { template: 'creative', colorScheme: 'emerald', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','projects','certifications','languages','achievements'], activeSections: ['summary','experience','education','skills','projects','certifications','languages','achievements'] },
-    }
-  },
-  {
-    role: 'Data Scientist',
+    role: 'Senior Software Engineer',
     level: 'Senior',
-    tags: ['Data', 'ML/AI'],
+    tags: ['Engineering', 'Tech'],
     data: {
       personalInfo: {
-        name: 'Priya Patel', title: 'Senior Data Scientist',
-        email: 'priya.patel@email.com', phone: '(650) 555-0303',
-        location: 'Seattle, WA', linkedin: 'linkedin.com/in/priyapatel',
-        github: 'github.com/priyapatel', website: '', photo: '',
+        name: 'Sophia Nguyen', title: 'Senior Software Engineer',
+        email: 'sophia.nguyen@email.com', phone: '+1 (555) 847-2910',
+        location: 'San Francisco, CA', linkedin: 'linkedin.com/in/sophianguyen',
+        github: 'github.com/sophianguyen', website: '', photo: '',
       },
-      summary: 'Senior Data Scientist with 7+ years building ML models that drive business decisions. Specialized in NLP and recommendation systems. Published 3 research papers and led teams of 5+ data scientists.',
+      summary: 'Senior Software Engineer with 8+ years of experience building scalable backend architectures and dynamic frontends. Passionate about system design, mentoring junior engineers, and driving engineering best practices.',
       experience: [
-        { id: genId(), company: 'Amazon', position: 'Senior Data Scientist', startDate: '2020-01', endDate: '', current: true, location: 'Seattle, WA', description: '• Built recommendation engine increasing product click-through rate by 28%\n• Developed NLP model reducing customer service tickets by 40%\n• Led a team of 5 data scientists across 2 product lines' },
-        { id: genId(), company: 'Netflix', position: 'Data Scientist', startDate: '2017-06', endDate: '2019-12', current: false, location: 'Los Gatos, CA', description: '• Improved content recommendation accuracy by 15% using collaborative filtering\n• Built A/B testing framework used by 12 product teams\n• Processed 10TB+ daily streaming data using Spark and Hadoop' },
+        { id: genId(), company: 'Stripe', position: 'Senior Software Engineer', startDate: '2021-02', endDate: '', current: true, location: 'San Francisco, CA', description: '• Architected a highly available payments microservice processing 10k TPS\n• Reduced database query latency by 45% through advanced indexing and caching\n• Mentored 5 junior engineers and led cross-functional technical designs' },
+        { id: genId(), company: 'Airbnb', position: 'Software Engineer', startDate: '2018-05', endDate: '2021-01', current: false, location: 'San Francisco, CA', description: '• Built frontend components for the core booking flow using React and TypeScript\n• Improved CI/CD pipeline speed by 30% using Docker optimizations\n• Collaborated with product managers to launch 3 major feature initiatives' },
       ],
-      education: [{ id: genId(), institution: 'Carnegie Mellon University', degree: 'M.S.', field: 'Machine Learning', startDate: '2015-09', endDate: '2017-05', gpa: '3.9/4.0', description: '' }],
+      education: [{ id: genId(), institution: 'Stanford University', degree: 'B.S.', field: 'Computer Science', startDate: '2012-09', endDate: '2016-05', gpa: '3.9/4.0', description: '' }],
       skills: [
-        { id: genId(), category: 'ML/AI', items: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'NLP', 'Deep Learning'] },
-        { id: genId(), category: 'Data', items: ['Python', 'SQL', 'Spark', 'Hadoop', 'Pandas'] },
-        { id: genId(), category: 'Cloud', items: ['AWS SageMaker', 'GCP BigQuery', 'Azure ML'] },
-      ],
-      projects: [{ id: genId(), name: 'SentimentAI', description: 'Open-source sentiment analysis library with 1,500+ GitHub stars.', technologies: 'Python, PyTorch, HuggingFace', link: 'github.com/priyapatel/sentimentai' }],
-      certifications: [{ id: genId(), name: 'Google Professional ML Engineer', issuer: 'Google Cloud', date: '2022-08', link: '' }],
-      languages: [{ id: genId(), language: 'English', proficiency: 'Fluent' }, { id: genId(), language: 'Gujarati', proficiency: 'Native' }],
-      achievements: [{ id: genId(), title: 'Best Paper Award — NeurIPS 2021', description: 'Recognized for research on efficient transformer architectures.', date: '2021-12' }],
-      customSections: [],
-      settings: { template: 'creative', colorScheme: 'rose', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','projects','certifications','languages','achievements'], activeSections: ['summary','experience','education','skills','projects','certifications','languages','achievements'] },
-    }
-  },
-  {
-    role: 'Marketing Manager',
-    level: 'Mid-Level',
-    tags: ['Marketing', 'Growth'],
-    data: {
-      personalInfo: {
-        name: 'James Carter', title: 'Digital Marketing Manager',
-        email: 'james.carter@email.com', phone: '(312) 555-0404',
-        location: 'Chicago, IL', linkedin: 'linkedin.com/in/jamescarter',
-        github: '', website: 'jamescarter.co', photo: '',
-      },
-      summary: 'Digital Marketing Manager with 6+ years driving growth through SEO, paid media, and content strategy. Generated $5M+ in pipeline through integrated campaigns. Data-driven and ROI-focused.',
-      experience: [
-        { id: genId(), company: 'Salesforce', position: 'Digital Marketing Manager', startDate: '2021-02', endDate: '', current: true, location: 'Chicago, IL', description: '• Managed $2M annual paid media budget across Google, LinkedIn, and Meta\n• Grew organic traffic by 85% in 18 months through SEO and content strategy\n• Led team of 4 marketing specialists and 2 content writers' },
-        { id: genId(), company: 'HubSpot', position: 'Marketing Specialist', startDate: '2018-04', endDate: '2021-01', current: false, location: 'Boston, MA', description: '• Launched email campaigns with 35%+ open rates (industry avg: 21%)\n• Managed social media accounts growing followers from 10K to 45K\n• Produced 50+ blog posts ranking on page 1 of Google' },
-      ],
-      education: [{ id: genId(), institution: 'University of Michigan', degree: 'B.A.', field: 'Marketing', startDate: '2014-09', endDate: '2018-05', gpa: '3.6/4.0', description: '' }],
-      skills: [
-        { id: genId(), category: 'Digital Marketing', items: ['SEO/SEM', 'Google Ads', 'Meta Ads', 'Email Marketing'] },
-        { id: genId(), category: 'Analytics', items: ['Google Analytics', 'HubSpot', 'Salesforce', 'Tableau'] },
-        { id: genId(), category: 'Content', items: ['Content Strategy', 'Copywriting', 'WordPress', 'Canva'] },
+        { id: genId(), category: 'Languages & Frameworks', items: ['React', 'Node.js', 'TypeScript'] },
+        { id: genId(), category: 'Infrastructure & DB', items: ['AWS', 'PostgreSQL', 'Docker'] },
       ],
       projects: [],
-      certifications: [
-        { id: genId(), name: 'Google Ads Certified', issuer: 'Google', date: '2023-01', link: '' },
-        { id: genId(), name: 'HubSpot Marketing Certified', issuer: 'HubSpot', date: '2022-06', link: '' },
-      ],
+      certifications: [],
       languages: [{ id: genId(), language: 'English', proficiency: 'Native' }],
-      achievements: [{ id: genId(), title: 'Marketing Campaign of the Year — Salesforce 2022', description: 'Recognized for B2B campaign generating $3M in pipeline.', date: '2022-11' }],
+      achievements: [],
       customSections: [],
-      settings: { template: 'creative', colorScheme: 'amber', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','projects','certifications','languages','achievements'], activeSections: ['summary','experience','education','skills','certifications','languages','achievements'] },
+      settings: { template: 'modern', colorScheme: 'slate', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','languages'], activeSections: ['summary','experience','education','skills','languages'] },
     }
   },
   {
-    role: 'UX Designer',
-    level: 'Mid-Level',
+    role: 'Research Scientist',
+    level: 'Senior',
+    tags: ['Science', 'Research'],
+    data: {
+      personalInfo: {
+        name: 'Emily Davis', title: 'Research Scientist',
+        email: 'emily.davis@email.com', phone: '+1 (555) 332-7841',
+        location: 'Boston, MA', linkedin: 'linkedin.com/in/emilydavis',
+        github: '', website: '', photo: '',
+      },
+      summary: 'Innovative Research Scientist with a Ph.D. in Biomedical Engineering. Extensive experience in clinical research, data analysis, and leading complex scientific studies from inception to publication.',
+      experience: [
+        { id: genId(), company: 'Pfizer', position: 'Research Scientist', startDate: '2020-06', endDate: '', current: true, location: 'Boston, MA', description: '• Led a team of 4 researchers in conducting pre-clinical trials for novel therapeutics\n• Analyzed massive genomic datasets using Python and R, uncovering 2 new biomarkers\n• Published 3 peer-reviewed articles in top-tier medical journals' },
+        { id: genId(), company: 'Harvard Medical School', position: 'Lab Associate', startDate: '2017-08', endDate: '2020-05', current: false, location: 'Boston, MA', description: '• Assisted in executing complex biomedical assays and maintaining lab protocols\n• Designed MATLAB scripts to automate data processing workflows\n• Presented research findings at 5 international scientific conferences' },
+      ],
+      education: [{ id: genId(), institution: 'MIT', degree: 'Ph.D.', field: 'Biomedical Engineering', startDate: '2015-09', endDate: '2019-05', gpa: '', description: '' }],
+      skills: [
+        { id: genId(), category: 'Technical Skills', items: ['Python', 'MATLAB', 'Data Analysis', 'Clinical Research', 'R'] },
+      ],
+      projects: [],
+      certifications: [],
+      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }],
+      achievements: [],
+      customSections: [],
+      settings: { template: 'minimal', colorScheme: 'emerald', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','languages'], activeSections: ['summary','experience','education','skills','languages'] },
+    }
+  },
+  {
+    role: 'Marketing Director',
+    level: 'Executive',
+    tags: ['Marketing', 'Leadership'],
+    data: {
+      personalInfo: {
+        name: 'Robert Mitchell', title: 'Marketing Director',
+        email: 'r.mitchell@email.com', phone: '+1 (555) 923-5517',
+        location: 'Chicago, IL', linkedin: 'linkedin.com/in/rmitchell',
+        github: '', website: '', photo: '',
+      },
+      summary: 'Visionary Marketing Director with 10+ years driving global brand strategy and high-impact integrated campaigns. Expert in leveraging analytics to optimize ROI and leading high-performing marketing teams.',
+      experience: [
+        { id: genId(), company: 'Nike', position: 'Marketing Director', startDate: '2020-03', endDate: '', current: true, location: 'Chicago, IL', description: '• Directed a $15M annual marketing budget, consistently achieving 30%+ ROI\n• Led a 25-person team across digital marketing, PR, and brand strategy\n• Launched a multi-channel campaign that increased market share by 12% in Q3' },
+        { id: genId(), company: 'Coca-Cola', position: 'Senior Marketing Manager', startDate: '2016-04', endDate: '2020-02', current: false, location: 'Atlanta, GA', description: '• Managed end-to-end execution of national SEO and digital ad campaigns\n• Grew organic online engagement by 45% through targeted content strategies\n• Negotiated strategic brand partnerships generating $5M in added value' },
+      ],
+      education: [{ id: genId(), institution: 'Northwestern University', degree: 'MBA', field: 'Marketing', startDate: '2013-09', endDate: '2015-06', gpa: '', description: '' }],
+      skills: [
+        { id: genId(), category: 'Expertise', items: ['Brand Strategy', 'SEO', 'Campaign Management', 'Analytics'] },
+      ],
+      projects: [],
+      certifications: [],
+      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }],
+      achievements: [],
+      customSections: [],
+      settings: { template: 'elegant', colorScheme: 'violet', fontSize: 'medium', fontFamily: 'classic', sectionOrder: ['summary','experience','education','skills','languages'], activeSections: ['summary','experience','education','skills','languages'] },
+    }
+  },
+  {
+    role: 'VP of Operations',
+    level: 'Executive',
+    tags: ['Operations', 'Leadership'],
+    data: {
+      personalInfo: {
+        name: 'William Thompson', title: 'VP of Operations',
+        email: 'w.thompson@email.com', phone: '+1 (555) 774-3829',
+        location: 'Dallas, TX', linkedin: 'linkedin.com/in/wthompson',
+        github: '', website: '', photo: '',
+      },
+      summary: 'Dynamic VP of Operations with 15+ years of experience optimizing supply chain logistics and driving operational excellence. Proven success in scaling manufacturing processes and improving P&L performance for Fortune 500 companies.',
+      experience: [
+        { id: genId(), company: 'Tesla', position: 'VP of Operations', startDate: '2019-01', endDate: '', current: true, location: 'Dallas, TX', description: '• Oversee global operations strategy, managing a $50M operating budget\n• Streamlined supply chain logistics, reducing manufacturing lead times by 22%\n• Championed lean initiatives that resulted in $12M annual cost savings' },
+        { id: genId(), company: 'Ford Motor Company', position: 'Director of Operations', startDate: '2013-05', endDate: '2018-12', current: false, location: 'Dearborn, MI', description: '• Directed daily operations across 3 major production facilities\n• Implemented quality control protocols that reduced defect rates by 40%\n• Negotiated vendor contracts saving the company $8M over 4 years' },
+      ],
+      education: [{ id: genId(), institution: 'Harvard Business School', degree: 'MBA', field: '', startDate: '2008-09', endDate: '2010-05', gpa: '', description: '' }],
+      skills: [
+        { id: genId(), category: 'Core Competencies', items: ['P&L Management', 'Supply Chain', 'Leadership', 'Strategy'] },
+      ],
+      projects: [],
+      certifications: [],
+      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }],
+      achievements: [],
+      customSections: [],
+      settings: { template: 'executive', colorScheme: 'slate', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','languages'], activeSections: ['summary','experience','education','skills','languages'] },
+    }
+  },
+  {
+    role: 'UX/UI Designer',
+    level: 'Mid-Senior',
     tags: ['Design', 'Creative'],
     data: {
       personalInfo: {
-        name: 'Emma Wilson', title: 'UX/UI Designer',
-        email: 'emma.wilson@email.com', phone: '(646) 555-0505',
-        location: 'New York, NY', linkedin: 'linkedin.com/in/emmawilson',
-        github: '', website: 'emmawilson.design', photo: '',
+        name: 'Olivia Martinez', title: 'UX/UI Designer',
+        email: 'olivia.martinez@email.com', phone: '+1 (555) 618-4403',
+        location: 'Austin, TX', linkedin: 'linkedin.com/in/oliviamartinez',
+        github: '', website: 'oliviamartinez.design', photo: '',
       },
-      summary: 'UX/UI Designer with 5+ years creating user-centered digital experiences for web and mobile. Led design for products used by 2M+ users. Expert in Figma, design systems, and usability research.',
+      summary: 'Passionate UX/UI Designer dedicated to creating intuitive, visually stunning digital experiences. Adept at transforming complex user problems into elegant, accessible design solutions through rigorous research and prototyping.',
       experience: [
-        { id: genId(), company: 'Airbnb', position: 'Senior UX Designer', startDate: '2021-06', endDate: '', current: true, location: 'New York, NY', description: '• Redesigned host onboarding flow reducing drop-off by 42%\n• Built and maintained design system with 200+ components used by 15 designers\n• Conducted 30+ usability tests and synthesized findings into actionable design decisions' },
-        { id: genId(), company: 'Spotify', position: 'UX Designer', startDate: '2019-03', endDate: '2021-05', current: false, location: 'New York, NY', description: '• Designed podcast player interface now used by 100M+ listeners\n• Created user journey maps and wireframes for 5 major feature releases\n• Improved app store rating from 4.1 to 4.6 through UX improvements' },
+        { id: genId(), company: 'Spotify', position: 'Lead UX Designer', startDate: '2021-04', endDate: '', current: true, location: 'Austin, TX', description: '• Lead the design strategy for the core mobile application used by millions globally\n• Established a comprehensive design system accelerating engineering velocity by 25%\n• Conduct weekly user research sessions to continuously iterate on user flows' },
+        { id: genId(), company: 'Adobe', position: 'UI Designer', startDate: '2018-07', endDate: '2021-03', current: false, location: 'San Jose, CA', description: '• Designed high-fidelity prototypes and pixel-perfect interfaces for creative cloud apps\n• Collaborated closely with product and engineering to ensure flawless implementation\n• Improved accessibility compliance (WCAG 2.1) across 4 major web properties' },
       ],
-      education: [{ id: genId(), institution: 'Parsons School of Design', degree: 'B.F.A.', field: 'Communication Design', startDate: '2015-09', endDate: '2019-05', gpa: '3.8/4.0', description: '' }],
+      education: [{ id: genId(), institution: 'Rhode Island School of Design', degree: 'B.F.A.', field: 'Design', startDate: '2014-09', endDate: '2018-05', gpa: '', description: '' }],
       skills: [
-        { id: genId(), category: 'Design', items: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping'] },
-        { id: genId(), category: 'Research', items: ['User Interviews', 'Usability Testing', 'A/B Testing', 'Journey Mapping'] },
-        { id: genId(), category: 'Development', items: ['HTML/CSS', 'React (basics)', 'Design Systems'] },
+        { id: genId(), category: 'Tools & Methods', items: ['Figma', 'Adobe XD', 'Prototyping', 'User Research', 'CSS'] },
       ],
-      projects: [{ id: genId(), name: 'DesignKit — Free UI Component Library', description: 'Open-source Figma component library with 5,000+ downloads.', technologies: 'Figma, Design Systems', link: 'figma.com/@emmawilson' }],
-      certifications: [{ id: genId(), name: 'Google UX Design Certificate', issuer: 'Google / Coursera', date: '2021-01', link: '' }],
-      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }, { id: genId(), language: 'French', proficiency: 'Conversational' }],
-      achievements: [{ id: genId(), title: 'Awwwards Site of the Day', description: 'Portfolio recognized for outstanding UI/UX design.', date: '2022-04' }],
+      projects: [],
+      certifications: [],
+      languages: [{ id: genId(), language: 'English', proficiency: 'Native' }, { id: genId(), language: 'Spanish', proficiency: 'Fluent' }],
+      achievements: [],
       customSections: [],
-      settings: { template: 'creative', colorScheme: 'violet', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','projects','certifications','languages','achievements'], activeSections: ['summary','experience','education','skills','projects','certifications','languages','achievements'] },
+      settings: { template: 'creative', colorScheme: 'rose', fontSize: 'medium', fontFamily: 'modern', sectionOrder: ['summary','experience','education','skills','languages'], activeSections: ['summary','experience','education','skills','languages'] },
     }
   },
 ]
@@ -250,7 +234,7 @@ export default function ResumeExamples() {
             The best resume examples share common traits: they are concise, use strong action verbs, quantify achievements, and are tailored to the specific role.
           </p>
 
-          <div style={{ background: 'linear-gradient(135deg, #1e3a5f, #2563eb)', borderRadius: '16px', padding: '40px', textAlign: 'center', marginTop: '40px' }}>
+          <div style={{ background: 'linear-gradient(135deg, #1e3a5f, #2563eb)', borderRadius: '16px', padding: '40px', textAlign: 'center', margin: '40px 0' }}>
             <h2 style={{ color: '#fff', fontSize: '1.4rem', fontWeight: 700, margin: '0 0 12px' }}>Create Your Own Professional Resume</h2>
             <Link to="/" style={{ background: '#fff', color: '#2563eb', padding: '14px 32px', borderRadius: '8px', fontWeight: 700, fontSize: '1rem', textDecoration: 'none', display: 'inline-block' }}>
               🚀 Create Your Free Resume Now

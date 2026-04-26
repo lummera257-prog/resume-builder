@@ -278,12 +278,15 @@ export default function Header({ previewVisible, setPreviewVisible }) {
           </div>
           <div className="hidden sm:block">
             <span className="font-bold text-slate-900 text-base">ResumeForge</span>
-            <span className="ml-1.5 text-xs text-slate-500 hidden md:inline">Free Resume Builder</span>
+            
           </div>
         </div>
 
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-1 ml-2">
+          <Link to="/tools/ats-checker" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ATS Checker</Link>
+          <Link to="/tools/cover-letter" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Cover Letter</Link>
+          <Link to="/tools/resignation-letter" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Resignation Letter</Link>
           <Link to="/blog"    className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Blog</Link>
           <Link to="/about"   className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">About</Link>
           <Link to="/contact" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Contact</Link>

@@ -5,10 +5,7 @@ import { AlertCircle, Loader2, UploadCloud, CheckCircle, XCircle, ChevronDown, C
 import * as pdfjsLib from 'pdfjs-dist'
 
 // ✅ Fix: correct import + Vite-compatible worker path
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString()
+pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
 
 function FaqItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,12 +1,14 @@
-javascript
-
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
 import { AlertCircle, Loader2, UploadCloud, CheckCircle, XCircle, ChevronDown, CheckCircle2 } from 'lucide-react'
-import * as pdfjsLib from 'pdfjs-dist/build/pdf'
+import * as pdfjsLib from 'pdfjs-dist'
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+// ✅ Fix: correct import + Vite-compatible worker path
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url
+).toString()
 
 function FaqItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -88,7 +90,6 @@ export default function AtsChecker() {
     try {
       const lowerText = text.toLowerCase()
 
-      // ✅ Detect if resume was built with ResumeForge
       const isResumeForge = /resumeforge|freeresumeforgebuilder\.com|built with resumeforge/i.test(text)
 
       let sectionScore = 0
@@ -97,7 +98,6 @@ export default function AtsChecker() {
       const hasEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i.test(lowerText)
       const hasPhone = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im.test(lowerText)
 
-      // A: Sections
       if (isResumeForge) {
         sectionScore = 30
       } else {
@@ -109,7 +109,6 @@ export default function AtsChecker() {
         if (/projects|certifications/i.test(lowerText)) sectionScore += 5; else missingSections.push('Projects')
       }
 
-      // B: Contact Info Quality
       let contactScore = 0
       if (isResumeForge) {
         contactScore = 10
@@ -120,7 +119,6 @@ export default function AtsChecker() {
         if (/[A-Za-z]+, [A-Z]{2}/.test(text) || /[A-Za-z]+, [A-Za-z]+/.test(text)) contactScore += 2
       }
 
-      // C: Spelling
       let mistakes = []
       let spellingScore = 0
       if (isResumeForge) {
@@ -135,7 +133,6 @@ export default function AtsChecker() {
         else spellingScore = 0
       }
 
-      // D: Power Words
       let foundPower = []
       powerWords.forEach(w => {
         if (new RegExp(`\\b${w}\\b`, 'i').test(lowerText)) foundPower.push(w)
@@ -143,7 +140,6 @@ export default function AtsChecker() {
       let powerScore = Math.min(foundPower.length, 20)
       let missingPower = powerWords.filter(w => !foundPower.includes(w)).slice(0, 10)
 
-      // E: Formatting
       let formatScore = 0
       const words = text.trim().split(/\s+/)
       if (isResumeForge) {
@@ -155,16 +151,13 @@ export default function AtsChecker() {
         if (/[•*·-]/.test(text)) formatScore += 2
       }
 
-      // F: Quantified
       const numbers = text.match(/\b\d+\b|\d+%|\$\d+/g) || []
       let quantScore = 0
       if (numbers.length >= 3) quantScore = 10
       else if (numbers.length >= 1) quantScore = 5
 
       let total = sectionScore + contactScore + spellingScore + powerScore + formatScore + quantScore
-      if (isResumeForge && total < 90) {
-        total = 90
-      }
+      if (isResumeForge && total < 90) total = 90
 
       let verdict = 'Poor'
       if (total >= 71) verdict = 'Excellent'
@@ -179,11 +172,7 @@ export default function AtsChecker() {
       if (words.length < 300) improvements.push(`Your resume is too short (${words.length} words). Try to reach at least 300.`)
       if (words.length > 800) improvements.push(`Your resume is quite long (${words.length} words). Consider trimming.`)
       if (numbers.length < 3) improvements.push(`Quantify more achievements using numbers, %, or $`)
-
-      // ✅ If not ResumeForge, suggest using our builder
-      if (!isResumeForge) {
-        improvements.push(`💡 Boost your ATS score instantly — use our free ATS-optimized templates at freeresumeforgebuilder.com`)
-      }
+      if (!isResumeForge) improvements.push(`💡 Boost your ATS score instantly — use our free ATS-optimized templates at freeresumeforgebuilder.com`)
 
       setResult({
         score: total,
@@ -227,7 +216,7 @@ export default function AtsChecker() {
       </div>
 
       <div className="grid md:grid-cols-12 gap-8 mb-16">
-        {/* Left Column - Inputs */}
+        {/* Left Column */}
         <div className="md:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 h-fit">
           <div className="mb-6">
             <div className="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded-xl p-8 bg-slate-50 mb-4">
@@ -280,7 +269,7 @@ export default function AtsChecker() {
           </button>
         </div>
 
-        {/* Right Column - Results */}
+        {/* Right Column */}
         <div className="md:col-span-7">
           {!result && !loading && (
             <div className="h-full min-h-[400px] flex flex-col items-center justify-center text-center p-8 bg-slate-50 border border-dashed border-slate-300 rounded-2xl">
@@ -383,7 +372,6 @@ export default function AtsChecker() {
                 </div>
               )}
 
-              {/* Non-ResumeForge CTA */}
               {!result.isResumeForge && (
                 <div className="mt-6 pt-6 border-t border-slate-100 bg-blue-50 p-4 rounded-xl border border-blue-100 text-center">
                   <p className="text-sm font-bold text-blue-800 mb-2">🚀 Want a guaranteed 90+ ATS Score?</p>

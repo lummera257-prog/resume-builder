@@ -15,12 +15,15 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
       overflowY: node.style.overflowY,
       maxHeight: node.style.maxHeight,
       height:    node.style.height,
+      width:     node.style.width,
+      transform: node.style.transform,
     })
     node.style.overflow  = 'visible'
     node.style.overflowX = 'visible'
     node.style.overflowY = 'visible'
     node.style.maxHeight = 'none'
     node.style.height    = 'auto'
+    node.style.transform = 'none'
     node = node.parentElement
   }
 
@@ -77,12 +80,14 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
 
   // Restore all original styles — always runs even if PDF fails
   const restore = () => {
-    saved.forEach(({ el, overflow, overflowX, overflowY, maxHeight, height }) => {
+    saved.forEach(({ el, overflow, overflowX, overflowY, maxHeight, height, width, transform }) => {
       el.style.overflow  = overflow
       el.style.overflowX = overflowX
       el.style.overflowY = overflowY
       el.style.maxHeight = maxHeight
       el.style.height    = height
+      el.style.width     = width
+      el.style.transform = transform
     })
     element.style.width  = origWidth
     element.style.height = origHeight

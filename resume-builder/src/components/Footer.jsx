@@ -69,7 +69,7 @@ export default function Footer() {
           gap: '6px',
         }}>
           <div style={{ fontSize: '12px', color: '#9ca3af' }}>
-            © {new Date().getFullYear()} ResumeForge
+            © {new Date().getFullYear()} ResumeForge · A VeloraTech Labs Product
           </div>
           <nav style={{ display: 'flex', flexWrap: 'wrap', gap: '14px' }}>
             {[

@@ -43,6 +43,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     #resume-preview h2,
     #resume-preview h3,
     #resume-preview strong { page-break-after: avoid; }
+    .no-break { page-break-inside: avoid; break-inside: avoid; }
   `
   document.head.appendChild(printStyle)
 

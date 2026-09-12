@@ -32,9 +32,9 @@ function Heading({ title, color }) {
   )
 }
 
-function TimelineEntry({ left, title, sub, color, desc }) {
+function TimelineEntry({ left, title, sub, color, desc, className }) {
   return (
-    <div style={{ display: 'flex', gap: '12px', marginBottom: '10px' }}>
+    <div className={className} style={{ display: 'flex', gap: '12px', marginBottom: '10px' }}>
       <div style={{ width: '52px', flexShrink: 0, textAlign: 'right', fontSize: '7.5pt', color: '#888', paddingTop: '1px', lineHeight: 1.4 }}>
         {left}
       </div>
@@ -110,6 +110,7 @@ export default function ElegantTemplate({ resume }) {
                   <Heading title="Work Experience" color={color} />
                   {experience.map(e => (
                     <TimelineEntry key={e.id}
+                      className="no-break"
                       left={<>{fmt(e.startDate)}<br />–<br />{e.current ? 'Present' : fmt(e.endDate)}</>}
                       title={e.position}
                       sub={`${e.company}${e.location ? ` · ${e.location}` : ''}`}
@@ -156,7 +157,7 @@ export default function ElegantTemplate({ resume }) {
                 <div key={key}>
                   <Heading title="Projects" color={color} />
                   {projects.map((p, i) => (
-                    <div key={p.id} style={{ marginBottom: i < projects.length - 1 ? '8px' : 0 }}>
+                    <div key={p.id} className="no-break" style={{ marginBottom: i < projects.length - 1 ? '8px' : 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <strong style={{ fontSize: '9.5pt' }}>{p.name}</strong>
                         {p.link && <span style={{ fontSize: '7.5pt', color }}>{p.link}</span>}

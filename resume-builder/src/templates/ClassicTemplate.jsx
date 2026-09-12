@@ -112,7 +112,7 @@ export default function ClassicTemplate({ resume }) {
                 <div key={key}>
                   <SectionHeading title="Work Experience" color={color} />
                   {experience.map((e, i) => (
-                    <div key={e.id} style={{ marginBottom: i < experience.length - 1 ? '10px' : 0 }}>
+                    <div key={e.id} className="no-break" style={{ marginBottom: i < experience.length - 1 ? '10px' : 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                         <strong style={{ fontSize: '10.5pt' }}>{e.position}</strong>
                         <span style={{ fontSize: '8pt', color: '#666' }}>
@@ -180,7 +180,7 @@ export default function ClassicTemplate({ resume }) {
                 <div key={key}>
                   <SectionHeading title="Projects" color={color} />
                   {projects.map((p, i) => (
-                    <div key={p.id} style={{ marginBottom: i < projects.length - 1 ? '8px' : 0 }}>
+                    <div key={p.id} className="no-break" style={{ marginBottom: i < projects.length - 1 ? '8px' : 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                         <strong style={{ fontSize: '10pt' }}>{p.name}</strong>
                         {p.link && <span style={{ fontSize: '7.5pt', color }}>{p.link}</span>}

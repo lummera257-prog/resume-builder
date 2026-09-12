@@ -174,7 +174,7 @@ export default function ModernTemplate({ resume }) {
           <div>
             <MainHeading title="Work Experience" color={scheme.main} />
             {experience.map((e, i) => (
-              <div key={e.id} style={{ marginBottom: i < experience.length - 1 ? '10px' : 0 }}>
+              <div key={e.id} className="no-break" style={{ marginBottom: i < experience.length - 1 ? '10px' : 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <strong style={{ fontSize: '10pt', color: '#111' }}>{e.position}</strong>
                   <span style={{ fontSize: '7.5pt', color: '#777' }}>
@@ -220,7 +220,7 @@ export default function ModernTemplate({ resume }) {
           <div>
             <MainHeading title="Projects" color={scheme.main} />
             {projects.map((p, i) => (
-              <div key={p.id} style={{ marginBottom: i < projects.length - 1 ? '8px' : 0 }}>
+              <div key={p.id} className="no-break" style={{ marginBottom: i < projects.length - 1 ? '8px' : 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <strong style={{ fontSize: '9.5pt' }}>{p.name}</strong>
                   {p.link && <span style={{ fontSize: '7.5pt', color: scheme.main }}>{p.link}</span>}

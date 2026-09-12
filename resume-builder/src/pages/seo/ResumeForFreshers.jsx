@@ -1,12 +1,11 @@
-import { useEffect } from 'react'; import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 export default function ResumeForFreshers() {
-  useEffect(() => {
-    document.title = 'Resume for Freshers 2026 | Free First Resume Builder | ResumeForge'
-    let m = document.querySelector('meta[name="description"]'); if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Build your first resume as a fresher with no experience. Free resume builder for students and fresh graduates. ATS-friendly templates.'
-    let c = document.querySelector('link[rel="canonical"]'); if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/resume-for-freshers'
-  }, [])
+  useSEO({
+    title: 'Resume for Freshers 2026 | Free First Resume Builder | ResumeForge',
+    description: 'Build your first resume as a fresher with no experience. Free resume builder for students and fresh graduates. ATS-friendly templates.',
+    path: '/resume-for-freshers',
+  })
   const faqs = [
     { q: 'How do I write a resume with no experience?', a: 'Focus on education, internships, projects, skills, and certifications. Use action verbs and quantify achievements where possible.' },
     { q: 'What should a fresher put in a resume?', a: 'Include education, skills, internships or projects, certifications, languages, and a strong objective/summary.' },

@@ -1,20 +1,16 @@
-import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
 import { TEMPLATES } from '../../utils/templateConfig'
+import { useSEO } from '../../utils/useSEO'
 
 export default function ResumeTemplates() {
   const navigate = useNavigate()
 
-  useEffect(() => {
-    document.title = 'Free Resume Templates 2026 | ATS-Friendly Designs | ResumeForge'
-    let m = document.querySelector('meta[name="description"]')
-    if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Browse free professional resume templates. ATS-friendly, modern and classic designs. Download as PDF instantly. No login required.'
-    let c = document.querySelector('link[rel="canonical"]')
-    if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/resume-templates'
-  }, [])
+  useSEO({
+    title: 'Free Resume Templates 2026 | ATS-Friendly Designs | ResumeForge',
+    description: 'Browse free professional resume templates. ATS-friendly, modern and classic designs. Download as PDF instantly. No login required.',
+    path: '/resume-templates',
+  })
 
   const faqs = [
     { q: 'Are these resume templates free?', a: 'Yes, all ResumeForge templates are completely free to use and download.' },

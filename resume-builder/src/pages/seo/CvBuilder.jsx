@@ -1,17 +1,13 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 
 export default function CvBuilder() {
-  useEffect(() => {
-    document.title = 'Free CV Builder Online 2026 | Professional CV Maker | ResumeForge'
-    let m = document.querySelector('meta[name="description"]')
-    if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Create a professional CV online for free. No login required. ATS-friendly CV templates, instant PDF download. Build your CV in minutes.'
-    let c = document.querySelector('link[rel="canonical"]')
-    if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/cv-builder'
-  }, [])
+  useSEO({
+    title: 'Free CV Builder Online 2026 | Professional CV Maker | ResumeForge',
+    description: 'Create a professional CV online for free. No login required. ATS-friendly CV templates, instant PDF download. Build your CV in minutes.',
+    path: '/cv-builder',
+  })
 
   const faqs = [
     { q: 'What is the difference between a CV and a resume?', a: 'A CV (Curriculum Vitae) is a detailed document listing your full academic and professional history. A resume is a shorter, targeted summary for a specific job.' },

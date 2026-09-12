@@ -96,7 +96,7 @@ function SettingsPanel() {
           <div style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', marginBottom: '8px' }}>Color</div>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             {COLOR_SCHEMES.map(c => (
-              <button key={c.id} onClick={() => updateSettings({ colorScheme: c.id })} title={c.label}
+              <button key={c.id} onClick={() => updateSettings({ colorScheme: c.id })} title={c.label} aria-label={c.label}
                 style={{
                   width: '28px', height: '28px', borderRadius: '50%',
                   backgroundColor: c.color, cursor: 'pointer',

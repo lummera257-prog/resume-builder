@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 import { CheckCircle, ChevronDown } from 'lucide-react'
 
 function FaqItem({ question, answer }) {
@@ -9,7 +10,7 @@ function FaqItem({ question, answer }) {
     <div className="border-b border-slate-200">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-4 flex items-center justify-between text-left focus:outline-none"
+        className="w-full py-4 flex items-center justify-between text-left"
       >
         <span className="font-semibold text-slate-800">{question}</span>
         <ChevronDown className={`text-slate-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} size={20} />
@@ -22,9 +23,11 @@ function FaqItem({ question, answer }) {
 }
 
 export default function AtsChecker() {
-  useEffect(() => {
-    document.title = 'Free ATS Resume Checker – Instant ATS Score'
-  }, [])
+  useSEO({
+    title: 'Free ATS Resume Checker – Instant ATS Score',
+    description: 'Check your resume ATS score for free. Get an instant compatibility score and tips to help your resume pass Applicant Tracking Systems.',
+    path: '/tools/ats-checker',
+  })
 
   return (
     <PageLayout>

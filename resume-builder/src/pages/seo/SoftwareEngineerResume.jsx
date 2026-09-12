@@ -1,12 +1,11 @@
-import { useEffect } from 'react'; import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 export default function SoftwareEngineerResume() {
-  useEffect(() => {
-    document.title = 'Software Engineer Resume 2026 | Free Builder & Examples | ResumeForge'
-    let m = document.querySelector('meta[name="description"]'); if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Build a professional software engineer resume for free. ATS-optimized templates, examples, and tips for SDE, backend, frontend, and full-stack roles.'
-    let c = document.querySelector('link[rel="canonical"]'); if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/software-engineer-resume'
-  }, [])
+  useSEO({
+    title: 'Software Engineer Resume 2026 | Free Builder & Examples | ResumeForge',
+    description: 'Build a professional software engineer resume for free. ATS-optimized templates, examples, and tips for SDE, backend, frontend, and full-stack roles.',
+    path: '/software-engineer-resume',
+  })
   const faqs = [
     { q: 'What skills should a software engineer put on a resume?', a: 'Include programming languages, frameworks, databases, cloud platforms, and tools relevant to your target role.' },
     { q: 'How do I write a software engineer resume with no experience?', a: 'Highlight personal projects, open-source contributions, internships, and relevant coursework.' },

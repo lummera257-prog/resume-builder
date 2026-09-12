@@ -38,6 +38,7 @@ export function SectionCard({
             }}
             className="p-1 rounded hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors"
             title={enabled ? 'Hide section' : 'Show section'}
+            aria-label={enabled ? 'Hide section' : 'Show section'}
           >
             {enabled ? <Eye size={14} /> : <EyeOff size={14} />}
           </button>
@@ -72,6 +73,7 @@ export function EntryCard({
           disabled={!canMoveUp}
           className="p-1 rounded hover:bg-slate-200 text-slate-400 disabled:opacity-30 transition-colors"
           title="Move up"
+          aria-label="Move up"
         >
           <ChevronUp size={13} />
         </button>
@@ -82,6 +84,7 @@ export function EntryCard({
           disabled={!canMoveDown}
           className="p-1 rounded hover:bg-slate-200 text-slate-400 disabled:opacity-30 transition-colors"
           title="Move down"
+          aria-label="Move down"
         >
           <ChevronDown size={13} />
         </button>
@@ -91,6 +94,7 @@ export function EntryCard({
           onClick={onRemove}
           className="p-1 rounded hover:bg-red-50 text-red-400 hover:text-red-600 transition-colors"
           title="Remove"
+          aria-label="Remove"
         >
           ✕
         </button>

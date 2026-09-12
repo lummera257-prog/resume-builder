@@ -1,11 +1,4 @@
-const fmt = (d) => {
-  if (!d) return ''
-  if (/^\d{4}-\d{2}/.test(d)) {
-    const [y, m] = d.split('-')
-    return new Date(y, m - 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-  }
-  return d
-}
+import { fmt } from '../utils/formatDate'
 
 const accentVars = {
   blue:    { main: '#1e3a8a' },
@@ -127,6 +120,7 @@ export default function ElegantTemplate({ resume }) {
                   <Heading title="Education" color={color} />
                   {education.map(e => (
                     <TimelineEntry key={e.id}
+                      className="no-break"
                       left={<>{fmt(e.startDate)}<br />–<br />{fmt(e.endDate)}</>}
                       title={e.institution}
                       sub={`${e.degree}${e.field ? ` in ${e.field}` : ''}${e.gpa ? ` · GPA: ${e.gpa}` : ''}`}
@@ -174,7 +168,7 @@ export default function ElegantTemplate({ resume }) {
                 <div key={key}>
                   <Heading title="Certifications" color={color} />
                   {certifications.map(c => (
-                    <div key={c.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '8.5pt' }}>
+                    <div key={c.id} className="no-break" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '8.5pt' }}>
                       <div><strong>{c.name}</strong>{c.issuer && <span style={{ color: '#555', fontStyle: 'italic' }}> · {c.issuer}</span>}</div>
                       {c.date && <span style={{ color: '#888' }}>{fmt(c.date)}</span>}
                     </div>
@@ -201,7 +195,7 @@ export default function ElegantTemplate({ resume }) {
                 <div key={key}>
                   <Heading title="Achievements & Awards" color={color} />
                   {achievements.map((a, i) => (
-                    <div key={a.id} style={{ marginBottom: i < achievements.length - 1 ? '5px' : 0 }}>
+                    <div key={a.id} className="no-break" style={{ marginBottom: i < achievements.length - 1 ? '5px' : 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <strong style={{ fontSize: '9pt' }}>{a.title}</strong>
                         {a.date && <span style={{ fontSize: '8pt', color: '#888' }}>{fmt(a.date)}</span>}

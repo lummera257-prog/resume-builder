@@ -5,6 +5,7 @@ import FormPanel from '../components/FormPanel'
 import PreviewPanel from '../components/PreviewPanel'
 import Footer from '../components/Footer'
 import { useResume } from '../context/ResumeContext'
+import { useSEO } from '../utils/useSEO'
 
 function trackConversion(action) {
   if (typeof window.gtag === 'function') {
@@ -56,6 +57,12 @@ export default function Builder() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const location = useLocation()
   const { updateSettings } = useResume()
+
+  useSEO({
+    title: 'Build Your Resume — ResumeForge',
+    description: 'Build and download your free ATS-friendly resume online. 6 professional templates, instant PDF export, no login required.',
+    path: '/builder',
+  })
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)

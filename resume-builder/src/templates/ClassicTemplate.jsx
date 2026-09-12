@@ -1,11 +1,4 @@
-const fmt = (d) => {
-  if (!d) return ''
-  if (/^\d{4}-\d{2}/.test(d)) {
-    const [y, m] = d.split('-')
-    return new Date(y, m - 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-  }
-  return d
-}
+import { fmt } from '../utils/formatDate'
 
 const accentVars = {
   blue:    { main: '#2563eb' },
@@ -137,7 +130,7 @@ export default function ClassicTemplate({ resume }) {
                 <div key={key}>
                   <SectionHeading title="Education" color={color} />
                   {education.map(e => (
-                    <div key={e.id} style={{ marginBottom: '6px' }}>
+                    <div key={e.id} className="no-break" style={{ marginBottom: '6px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                         <strong>{e.institution}</strong>
                         <span style={{ fontSize: '8pt', color: '#666' }}>
@@ -203,7 +196,7 @@ export default function ClassicTemplate({ resume }) {
                 <div key={key}>
                   <SectionHeading title="Certifications" color={color} />
                   {certifications.map(c => (
-                    <div key={c.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <div key={c.id} className="no-break" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                       <div>
                         <strong style={{ fontSize: '9.5pt' }}>{c.name}</strong>
                         {c.issuer && <span style={{ fontSize: '8.5pt', color: '#555' }}> · {c.issuer}</span>}
@@ -234,7 +227,7 @@ export default function ClassicTemplate({ resume }) {
                 <div key={key}>
                   <SectionHeading title="Achievements & Awards" color={color} />
                   {achievements.map((a, i) => (
-                    <div key={a.id} style={{ marginBottom: i < achievements.length - 1 ? '6px' : 0 }}>
+                    <div key={a.id} className="no-break" style={{ marginBottom: i < achievements.length - 1 ? '6px' : 0 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                         <strong style={{ fontSize: '9.5pt' }}>{a.title}</strong>
                         {a.date && <span style={{ fontSize: '8pt', color: '#777' }}>{fmt(a.date)}</span>}

@@ -1,17 +1,13 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 
 export default function AtsResumeBuilder() {
-  useEffect(() => {
-    document.title = 'ATS Resume Builder Free 2026 | Beat the Bots | ResumeForge'
-    let m = document.querySelector('meta[name="description"]')
-    if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Build an ATS-optimized resume that passes automated screening. Free online ATS resume builder with proven templates. No login required.'
-    let c = document.querySelector('link[rel="canonical"]')
-    if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/ats-resume-builder'
-  }, [])
+  useSEO({
+    title: 'ATS Resume Builder Free 2026 | Beat the Bots | ResumeForge',
+    description: 'Build an ATS-optimized resume that passes automated screening. Free online ATS resume builder with proven templates. No login required.',
+    path: '/ats-resume-builder',
+  })
 
   const faqs = [
     { q: 'What is an ATS resume?', a: 'An ATS (Applicant Tracking System) resume is formatted to be parsed correctly by automated HR software before a human ever reads it.' },

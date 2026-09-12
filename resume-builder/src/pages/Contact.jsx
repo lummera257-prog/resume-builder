@@ -1,24 +1,12 @@
-import { useEffect } from "react"
 import PageLayout from "../components/PageLayout"
+import { useSEO } from "../utils/useSEO"
 
 export default function Contact() {
-  useEffect(() => {
-    document.title = "Contact ResumeForge | Get Help and Support"
-    let d = document.querySelector('meta[name="description"]')
-    if (!d) {
-      d = document.createElement('meta')
-      d.name = 'description'
-      document.head.appendChild(d)
-    }
-    d.setAttribute('content', 'Contact ResumeForge for support and feedback.')
-    let c = document.querySelector('link[rel="canonical"]')
-    if (!c) {
-      c = document.createElement('link')
-      c.rel = 'canonical'
-      document.head.appendChild(c)
-    }
-    c.href = 'https://freeresumeforgebuilder.com/contact'
-  }, [])
+  useSEO({
+    title: "Contact ResumeForge | Get Help and Support",
+    description: 'Contact ResumeForge for support and feedback.',
+    path: '/contact',
+  })
 
   const email = "resumeforgehelp@gmail.com"
 

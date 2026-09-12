@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { blogPosts } from '../data/blogPosts'
 import Footer from '../components/Footer'
 import { FileText, Globe, ChevronDown, Check } from 'lucide-react'
+import { useSEO } from '../utils/useSEO'
 
 const LANGUAGES = [
   { code: 'en',    label: 'English',    flag: '🇺🇸' },
@@ -99,6 +100,7 @@ function LanguageSelector() {
     <div ref={dropdownRef} style={{ position: 'relative', zIndex: 100 }}>
       <button
         onClick={() => setOpen(o => !o)}
+        aria-label={`Language: ${selected.label}`}
         style={{
           display: 'flex', alignItems: 'center', gap: '5px',
           height: '32px', padding: '0 10px 0 8px', borderRadius: '8px',
@@ -106,7 +108,7 @@ function LanguageSelector() {
           background: open ? '#eff6ff' : '#fff', cursor: 'pointer',
           fontWeight: 500, color: '#374151', whiteSpace: 'nowrap',
           boxShadow: open ? '0 0 0 3px rgba(37,99,235,0.1)' : '0 1px 2px rgba(0,0,0,0.05)',
-          outline: 'none', transition: 'all 0.15s ease', userSelect: 'none',
+          transition: 'all 0.15s ease', userSelect: 'none',
         }}
       >
         <Globe size={13} color={open ? '#2563eb' : '#6b7280'} strokeWidth={2} />
@@ -196,10 +198,14 @@ function LanguageSelector() {
 }
 
 export default function Blog() {
+  useSEO({
+    title: 'Resume Tips & Career Blog 2026 — ResumeForge',
+    description: 'Free resume tips, career advice, and job search strategies. Learn how to write a resume that gets you hired, ace interviews, and grow your career.',
+    path: '/blog',
+  })
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
-      <title>Resume Tips & Career Blog 2026 — ResumeForge</title>
-
       {/* Header — matches main Header.jsx */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
         <div id="google_translate_element" style={{ display: 'none' }} />

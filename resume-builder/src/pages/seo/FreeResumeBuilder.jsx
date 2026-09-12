@@ -1,17 +1,13 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 
 export default function FreeResumeBuilder() {
-  useEffect(() => {
-    document.title = 'Free Resume Builder Online 2026 | No Login | ResumeForge'
-    let m = document.querySelector('meta[name="description"]')
-    if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Build a professional resume for free online. No login, no signup. ATS-friendly templates, instant PDF download. Start in 2 minutes.'
-    let c = document.querySelector('link[rel="canonical"]')
-    if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/free-resume-builder'
-  }, [])
+  useSEO({
+    title: 'Free Resume Builder Online 2026 | No Login | ResumeForge',
+    description: 'Build a professional resume for free online. No login, no signup. ATS-friendly templates, instant PDF download. Start in 2 minutes.',
+    path: '/free-resume-builder',
+  })
 
   const faqs = [
     { q: 'Is this resume builder really free?', a: 'Yes, 100% free. No credit card, no subscription, no hidden charges ever.' },

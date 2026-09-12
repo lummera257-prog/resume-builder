@@ -124,6 +124,7 @@ function LanguageSelector() {
       <button
         ref={btnRef}
         onClick={() => setOpen(o => !o)}
+        aria-label={`Language: ${selected.label}`}
         style={{
           display:      'flex',
           alignItems:   'center',
@@ -138,7 +139,6 @@ function LanguageSelector() {
           color:        '#374151',
           whiteSpace:   'nowrap',
           boxShadow:    open ? '0 0 0 3px rgba(37,99,235,0.1)' : '0 1px 2px rgba(0,0,0,0.05)',
-          outline:      'none',
           transition:   'all 0.15s ease',
           userSelect:   'none',
         }}
@@ -258,18 +258,29 @@ export default function Header({ previewVisible, setPreviewVisible }) {
   const { resume, resetResume, loadSample } = useResume()
   const [exporting,   setExporting]   = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [exportError, setExportError] = useState(null)
+
+  useEffect(() => {
+    if (!exportError) return
+    const t = setTimeout(() => setExportError(null), 6000)
+    return () => clearTimeout(t)
+  }, [exportError])
 
   const handleExport = async () => {
     setExporting(true)
-    await exportToPDF('resume-preview', resume.personalInfo.name || 'Resume')
+    setExportError(null)
+    const result = await exportToPDF('resume-preview', resume.personalInfo.name || 'Resume')
     setExporting(false)
+    if (result && result.success === false) {
+      setExportError(result.error || 'Something went wrong. Please try again.')
+    }
   }
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-200">
       <div id="google_translate_element" style={{ display: 'none' }} />
 
-      <div className="flex items-center gap-3 px-4 h-14 max-w-screen-2xl mx-auto">
+      <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 h-14 max-w-screen-2xl mx-auto">
 
         {/* Logo */}
         <div className="flex items-center gap-2 shrink-0">
@@ -283,19 +294,19 @@ export default function Header({ previewVisible, setPreviewVisible }) {
         </div>
 
         {/* Nav Links */}
-        <div className="hidden md:flex items-center gap-1 ml-2">
-          <Link to="/tools/ats-checker" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ATS Checker</Link>
-          <Link to="/tools/cover-letter" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Cover Letter</Link>
-          <Link to="/tools/resignation-letter" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Resignation Letter</Link>
-          <Link to="/blog"    className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Blog</Link>
-          <Link to="/about"   className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">About</Link>
-          <Link to="/contact" className="text-sm text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Contact</Link>
+        <div className="hidden lg:flex items-center gap-0.5 ml-2">
+          <Link to="/tools/ats-checker" className="text-sm text-slate-600 hover:text-slate-900 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">ATS Checker</Link>
+          <Link to="/tools/cover-letter" className="text-sm text-slate-600 hover:text-slate-900 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Cover Letter</Link>
+          <Link to="/tools/resignation-letter" className="text-sm text-slate-600 hover:text-slate-900 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Resignation Letter</Link>
+          <Link to="/blog"    className="text-sm text-slate-600 hover:text-slate-900 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Blog</Link>
+          <Link to="/about"   className="text-sm text-slate-600 hover:text-slate-900 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">About</Link>
+          <Link to="/contact" className="text-sm text-slate-600 hover:text-slate-900 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Contact</Link>
         </div>
 
         <div className="flex-1" />
 
         {/* Right Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
 
           {/* 🌐 Language Selector */}
           <LanguageSelector />
@@ -304,9 +315,9 @@ export default function Header({ previewVisible, setPreviewVisible }) {
 
           {/* Sample */}
           <button onClick={loadSample}
-            className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors">
+            className="hidden md:flex items-center gap-1 text-xs px-3 py-1.5 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors">
             <Sparkles size={13} />
-            <span className="hidden md:inline">Sample</span>
+            <span className="hidden lg:inline">Sample</span>
           </button>
 
           {/* Reset */}
@@ -320,9 +331,9 @@ export default function Header({ previewVisible, setPreviewVisible }) {
             </div>
           ) : (
             <button onClick={() => setShowConfirm(true)}
-              className="hidden sm:flex items-center gap-1 text-xs px-3 py-1.5 hover:bg-slate-100 rounded-lg transition-colors">
+              className="hidden md:flex items-center gap-1 text-xs px-3 py-1.5 hover:bg-slate-100 rounded-lg transition-colors">
               <RotateCcw size={13} />
-              <span className="hidden md:inline">Reset</span>
+              <span className="hidden lg:inline">Reset</span>
             </button>
           )}
 
@@ -335,12 +346,30 @@ export default function Header({ previewVisible, setPreviewVisible }) {
 
           {/* Download */}
           <button onClick={handleExport} disabled={exporting}
-            className="flex items-center gap-1 text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-70 transition-colors">
+            aria-label={exporting ? 'Generating PDF' : 'Download PDF'}
+            className="flex items-center gap-1 text-sm px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-70 transition-colors">
             <Download size={14} className={exporting ? 'animate-bounce' : ''} />
-            {exporting ? 'Generating…' : 'Download'}
+            {exporting ? <span className="hidden sm:inline">Generating…</span> : 'Download'}
           </button>
         </div>
       </div>
+
+      {exportError && (
+        <div role="alert" style={{
+          position: 'fixed', top: '64px', left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', alignItems: 'center', gap: '10px',
+          maxWidth: '90vw', background: '#fef2f2', border: '1px solid #fecaca',
+          color: '#b91c1c', fontSize: '13px', fontWeight: 500,
+          padding: '10px 14px', borderRadius: '10px',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.12)', zIndex: 200,
+        }}>
+          <span>⚠️ PDF generation failed: {exportError}</span>
+          <button onClick={() => setExportError(null)} aria-label="Dismiss error"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#b91c1c', fontWeight: 700, padding: 0, lineHeight: 1 }}>
+            ✕
+          </button>
+        </div>
+      )}
     </header>
   )
 }

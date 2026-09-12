@@ -79,6 +79,7 @@ function LanguageSelector() {
     <div ref={ref} style={{ position: 'relative', zIndex: 100 }}>
       <button
         onClick={() => setOpen(o => !o)}
+        aria-label={`Language: ${selected.label}`}
         style={{
           display: 'flex', alignItems: 'center', gap: '5px',
           height: '32px', padding: '0 10px 0 8px',
@@ -88,7 +89,7 @@ function LanguageSelector() {
           cursor: 'pointer', fontWeight: 500, color: '#374151',
           whiteSpace: 'nowrap',
           boxShadow: open ? '0 0 0 3px rgba(37,99,235,0.1)' : '0 1px 2px rgba(0,0,0,0.05)',
-          outline: 'none', transition: 'all 0.15s ease',
+          transition: 'all 0.15s ease',
         }}
       >
         <Globe size={13} color={open ? '#2563eb' : '#6b7280'} />
@@ -234,7 +235,7 @@ function ToolsDropdown({ isMobile, closeMobileMenu }) {
       <button 
         onClick={() => setOpen(!open)}
         onMouseEnter={() => setOpen(true)}
-        className="text-sm font-medium px-3 py-1.5 rounded-lg transition-colors text-slate-500 hover:text-slate-800 hover:bg-slate-100 flex items-center gap-1 focus:outline-none"
+        className="text-sm font-medium px-3 py-1.5 rounded-lg transition-colors text-slate-500 hover:text-slate-800 hover:bg-slate-100 flex items-center gap-1"
       >
         Tools
         <ChevronDown size={12} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
@@ -337,7 +338,7 @@ export default function NavBar() {
 
           {/* Hamburger Menu Toggle */}
           <button 
-            className="sm:hidden p-1 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none"
+            className="sm:hidden p-1 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >

@@ -45,6 +45,7 @@ const AtsResumeChecker       = lazy(() => import('./pages/seo/AtsResumeChecker')
 const ToolAtsChecker         = lazy(() => import('./pages/tools/AtsChecker'))
 const ToolCoverLetter        = lazy(() => import('./pages/tools/CoverLetter'))
 const ToolResignationLetter  = lazy(() => import('./pages/tools/ResignationLetter'))
+const NotFound                = lazy(() => import('./pages/NotFound'))
 export default function App() {
   return (
     <ResumeProvider>
@@ -71,6 +72,7 @@ export default function App() {
             <Route path="/software-engineer-resume" element={<SoftwareEngineerResume />} />
             <Route path="/how-to-make-a-resume"    element={<HowToMakeResume />} />
             <Route path="/ats-resume-checker"      element={<AtsResumeChecker />} />
+            <Route path="*"                        element={<NotFound />} />
           </Routes>
         </Suspense>
       </Router>

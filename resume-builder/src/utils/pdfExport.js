@@ -2,7 +2,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   const html2pdf = (await import('html2pdf.js')).default
 
   const element = document.getElementById(elementId)
-  if (!element) { console.error('Resume element not found:', elementId); return }
+  if (!element) { return { success: false, error: 'Resume element not found' } }
 
   const saved = []
   let node = element
@@ -118,7 +118,6 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     return { success: true }
 
   } catch (err) {
-    console.error('PDF generation failed:', err)
     restore()
     return { success: false, error: err.message }
   }

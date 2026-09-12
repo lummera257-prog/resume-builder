@@ -1,5 +1,6 @@
-node_modules
-dist
+node_modules/
+dist/
+build/
 
 android.keystore
 *.keystore
@@ -7,6 +8,9 @@ android.keystore
 *.aab
 *.apk
 *.idsig
-build/
 .gradle/
 project-structure.txt
+
+.env
+.env.local
+.env.*

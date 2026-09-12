@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
 import { LogOut, AlertCircle, Copy, Download, RefreshCw, Check, ChevronDown } from 'lucide-react'
-import { jsPDF } from 'jspdf'
+import { useSEO } from '../../utils/useSEO'
 
 function FaqItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,7 +11,7 @@ function FaqItem({ question, answer }) {
     <div className="border-b border-slate-200">
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="w-full py-4 flex items-center justify-between text-left focus:outline-none"
+        className="w-full py-4 flex items-center justify-between text-left"
         aria-expanded={isOpen}
       >
         <span className="font-semibold text-slate-800">{question}</span>
@@ -61,12 +61,11 @@ export default function ResignationLetter() {
   const [result, setResult] = useState('')
   const [copied, setCopied] = useState(false)
 
-  useEffect(() => {
-    document.title = 'Free Resignation Letter Generator – Professional Templates'
-    let metaDesc = document.querySelector('meta[name="description"]')
-    if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc) }
-    metaDesc.content = 'Free resignation letter generator. Build a professional, simple, or immediate resignation letter instantly.'
-  }, [])
+  useSEO({
+    title: 'Free Resignation Letter Generator – Professional Templates',
+    description: 'Free resignation letter generator. Build a professional, simple, or immediate resignation letter instantly.',
+    path: '/tools/resignation-letter',
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -147,14 +146,15 @@ ${formData.name}`
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
+    const { jsPDF } = await import('jspdf')
     const doc = new jsPDF()
     doc.setFont("helvetica")
     doc.setFontSize(11)
-    
+
     const lines = doc.splitTextToSize(result, 170)
     doc.text(lines, 20, 20)
-    
+
     doc.save(`Resignation_Letter_${formData.company.replace(/\s+/g, '_')}.pdf`)
   }
 

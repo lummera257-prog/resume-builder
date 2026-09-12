@@ -79,7 +79,7 @@ export default function Privacy() {
           </div>
 
           {/* Sections */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: "20px", margin: "32px 0" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(380px, 100%), 1fr))", gap: "20px", margin: "32px 0" }}>
             {sections.map((section, index) => (
               <div key={index}
                 style={{ background: "#fff", borderRadius: "16px", padding: "28px", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e5e7eb", transition: "box-shadow 0.2s ease", cursor: "default" }}

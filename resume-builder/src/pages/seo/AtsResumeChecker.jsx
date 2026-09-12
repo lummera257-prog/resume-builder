@@ -1,12 +1,11 @@
-import { useEffect } from 'react'; import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 export default function AtsResumeChecker() {
-  useEffect(() => {
-    document.title = 'ATS Resume Checker Free 2026 | Check Your Resume Score | ResumeForge'
-    let m = document.querySelector('meta[name="description"]'); if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Check your resume ATS score for free. Get instant feedback and tips to improve your resume and pass automated screening systems.'
-    let c = document.querySelector('link[rel="canonical"]'); if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/ats-resume-checker'
-  }, [])
+  useSEO({
+    title: 'ATS Resume Checker Free 2026 | Check Your Resume Score | ResumeForge',
+    description: 'Check your resume ATS score for free. Get instant feedback and tips to improve your resume and pass automated screening systems.',
+    path: '/ats-resume-checker',
+  })
   const faqs = [
     { q: 'What is an ATS resume checker?', a: 'An ATS resume checker analyzes your resume against ATS criteria and gives you a score with improvement suggestions.' },
     { q: 'Is the ATS checker free?', a: 'Yes. ResumeForge includes a built-in ATS score checker completely free as part of the resume builder.' },

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { blogPosts } from '../data/blogPosts'
 import Footer from '../components/Footer'
 import { FileText, Globe, ChevronDown, Check } from 'lucide-react'
+import { useSEO } from '../utils/useSEO'
 
 const LANGUAGES = [
   { code: 'en',    label: 'English',    flag: '🇺🇸' },
@@ -99,6 +100,7 @@ function LanguageSelector() {
     <div ref={dropdownRef} style={{ position: 'relative', zIndex: 100 }}>
       <button
         onClick={() => setOpen(o => !o)}
+        aria-label={`Language: ${selected.label}`}
         style={{
           display: 'flex', alignItems: 'center', gap: '5px',
           height: '32px', padding: '0 10px 0 8px', borderRadius: '8px',
@@ -106,7 +108,7 @@ function LanguageSelector() {
           background: open ? '#eff6ff' : '#fff', cursor: 'pointer',
           fontWeight: 500, color: '#374151', whiteSpace: 'nowrap',
           boxShadow: open ? '0 0 0 3px rgba(37,99,235,0.1)' : '0 1px 2px rgba(0,0,0,0.05)',
-          outline: 'none', transition: 'all 0.15s ease', userSelect: 'none',
+          transition: 'all 0.15s ease', userSelect: 'none',
         }}
       >
         <Globe size={13} color={open ? '#2563eb' : '#6b7280'} strokeWidth={2} />
@@ -199,22 +201,15 @@ export default function BlogPost() {
   const { slug } = useParams()
   const post = blogPosts.find(p => p.slug === slug)
 
+  useSEO({
+    title: post ? `${post.title} | ResumeForge Blog` : 'Post Not Found | ResumeForge Blog',
+    description: post?.description,
+    path: post ? `/blog/${post.slug}` : '/blog',
+    ogType: 'article',
+  })
+
   useEffect(() => {
     if (!post) return
-
-    document.title = `${post.title} | ResumeForge Blog`
-
-    let f = document.querySelector('link[rel="icon"]')
-    if (!f) { f = document.createElement('link'); f.rel = 'icon'; document.head.appendChild(f) }
-    f.href = '/favicon.ico'
-
-    let m = document.querySelector('meta[name="description"]')
-    if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = post.description
-
-    let c = document.querySelector('link[rel="canonical"]')
-    if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = `https://freeresumeforgebuilder.com/blog/${post.slug}`
 
     let s = document.querySelector('script[data-blog-schema]')
     if (!s) { s = document.createElement('script'); s.type = 'application/ld+json'; s.setAttribute('data-blog-schema', '1'); document.head.appendChild(s) }

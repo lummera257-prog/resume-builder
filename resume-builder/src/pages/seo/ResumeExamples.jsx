@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
 import { useResume } from '../../context/ResumeContext'
 import { genId } from '../../utils/defaultData'
+import { useSEO } from '../../utils/useSEO'
 
 const examples = [
   {
@@ -180,15 +180,11 @@ export default function ResumeExamples() {
   const { loadExample } = useResume()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    document.title = 'Resume Examples 2026 | Professional Resume Samples | ResumeForge'
-    let m = document.querySelector('meta[name="description"]')
-    if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Browse professional resume examples for all industries and experience levels. Use free templates and build your resume instantly.'
-    let c = document.querySelector('link[rel="canonical"]')
-    if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/resume-examples'
-  }, [])
+  useSEO({
+    title: 'Resume Examples 2026 | Professional Resume Samples | ResumeForge',
+    description: 'Browse professional resume examples for all industries and experience levels. Use free templates and build your resume instantly.',
+    path: '/resume-examples',
+  })
 
   const handleUseExample = (example) => {
     loadExample(example.data)

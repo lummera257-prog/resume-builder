@@ -1,12 +1,11 @@
-import { useEffect } from 'react'; import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { Link } from 'react-router-dom'; import PageLayout from '../../components/PageLayout'
+import { useSEO } from '../../utils/useSEO'
 export default function HowToMakeResume() {
-  useEffect(() => {
-    document.title = 'How to Make a Resume in 2026 | Step-by-Step Guide | ResumeForge'
-    let m = document.querySelector('meta[name="description"]'); if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
-    m.content = 'Learn how to make a professional resume step by step. Tips, examples, and a free resume builder to create your resume in minutes.'
-    let c = document.querySelector('link[rel="canonical"]'); if (!c) { c = document.createElement('link'); c.rel = 'canonical'; document.head.appendChild(c) }
-    c.href = 'https://freeresumeforgebuilder.com/how-to-make-a-resume'
-  }, [])
+  useSEO({
+    title: 'How to Make a Resume in 2026 | Step-by-Step Guide | ResumeForge',
+    description: 'Learn how to make a professional resume step by step. Tips, examples, and a free resume builder to create your resume in minutes.',
+    path: '/how-to-make-a-resume',
+  })
   const steps = [
     { n: '1', t: 'Choose the Right Format', d: 'Pick a reverse-chronological format for most jobs. Use a functional format if you have gaps in employment.' },
     { n: '2', t: 'Add Your Contact Information', d: 'Include name, email, phone, location, LinkedIn, and GitHub (for tech roles).' },

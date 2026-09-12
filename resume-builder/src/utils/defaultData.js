@@ -186,11 +186,5 @@ export const COLOR_SCHEMES = [
   { id: 'amber',   label: 'Gold',     color: '#d97706' },
 ]
 
-export const FONT_FAMILIES = [
-  { id: 'modern',  label: 'Modern',  fonts: '"Geist", system-ui, sans-serif' },
-  { id: 'classic', label: 'Classic', fonts: '"Playfair Display", Georgia, serif' },
-  { id: 'minimal', label: 'Minimal', fonts: '"JetBrains Mono", monospace' },
-]
-
 // ─── Generate unique IDs ──────────────────────────────────────────────────────
 export const genId = () => Math.random().toString(36).slice(2, 9)

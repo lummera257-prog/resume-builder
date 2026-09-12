@@ -1,11 +1,4 @@
-const fmt = (d) => {
-  if (!d) return ''
-  if (/^\d{4}-\d{2}/.test(d)) {
-    const [y, m] = d.split('-')
-    return new Date(y, m - 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-  }
-  return d
-}
+import { fmt } from '../utils/formatDate'
 
 const accentVars = {
   blue:    { main: '#2563eb', sidebar: '#1e3a8a', sidebarText: '#bfdbfe' },
@@ -138,7 +131,7 @@ export default function ModernTemplate({ resume }) {
           <div>
             <SideHeading title="Certifications" color={scheme.sidebarText} />
             {certifications.map(c => (
-              <div key={c.id} style={{ marginBottom: '6px' }}>
+              <div key={c.id} className="no-break" style={{ marginBottom: '6px' }}>
                 <div style={{ fontSize: '7.5pt', color: '#fff', fontWeight: 600, lineHeight: 1.4 }}>{c.name}</div>
                 {c.issuer && <div style={{ fontSize: '7pt', color: 'rgba(255,255,255,0.7)' }}>{c.issuer}</div>}
                 {c.date   && <div style={{ fontSize: '7pt', color: 'rgba(255,255,255,0.6)' }}>{fmt(c.date)}</div>}
@@ -151,7 +144,7 @@ export default function ModernTemplate({ resume }) {
           <div>
             <SideHeading title="Achievements" color={scheme.sidebarText} />
             {achievements.map(a => (
-              <div key={a.id} style={{ marginBottom: '6px' }}>
+              <div key={a.id} className="no-break" style={{ marginBottom: '6px' }}>
                 <div style={{ fontSize: '7.5pt', color: '#fff', fontWeight: 600, lineHeight: 1.4 }}>{a.title}</div>
                 {a.date        && <div style={{ fontSize: '7pt', color: 'rgba(255,255,255,0.6)' }}>{fmt(a.date)}</div>}
                 {a.description && <div style={{ fontSize: '7pt', color: 'rgba(255,255,255,0.75)', marginTop: '2px', lineHeight: 1.5 }}>{a.description}</div>}
@@ -198,7 +191,7 @@ export default function ModernTemplate({ resume }) {
           <div>
             <MainHeading title="Education" color={scheme.main} />
             {education.map(e => (
-              <div key={e.id} style={{ marginBottom: '6px' }}>
+              <div key={e.id} className="no-break" style={{ marginBottom: '6px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <strong style={{ fontSize: '10pt' }}>{e.institution}</strong>
                   <span style={{ fontSize: '7.5pt', color: '#777' }}>

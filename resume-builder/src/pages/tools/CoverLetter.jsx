@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
 import { FileEdit, AlertCircle, Copy, Download, RefreshCw, Check, ChevronDown } from 'lucide-react'
-import { jsPDF } from 'jspdf'
+import { useSEO } from '../../utils/useSEO'
 
 // FAQ Accordion component
 function FaqItem({ question, answer }) {
@@ -12,7 +12,7 @@ function FaqItem({ question, answer }) {
     <div className="border-b border-slate-200">
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="w-full py-4 flex items-center justify-between text-left focus:outline-none"
+        className="w-full py-4 flex items-center justify-between text-left"
         aria-expanded={isOpen}
       >
         <span className="font-semibold text-slate-800">{question}</span>
@@ -48,12 +48,11 @@ export default function CoverLetter() {
   const [result, setResult] = useState('')
   const [copied, setCopied] = useState(false)
 
-  useEffect(() => {
-    document.title = 'Free Cover Letter Generator – Professional Templates'
-    let metaDesc = document.querySelector('meta[name="description"]')
-    if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc) }
-    metaDesc.content = 'Free cover letter generator. Build a professional, tailored cover letter instantly and download as PDF.'
-  }, [])
+  useSEO({
+    title: 'Free Cover Letter Generator – Professional Templates',
+    description: 'Free cover letter generator. Build a professional, tailored cover letter instantly and download as PDF.',
+    path: '/tools/cover-letter',
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -106,14 +105,15 @@ ${formData.name}`
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
+    const { jsPDF } = await import('jspdf')
     const doc = new jsPDF()
     doc.setFont("helvetica")
     doc.setFontSize(11)
-    
+
     const lines = doc.splitTextToSize(result, 170) // 210mm width - 40mm margins (20 left, 20 right)
     doc.text(lines, 20, 20) // 20mm top/left margins
-    
+
     doc.save(`Cover_Letter_${formData.company.replace(/\s+/g, '_')}.pdf`)
   }
 

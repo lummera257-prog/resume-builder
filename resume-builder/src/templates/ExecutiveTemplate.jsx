@@ -1,11 +1,4 @@
-const fmt = (d) => {
-  if (!d) return ''
-  if (/^\d{4}-\d{2}/.test(d)) {
-    const [y, m] = d.split('-')
-    return new Date(y, m - 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-  }
-  return d
-}
+import { fmt } from '../utils/formatDate'
 
 const accentVars = {
   blue:    { main: '#3b82f6', sidebar: '#1e293b' },
@@ -123,7 +116,7 @@ export default function ExecutiveTemplate({ resume }) {
           <div>
             <SideHead title="Certifications" color={scheme.main} />
             {certifications.map(c => (
-              <div key={c.id} style={{ marginBottom: '6px' }}>
+              <div key={c.id} className="no-break" style={{ marginBottom: '6px' }}>
                 <div style={{ fontSize: '7.5pt', color: '#fff', fontWeight: 600 }}>{c.name}</div>
                 {c.issuer && <div style={{ fontSize: '7pt', color: 'rgba(255,255,255,0.65)' }}>{c.issuer}</div>}
                 {c.date   && <div style={{ fontSize: '7pt', color: 'rgba(255,255,255,0.5)' }}>{fmt(c.date)}</div>}
@@ -136,7 +129,7 @@ export default function ExecutiveTemplate({ resume }) {
           <div>
             <SideHead title="Achievements" color={scheme.main} />
             {achievements.map(a => (
-              <div key={a.id} style={{ marginBottom: '6px' }}>
+              <div key={a.id} className="no-break" style={{ marginBottom: '6px' }}>
                 <div style={{ fontSize: '7.5pt', color: '#fff', fontWeight: 600 }}>{a.title}</div>
                 {a.description && <div style={{ fontSize: '7pt', color: 'rgba(255,255,255,0.7)', marginTop: '2px', lineHeight: 1.4 }}>{a.description}</div>}
               </div>
@@ -185,7 +178,7 @@ export default function ExecutiveTemplate({ resume }) {
                 <div key={key}>
                   <MainHead title="Education" color={scheme.main} />
                   {education.map(e => (
-                    <div key={e.id} style={{ marginBottom: '7px', paddingLeft: '8px', borderLeft: `2px solid #f1f5f9` }}>
+                    <div key={e.id} className="no-break" style={{ marginBottom: '7px', paddingLeft: '8px', borderLeft: `2px solid #f1f5f9` }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <strong>{e.institution}</strong>
                         <span style={{ fontSize: '7.5pt', color: '#888' }}>

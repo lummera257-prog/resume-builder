@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
-import PageLayout from '../components/PageLayout'
 import { FileEdit, Wrench, LogOut, CheckCircle, Shield, Zap, FileText, Star, ChevronDown } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
+import { useSEO } from '../utils/useSEO'
 
 // FAQ Accordion component
 function FaqItem({ question, answer }) {
@@ -11,7 +13,7 @@ function FaqItem({ question, answer }) {
     <div className="border-b border-slate-200">
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="w-full py-4 flex items-center justify-between text-left focus:outline-none"
+        className="w-full py-4 flex items-center justify-between text-left"
         aria-expanded={isOpen}
       >
         <span className="font-semibold text-slate-800">{question}</span>
@@ -27,20 +29,15 @@ function FaqItem({ question, answer }) {
 }
 
 export default function Home() {
-  useEffect(() => {
-    document.title = 'Free ATS-Friendly Resume Builder – No Login Required | FreeResume'
-    
-    let metaDesc = document.querySelector('meta[name="description"]')
-    if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc) }
-    metaDesc.content = 'Build an ATS-optimized resume for free. Access instant PDF downloads, AI cover letter generator, and resume checker. No login needed.'
-    
-    let canonical = document.querySelector('link[rel="canonical"]')
-    if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical) }
-    canonical.href = 'https://freeresumeforgebuilder.com/'
-  }, [])
+  useSEO({
+    title: 'Free ATS-Friendly Resume Builder – No Login Required | ResumeForge',
+    description: 'Build an ATS-optimized resume for free. Access instant PDF downloads, AI cover letter generator, and resume checker. No login needed.',
+    path: '/',
+  })
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
+      <NavBar />
       <section className="bg-white border-b border-slate-200 pt-16 pb-20 px-4">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold tracking-wide uppercase mb-6">
@@ -358,6 +355,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <Footer />
     </div>
   )
 }

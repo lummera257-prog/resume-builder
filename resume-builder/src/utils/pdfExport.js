@@ -33,13 +33,17 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   element.style.height = 'auto'
 
   // Inject print CSS — tells html2pdf where NOT to cut the page
-  // This prevents mid-line and mid-paragraph breaks
+  // This prevents mid-line, mid-paragraph, and mid-entry breaks
   const printStyle = document.createElement('style')
   printStyle.id = 'pdf-print-style'
   printStyle.textContent = `
     #resume-preview p,
     #resume-preview li,
-    #resume-preview span { page-break-inside: avoid; }
+    #resume-preview span,
+    #resume-preview div {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
     #resume-preview h2,
     #resume-preview h3,
     #resume-preview strong { page-break-after: avoid; }
@@ -74,7 +78,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     },
     pagebreak: {
       mode:  ['css', 'legacy'],
-      avoid: ['h2', 'h3', 'li', '.no-break'],
+      avoid: ['h2', 'h3', 'li', 'div', '.no-break'],
     },
   }
 

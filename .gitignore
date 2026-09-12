@@ -1,2 +1,12 @@
-node_modules  
-dist 
+node_modules
+dist
+
+android.keystore
+*.keystore
+*.jks
+*.aab
+*.apk
+*.idsig
+build/
+.gradle/
+project-structure.txt

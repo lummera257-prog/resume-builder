@@ -108,7 +108,7 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
       pdf.setTextColor(160, 160, 160)
       pdf.setFont('helvetica', 'normal')
       pdf.text(
-        `freeresumeforgebuilder.com  •  Page ${i} of ${total}`,
+        `freeresumeforgebuilder.com · A VeloraTech Labs Product  •  Page ${i} of ${total}`,
         pw / 2,
         ph - 3,
         { align: 'center' }

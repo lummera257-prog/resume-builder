@@ -4,7 +4,6 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   const element = document.getElementById(elementId)
   if (!element) { console.error('Resume element not found:', elementId); return }
 
-  // Save and reset all ancestor overflow styles so html2pdf can see full content
   const saved = []
   let node = element
   while (node && node !== document.body) {
@@ -32,16 +31,13 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   element.style.width  = '794px'
   element.style.height = 'auto'
 
-  // Inject print CSS — tells html2pdf where NOT to cut the page
-  // This prevents mid-line, mid-paragraph, and mid-entry breaks
   const printStyle = document.createElement('style')
   printStyle.id = 'pdf-print-style'
   printStyle.textContent = `
     #resume-preview p,
     #resume-preview li,
-    #resume-preview span,
-    #resume-preview div {
-      page-break-inside: avoid;
+    #resume-preview span { 
+      page-break-inside: avoid; 
       break-inside: avoid;
     }
     #resume-preview h2,
@@ -50,7 +46,6 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
   `
   document.head.appendChild(printStyle)
 
-  // Wait for DOM to settle after style injection
   await new Promise(r => setTimeout(r, 400))
 
   const opt = {
@@ -78,11 +73,10 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     },
     pagebreak: {
       mode:  ['css', 'legacy'],
-      avoid: ['h2', 'h3', 'li', 'div', '.no-break'],
+      avoid: ['h2', 'h3', 'li', '.no-break'],
     },
   }
 
-  // Restore all original styles — always runs even if PDF fails
   const restore = () => {
     saved.forEach(({ el, overflow, overflowX, overflowY, maxHeight, height, width, transform }) => {
       el.style.overflow  = overflow
@@ -95,7 +89,6 @@ export const exportToPDF = async (elementId, filename = 'resume') => {
     })
     element.style.width  = origWidth
     element.style.height = origHeight
-    // Remove injected print styles after PDF generation
     document.getElementById('pdf-print-style')?.remove()
   }
 

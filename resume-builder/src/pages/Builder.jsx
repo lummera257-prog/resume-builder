@@ -7,15 +7,6 @@ import Footer from '../components/Footer'
 import { useResume } from '../context/ResumeContext'
 import { useSEO } from '../utils/useSEO'
 
-function trackConversion(action) {
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', action, {
-      event_category: 'Resume Builder',
-      event_label: 'User Engagement',
-    })
-  }
-}
-
 function TrustBar() {
   return (
     <div
@@ -79,7 +70,6 @@ export default function Builder() {
       })
       window.history.replaceState({}, document.title)
     }
-    trackConversion('page_view')
   }, [])
 
   // TrustBar ~32px + Header ~56px + StatusBar ~24px = ~112px

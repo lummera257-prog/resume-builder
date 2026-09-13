@@ -1,44 +1,30 @@
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
+import { useSEO } from "../utils/useSEO";
 
 export default function Privacy() {
-  useEffect(() => {
-    document.title = "Privacy Policy | ResumeForge — Your Data Never Leaves Your Browser"
-
-    const setMeta = (name, content) => {
-      let el = document.querySelector(`meta[name="${name}"]`)
-      if (!el) { el = document.createElement('meta'); el.name = name; document.head.appendChild(el) }
-      el.setAttribute('content', content)
-    }
-    const setOg = (prop, content) => {
-      let el = document.querySelector(`meta[property="${prop}"]`)
-      if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el) }
-      el.setAttribute('content', content)
-    }
-    const setCanonical = (url) => {
-      let el = document.querySelector('link[rel="canonical"]')
-      if (!el) { el = document.createElement('link'); el.rel = 'canonical'; document.head.appendChild(el) }
-      el.href = url
-    }
-
-    setMeta('description', 'ResumeForge Privacy Policy — your resume data never leaves your browser. No tracking, no server storage, 100% private and secure. Read our full privacy commitment.')
-    setMeta('keywords', 'resumeforge privacy policy, resume builder privacy, data security, no tracking')
-    setOg('og:title', 'Privacy Policy | ResumeForge — 100% Private Resume Builder')
-    setOg('og:description', 'Your resume data never leaves your browser. ResumeForge is committed to your privacy — no tracking, no storage, always free.')
-    setOg('og:url', 'https://freeresumeforgebuilder.com/privacy')
-    setOg('og:type', 'website')
-    setCanonical('https://freeresumeforgebuilder.com/privacy')
-  }, [])
+  useSEO({
+    title: "Privacy Policy | ResumeForge",
+    description: "How ResumeForge handles your data — resume content stays in your browser.",
+    path: "/privacy",
+  })
 
   const sections = [
     { icon: "🔒", title: "Information We Do NOT Collect", content: "ResumeForge does not collect, store, or transmit any personal information you enter while building your resume. All data is processed entirely within your browser and stays on your device." },
-    { icon: "🍪", title: "Cookies", content: "We may use minimal, anonymous cookies to improve performance and user experience. These cookies do not store any personally identifiable information and cannot be used to track you across other websites." },
-    { icon: "📊", title: "Analytics & Advertising", content: "We may use anonymized analytics tools (such as Google Analytics) and display ads (such as Google AdSense) to help maintain and improve the free service. These third-party services may collect non-personal usage data per their own privacy policies." },
+    { icon: "🍪", title: "Cookies", content: "ResumeForge does not use tracking or advertising cookies — our analytics tools are cookie-free. Your resume content is stored only in your browser's local storage, and is never sent to our servers." },
+    { icon: "📊", title: "Analytics & Advertising", content: "ResumeForge uses Vercel Analytics and Vercel Speed Insights to see how many people visit the site and how quickly pages load. These tools are cookie-free and do not track you across other websites. They record anonymous information such as the page visited, the referring site, country, browser and device type, and page performance timings. We cannot identify you from this data. ResumeForge does not currently display advertising. If we introduce ads in future, we will update this page and our Google Play Data safety declaration before they go live." },
     { icon: "🔗", title: "Third-Party Services", content: "Our platform may link to or integrate with third-party tools. We are not responsible for the privacy practices of those services. We encourage you to review their privacy policies before interacting with them." },
     { icon: "🛡️", title: "Data Security", content: "Since all resume data stays in your browser and is never sent to our servers, the security of your information is inherently protected. We have no access to your resume content at any time." },
-    { icon: "👶", title: "Children's Privacy", content: "ResumeForge is intended for users aged 16 and above. We do not knowingly collect any data from children. If you believe a child has used our service, please contact us immediately." },
+    { icon: "👶", title: "Children's Privacy", content: "ResumeForge is intended for users aged 18 and above. We do not knowingly collect any data from children. If you believe a child has used our service, please contact us immediately." },
     { icon: "📝", title: "Changes to This Policy", content: "We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date. Continued use of the platform after changes means you accept the revised policy." },
-    { icon: "📬", title: "Contact Us", content: "If you have any questions or concerns about this Privacy Policy, please reach out to us through our Contact page. We aim to respond to all privacy-related queries promptly." },
+    { icon: "📬", title: "Contact Us", content: (
+      <>
+        If you have any questions or concerns about this Privacy Policy, please reach out to us through our{" "}
+        <Link to="/contact">Contact page</Link>. We aim to respond to all privacy-related queries promptly.
+        <br /><br />
+        Email: <a href="mailto:resumeforgehelp@gmail.com">resumeforgehelp@gmail.com</a>
+      </>
+    ) },
   ];
 
   return (
@@ -58,7 +44,7 @@ export default function Privacy() {
             <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "1.1rem", maxWidth: "560px", margin: "0 auto 20px", lineHeight: 1.7 }}>
               Your privacy is our priority. Here's exactly how we handle your data — transparently and honestly.
             </p>
-            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.85rem" }}>Last updated: April 2026</p>
+            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.85rem" }}>Last updated: 13 September 2026</p>
           </div>
         </div>
 
